@@ -1,0 +1,31 @@
+project_id = "wgonwefnpccnismxquev"
+
+[functions.ghl-submit]
+verify_jwt = false
+
+[functions.clay-enrich]
+verify_jwt = false
+
+[functions.salary-lookup]
+verify_jwt = false
+
+[functions.newsletter-subscribe]
+verify_jwt = false
+
+[functions.prospect-enrich]
+verify_jwt = false
+
+[functions.outreach-webhook]
+verify_jwt = false
+
+[functions.company-research]
+verify_jwt = false
+
+[functions.ats-sync]
+verify_jwt = false
+
+[functions.ats-webhook]
+verify_jwt = false
+
+[functions.generate-invoice]
+verify_jwt = false

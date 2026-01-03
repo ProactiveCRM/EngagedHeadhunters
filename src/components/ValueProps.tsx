@@ -1,0 +1,58 @@
+const ValueProps = () => {
+  const props = [
+    {
+      emoji: "⏱️",
+      title: "Empty Seats Cost $500/Day",
+      description: "Every open role drains productivity and burns out the team covering for it. We deliver qualified candidates in days. Not months of waiting and filtering unqualified applicants.",
+      solution: "Candidates in days",
+      proof: "Not months of job board noise"
+    },
+    {
+      emoji: "🛡️",
+      title: "Bad Hires Cost 5x Salary",
+      description: "A wrong executive hire destroys momentum, damages culture, and wastes months of onboarding. Our guarantee: if the placement doesn't work, we replace them. No additional fee.",
+      solution: "Replacement guarantee",
+      proof: "Terms negotiated per engagement"
+    },
+    {
+      emoji: "🎯",
+      title: "Generalist Recruiters Waste Your Time",
+      description: "They send resumes that look good on paper but bomb in interviews. Our talent acquisition specialists come from the industries they serve. They know who's good, who's available, and who's pretending.",
+      solution: "Sector-focused search consultants",
+      proof: "Healthcare, Tech, Finance, Manufacturing"
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-foreground mb-4">
+            Why Hiring Leaders Call Us First
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Top performers aren't scrolling job boards. They're busy producing results elsewhere. We go find them—and make the case that your opportunity is worth their attention.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-8">
+          {props.map((prop, index) => (
+            <div key={index} className="bg-card rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border">
+              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                <span className="text-3xl" role="img" aria-hidden="true">{prop.emoji}</span>
+              </div>
+              <h3 className="text-2xl font-bold text-foreground mb-4">{prop.title}</h3>
+              <p className="text-muted-foreground mb-6">{prop.description}</p>
+              <div className="border-t pt-4">
+                <div className="text-lg font-bold text-primary">{prop.solution}</div>
+                <div className="text-sm text-muted-foreground">{prop.proof}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ValueProps;

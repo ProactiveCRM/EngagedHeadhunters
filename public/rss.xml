@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Engaged Headhunters Blog</title>
+    <link>https://www.engagedheadhunters.com/blog</link>
+    <description>Expert insights on executive recruiting, career development, and talent acquisition from the Engaged Headhunters team.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Dec 2024 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://www.engagedheadhunters.com/rss.xml" rel="self" type="application/rss+xml" />
+    <image>
+      <url>https://www.engagedheadhunters.com/lovable-uploads/d19bf66a-9f71-444d-956c-a63d0a09cf09.png</url>
+      <title>Engaged Headhunters Blog</title>
+      <link>https://www.engagedheadhunters.com/blog</link>
+    </image>
+    <copyright>Copyright 2024 Engaged Headhunters. All rights reserved.</copyright>
+    <managingEditor>contact@engagedheadhunters.com (Engaged Headhunters)</managingEditor>
+    <webMaster>contact@engagedheadhunters.com (Engaged Headhunters)</webMaster>
+    <ttl>60</ttl>
+    <!-- Blog posts will be dynamically generated using scripts/generate-rss.ts -->
+  </channel>
+</rss>

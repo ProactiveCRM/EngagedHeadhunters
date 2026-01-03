@@ -1,0 +1,36 @@
+-- Seed initial location data
+INSERT INTO public.locations (id, display_name, region, population, industries, geo_lat, geo_lng, market_type, display_order, description) VALUES
+-- Texas
+('houston', 'Houston, TX', 'Texas', '7.1M', ARRAY['Energy', 'Healthcare', 'Manufacturing'], 29.7604, -95.3698, 'headquarters', 1, 'Energy capital of the world with a diverse economy spanning healthcare, manufacturing, and aerospace. Houston offers exceptional opportunities for professionals across industries.'),
+('dallas', 'Dallas-Fort Worth, TX', 'Texas', '7.6M', ARRAY['Technology', 'Finance', 'Aviation'], 32.7767, -96.7970, 'primary', 2, 'Major business hub with thriving technology and financial sectors. DFW attracts top talent with its growing economy and quality of life.'),
+('austin', 'Austin, TX', 'Texas', '2.3M', ARRAY['Technology', 'Government', 'Healthcare'], 30.2672, -97.7431, 'primary', 3, 'Tech hub known as Silicon Hills with a vibrant startup ecosystem. Austin combines innovation with a unique culture and quality of life.'),
+('san-antonio', 'San Antonio, TX', 'Texas', '2.6M', ARRAY['Military', 'Healthcare', 'Manufacturing'], 29.4241, -98.4936, 'secondary', 4, 'Military city USA with growing healthcare and cybersecurity sectors. San Antonio offers affordable living and strong career growth.'),
+-- California
+('los-angeles', 'Los Angeles, CA', 'California', '13.2M', ARRAY['Entertainment', 'Technology', 'Aerospace'], 34.0522, -118.2437, 'primary', 1, 'Entertainment capital with growing tech and aerospace industries. LA offers diverse opportunities across creative and technical fields.'),
+('san-francisco', 'San Francisco, CA', 'California', '4.7M', ARRAY['Technology', 'Finance', 'Biotech'], 37.7749, -122.4194, 'primary', 2, 'Global technology and innovation hub. San Francisco leads in venture capital, AI, and fintech opportunities.'),
+('san-diego', 'San Diego, CA', 'California', '3.3M', ARRAY['Biotech', 'Defense', 'Tourism'], 32.7157, -117.1611, 'secondary', 3, 'Biotech and life sciences leader with strong defense sector. San Diego offers ideal climate and growing career opportunities.'),
+('sacramento', 'Sacramento, CA', 'California', '2.4M', ARRAY['Government', 'Agriculture', 'Technology'], 38.5816, -121.4944, 'secondary', 4, 'State capital with expanding technology sector. Sacramento offers affordable alternatives to Bay Area with strong job growth.'),
+-- Florida
+('miami', 'Miami, FL', 'Florida', '6.2M', ARRAY['Finance', 'International Trade', 'Tourism'], 25.7617, -80.1918, 'primary', 1, 'Gateway to Latin America with thriving finance and international business sectors. Miami is a global city with diverse opportunities.'),
+('tampa', 'Tampa, FL', 'Florida', '3.2M', ARRAY['Healthcare', 'Finance', 'Technology'], 27.9506, -82.4572, 'secondary', 2, 'Growing technology hub with strong healthcare and financial services. Tampa Bay offers excellent quality of life and career growth.'),
+('orlando', 'Orlando, FL', 'Florida', '2.6M', ARRAY['Tourism', 'Technology', 'Aerospace'], 28.5383, -81.3792, 'secondary', 3, 'Beyond tourism, Orlando has emerging tech and aerospace sectors. Growing startup ecosystem with lower cost than coastal markets.'),
+('jacksonville', 'Jacksonville, FL', 'Florida', '1.6M', ARRAY['Logistics', 'Healthcare', 'Finance'], 30.3322, -81.6557, 'secondary', 4, 'Major logistics hub with growing healthcare sector. Jacksonville offers affordable living with strong job market.'),
+-- Virginia
+('virginia-beach', 'Virginia Beach, VA', 'Virginia', '1.8M', ARRAY['Defense', 'Maritime', 'Healthcare'], 36.8529, -75.9780, 'secondary', 1, 'Major military presence with growing technology sector. Virginia Beach combines coastal lifestyle with strong defense careers.'),
+('richmond', 'Richmond, VA', 'Virginia', '1.3M', ARRAY['Finance', 'Government', 'Healthcare'], 37.5407, -77.4360, 'secondary', 2, 'State capital with diverse economy. Richmond offers historic charm with modern career opportunities in multiple sectors.'),
+('norfolk', 'Norfolk, VA', 'Virginia', '1.7M', ARRAY['Military', 'Shipping', 'Healthcare'], 36.8508, -76.2859, 'secondary', 3, 'Naval capital with world-class port operations. Norfolk offers unique military and maritime career opportunities.'),
+-- Nevada
+('las-vegas', 'Las Vegas, NV', 'Nevada', '2.3M', ARRAY['Hospitality', 'Gaming', 'Healthcare'], 36.1699, -115.1398, 'secondary', 1, 'Entertainment capital diversifying into technology and healthcare. Las Vegas offers no state income tax and growing job market.'),
+('reno', 'Reno, NV', 'Nevada', '480K', ARRAY['Technology', 'Manufacturing', 'Logistics'], 39.5296, -119.8138, 'secondary', 2, 'Emerging tech hub with major manufacturing investments. Reno offers mountain lifestyle with growing career opportunities.'),
+-- Alabama
+('birmingham', 'Birmingham, AL', 'Alabama', '1.1M', ARRAY['Manufacturing', 'Healthcare', 'Finance'], 33.5207, -86.8025, 'secondary', 1, 'Medical research hub with strong manufacturing base. Birmingham offers affordable living with quality healthcare careers.'),
+('huntsville', 'Huntsville, AL', 'Alabama', '490K', ARRAY['Aerospace', 'Defense', 'Technology'], 34.7304, -86.5861, 'primary', 2, 'Rocket City with NASA Marshall Space Flight Center. Huntsville is a top destination for aerospace and defense professionals.'),
+('mobile', 'Mobile, AL', 'Alabama', '430K', ARRAY['Aerospace', 'Maritime', 'Manufacturing'], 30.6954, -88.0399, 'secondary', 3, 'Growing aerospace manufacturing with Airbus facility. Mobile offers port city lifestyle with expanding industrial careers.'),
+-- Major Markets
+('new-york', 'New York, NY', 'Major Markets', '20.1M', ARRAY['Finance', 'Technology', 'Media'], 40.7128, -74.0060, 'primary', 1, 'Global financial capital with world-class opportunities across every industry. NYC attracts top talent from around the world.'),
+('chicago', 'Chicago, IL', 'Major Markets', '9.6M', ARRAY['Manufacturing', 'Finance', 'Technology'], 41.8781, -87.6298, 'primary', 2, 'Midwest business hub with diverse economy. Chicago offers world-class culture with more affordable living than coastal cities.'),
+('atlanta', 'Atlanta, GA', 'Major Markets', '6.1M', ARRAY['Technology', 'Logistics', 'Healthcare'], 33.7490, -84.3880, 'primary', 3, 'Major corporate hub and logistics center. Atlanta is one of the fastest-growing metro areas with exceptional career growth.'),
+('boston', 'Boston, MA', 'Major Markets', '4.9M', ARRAY['Technology', 'Healthcare', 'Education'], 42.3601, -71.0589, 'primary', 4, 'World-renowned education and healthcare hub. Boston leads in biotech, life sciences, and innovation.'),
+('seattle', 'Seattle, WA', 'Major Markets', '4.0M', ARRAY['Technology', 'Aerospace', 'Healthcare'], 47.6062, -122.3321, 'primary', 5, 'Pacific Northwest tech hub home to major corporations. Seattle offers innovation culture with natural beauty.'),
+('denver', 'Denver, CO', 'Major Markets', '2.9M', ARRAY['Technology', 'Energy', 'Aerospace'], 39.7392, -104.9903, 'primary', 6, 'Growing tech hub with outdoor lifestyle. Denver attracts young professionals seeking work-life balance.'),
+('phoenix', 'Phoenix, AZ', 'Major Markets', '5.0M', ARRAY['Technology', 'Healthcare', 'Manufacturing'], 33.4484, -112.0740, 'primary', 7, 'Rapidly growing metro with diverse economy. Phoenix offers affordable living with strong job growth across sectors.');
