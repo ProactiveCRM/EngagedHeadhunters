@@ -1,3 +1,4 @@
+"use client";
 import { SEOHead } from './SEOHead';
 import { useNicheSEO, generateServiceSchema, generateBreadcrumbSchema } from '@/hooks/useSEOData';
 

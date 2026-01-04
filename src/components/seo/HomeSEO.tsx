@@ -1,3 +1,4 @@
+"use client";
 import OrganizationSchema from './OrganizationSchema';
 
 const HomeSEO = () => {

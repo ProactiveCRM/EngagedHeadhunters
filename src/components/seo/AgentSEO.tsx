@@ -1,3 +1,4 @@
+"use client";
 import { SEOHead } from './SEOHead';
 import { useAgentSEO, generatePersonSchema, generateBreadcrumbSchema } from '@/hooks/useSEOData';
 
@@ -14,7 +15,7 @@ export const AgentSEO = ({ username }: AgentSEOProps) => {
 
   const name = agent.full_name || agent.username;
   const title = `${name} - ${agent.title || 'Recruiting Professional'}`;
-  const description = agent.bio || agent.headline || 
+  const description = agent.bio || agent.headline ||
     `Connect with ${name}, a professional recruiter${agent.niche ? ` specializing in ${agent.niche}` : ''} at Engaged Headhunters.`;
 
   const personSchema = generatePersonSchema(agent);

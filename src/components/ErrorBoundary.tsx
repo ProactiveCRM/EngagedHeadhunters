@@ -1,3 +1,5 @@
+"use client";
+
 import { Component, ErrorInfo, ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
@@ -24,10 +26,10 @@ class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     this.setState({ errorInfo });
-    
+
     // Log error to console and potentially to analytics
     console.error('ErrorBoundary caught an error:', error, errorInfo);
-    
+
     // Track error in GA4 if available
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       window.gtag('event', 'exception', {
@@ -53,7 +55,7 @@ class ErrorBoundary extends Component<Props, State> {
             <div className="mx-auto w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center">
               <AlertTriangle className="w-8 h-8 text-destructive" />
             </div>
-            
+
             <div className="space-y-2">
               <h1 className="text-2xl font-bold text-foreground">
                 Something went wrong

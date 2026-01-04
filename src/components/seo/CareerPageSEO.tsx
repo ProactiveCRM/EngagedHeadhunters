@@ -1,3 +1,5 @@
+"use client";
+
 import { SEOHead } from './SEOHead';
 import { CAREER_SEO_DATA, CAREER_FAQ_DATA } from '@/lib/seoConfig';
 import { generateBreadcrumbSchema } from '@/hooks/useSEOData';

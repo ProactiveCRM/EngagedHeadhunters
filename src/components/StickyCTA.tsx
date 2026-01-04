@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from 'react';
 import { Phone, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';

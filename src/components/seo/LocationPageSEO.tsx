@@ -1,3 +1,4 @@
+"use client";
 import { SEOHead } from './SEOHead';
 import { LOCATION_SEO_DATA, SEO_CONFIG } from '@/lib/seoConfig';
 import { generateBreadcrumbSchema } from '@/hooks/useSEOData';

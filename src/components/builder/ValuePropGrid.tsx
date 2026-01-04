@@ -53,19 +53,27 @@ export function ValuePropGrid({
                 </div>
 
                 <div className="grid lg:grid-cols-3 gap-8">
-                    {displayProps.map((prop, index) => (
-                        <div key={index} className="bg-card rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border">
-                            <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                                <span className="text-3xl" role="img" aria-hidden="true">{prop.emoji}</span>
+                    {displayProps.map((prop, index) => {
+                        const titleText = typeof prop.title === 'string' ? prop.title : '';
+                        const descText = typeof prop.description === 'string' ? prop.description : '';
+                        const solutionText = typeof prop.solution === 'string' ? prop.solution : '';
+                        const proofText = typeof prop.proof === 'string' ? prop.proof : '';
+                        const emojiText = typeof prop.emoji === 'string' ? prop.emoji : '';
+
+                        return (
+                            <div key={index} className="bg-card rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border">
+                                <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                                    <span className="text-3xl" role="img" aria-hidden="true">{emojiText}</span>
+                                </div>
+                                <h3 className="text-2xl font-bold text-foreground mb-4">{titleText}</h3>
+                                <p className="text-muted-foreground mb-6">{descText}</p>
+                                <div className="border-t pt-4">
+                                    <div className="text-lg font-bold text-primary">{solutionText}</div>
+                                    <div className="text-sm text-muted-foreground">{proofText}</div>
+                                </div>
                             </div>
-                            <h3 className="text-2xl font-bold text-foreground mb-4">{prop.title}</h3>
-                            <p className="text-muted-foreground mb-6">{prop.description}</p>
-                            <div className="border-t pt-4">
-                                <div className="text-lg font-bold text-primary">{prop.solution}</div>
-                                <div className="text-sm text-muted-foreground">{prop.proof}</div>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </section>

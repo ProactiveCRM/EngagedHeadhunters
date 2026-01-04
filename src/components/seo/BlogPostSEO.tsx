@@ -1,3 +1,4 @@
+"use client";
 import { SEOHead } from './SEOHead';
 import { useBlogPostSEO, generateArticleSchema, generateBreadcrumbSchema } from '@/hooks/useSEOData';
 

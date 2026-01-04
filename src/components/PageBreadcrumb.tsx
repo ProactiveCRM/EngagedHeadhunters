@@ -1,4 +1,5 @@
-import {   } from 'next/navigation';
+"use client";
+import { } from 'next/navigation';
 import Link from 'next/link';
 import { Home } from 'lucide-react';
 import { useBreadcrumbs, BreadcrumbItem } from '@/hooks/useBreadcrumbs';

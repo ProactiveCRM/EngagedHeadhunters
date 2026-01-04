@@ -1,3 +1,4 @@
+"use client";
 interface PersonSchemaProps {
   name: string;
   jobTitle: string;

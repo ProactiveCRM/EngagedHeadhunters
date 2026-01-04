@@ -49,8 +49,12 @@ export function CaseStudyCard({ study, className = "" }: CaseStudyCardProps) {
                     <h4 className="font-semibold text-foreground mb-4 text-green-600">Results</h4>
                     <ul className="space-y-2 mb-6 text-left">
                         {study.results.map((result: any, idx: number) => {
-                            const text = typeof result === 'string' ? result : result?.item;
-                            if (!text) return null;
+                            let text = typeof result === 'string' ? result : result?.item;
+                            if (text && typeof text === 'object') {
+                                // If it's a Builder block or other object, convert to string or skip
+                                text = text.item || JSON.stringify(text);
+                            }
+                            if (!text || typeof text !== 'string') return null;
                             return (
                                 <li key={idx} className="flex items-start text-sm">
                                     <ArrowRight className="text-green-600 mr-2 mt-0.5 flex-shrink-0" size={14} />

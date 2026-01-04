@@ -1,3 +1,4 @@
+"use client";
 const BASE_URL = 'https://www.engagedheadhunters.com';
 
 interface ServiceSchemaProps {

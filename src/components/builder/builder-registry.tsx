@@ -1,5 +1,6 @@
+"use client";
+
 import { Builder } from "@builder.io/react";
-import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/ui/hero-section";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -20,9 +21,46 @@ import Testimonials from "@/components/Testimonials";
 import { ValuePropGrid } from "./ValuePropGrid";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 
+import React from "react";
+
+// Helper to ensure text props are strings (prevents "Objects are not valid as a React child" errors)
+const ensureString = (val: any): string => {
+    if (typeof val === 'string') return val;
+    if (typeof val === 'number') return String(val);
+    return '';
+};
+
+// Safety HOC to strip internal props and sanitize children
+const withSafety = (Component: any) => {
+    return (props: any) => {
+        const { builderBlock, builderContext, attributes, children, ...rest } = props;
+
+        // Sanitize all string-like props in rest
+        const safeProps: any = { ...rest };
+        for (const key in safeProps) {
+            if (typeof safeProps[key] === 'object' && safeProps[key] !== null) {
+                if (safeProps[key].component || safeProps[key].id) {
+                    // This is likely a Builder block or internal object being passed as a prop
+                    safeProps[key] = '';
+                }
+            }
+        }
+
+        // Only allow valid children
+        const safeChildren = React.Children.map(children, (child) => {
+            if (typeof child === 'string' || typeof child === 'number' || React.isValidElement(child)) {
+                return child;
+            }
+            return null;
+        });
+
+        return <Component {...safeProps} {...attributes}>{safeChildren}</Component>;
+    };
+};
+
 // Register HeroSection (UI Component)
 Builder.registerComponent(
-    HeroSection,
+    withSafety(HeroSection),
     {
         name: "HeroSection",
         inputs: [
@@ -37,7 +75,7 @@ Builder.registerComponent(
 
 // Register Main Hero (Comprehensive Component)
 Builder.registerComponent(
-    Hero,
+    withSafety(Hero),
     {
         name: "MainHero",
         description: "The main animated hero section from the homepage",
@@ -46,7 +84,7 @@ Builder.registerComponent(
 
 // Register CTASection
 Builder.registerComponent(
-    CTASection,
+    withSafety(CTASection),
     {
         name: "CTASection",
         inputs: [
@@ -63,7 +101,7 @@ Builder.registerComponent(
 
 // Register ValueProps
 Builder.registerComponent(
-    ValueProps,
+    withSafety(ValueProps),
     {
         name: "ValueProps",
         description: "Three columns showing 'Empty Seats', 'Bad Hires', and 'Generalist recruiters'",
@@ -72,7 +110,7 @@ Builder.registerComponent(
 
 // Register NichesGrid
 Builder.registerComponent(
-    NichesGrid,
+    withSafety(NichesGrid),
     {
         name: "NichesGrid",
         description: "The 2x2 grid of industry niches (Healthcare, Tech, Finance, Senior Care)",
@@ -81,7 +119,7 @@ Builder.registerComponent(
 
 // Register Industries
 Builder.registerComponent(
-    Industries,
+    withSafety(Industries),
     {
         name: "Industries",
         description: "Comprehensive industry expertise section with placement stats",
@@ -90,7 +128,7 @@ Builder.registerComponent(
 
 // Register About section
 Builder.registerComponent(
-    About,
+    withSafety(About),
     {
         name: "AboutSection",
         description: "The 'We Hunt. We Don't Post and Pray' section",
@@ -99,7 +137,7 @@ Builder.registerComponent(
 
 // Register BDBSection
 Builder.registerComponent(
-    BDBSection,
+    withSafety(BDBSection),
     {
         name: "BDBSection",
         description: "The 'BDB Authority Builders' free program section",
@@ -108,7 +146,7 @@ Builder.registerComponent(
 
 // Register Contact section
 Builder.registerComponent(
-    Contact,
+    withSafety(Contact),
     {
         name: "ContactSection",
         description: "The main contact form and office info section",
@@ -117,7 +155,7 @@ Builder.registerComponent(
 
 // Register Supabase dynamic blocks
 Builder.registerComponent(
-    LatestBlogPosts,
+    withSafety(LatestBlogPosts),
     {
         name: "LatestBlogPosts",
         inputs: [
@@ -128,7 +166,7 @@ Builder.registerComponent(
 );
 
 Builder.registerComponent(
-    ActiveJobsGrid,
+    withSafety(ActiveJobsGrid),
     {
         name: "ActiveJobsGrid",
         inputs: [
@@ -140,7 +178,7 @@ Builder.registerComponent(
 
 // Register IndustryExpertise
 Builder.registerComponent(
-    IndustryExpertise,
+    withSafety(IndustryExpertise),
     {
         name: "IndustryExpertise",
         description: "Deep industry focus across critical sectors with stats",
@@ -149,7 +187,7 @@ Builder.registerComponent(
 
 // Register Partners section
 Builder.registerComponent(
-    Partners,
+    withSafety(Partners),
     {
         name: "Partners",
         description: "The 'Keep Your Brand. Gain Our Support' section for the Alliance",
@@ -158,7 +196,7 @@ Builder.registerComponent(
 
 // Register AudienceValue
 Builder.registerComponent(
-    AudienceValue,
+    withSafety(AudienceValue),
     {
         name: "AudienceValue",
         description: "AI technology advantage, nationwide coverage, and value props for Companies/Candidates/Agents",
@@ -167,7 +205,7 @@ Builder.registerComponent(
 
 // Register FeaturedAgents
 Builder.registerComponent(
-    FeaturedAgents,
+    withSafety(FeaturedAgents),
     {
         name: "FeaturedAgents",
         description: "Meet our founder and featured headhunters",
@@ -176,7 +214,7 @@ Builder.registerComponent(
 
 // Register PartnerCTASection (from Testimonials.tsx)
 Builder.registerComponent(
-    Testimonials,
+    withSafety(Testimonials),
     {
         name: "PartnerCTASection",
         description: "The three-column CTA section (Hiring Consultation, Find Roles, Agent Opportunity)",
@@ -185,7 +223,7 @@ Builder.registerComponent(
 
 // Register ValuePropGrid
 Builder.registerComponent(
-    ValuePropGrid,
+    withSafety(ValuePropGrid),
     {
         name: "ValuePropGrid",
         inputs: [
@@ -208,7 +246,7 @@ Builder.registerComponent(
 
 // Register CaseStudyCard
 Builder.registerComponent(
-    CaseStudyCard,
+    withSafety(CaseStudyCard),
     {
         name: "CaseStudyCard",
         inputs: [
@@ -232,7 +270,7 @@ Builder.registerComponent(
 
 // Register Button
 Builder.registerComponent(
-    Button,
+    withSafety(Button),
     {
         name: "Button",
         inputs: [
@@ -245,24 +283,23 @@ Builder.registerComponent(
 
 // Register Card
 Builder.registerComponent(
-    function BuilderCard({ title, description, content, className }: any) {
+    withSafety(function BuilderCard({ title, description, bodyText, className }: any) {
         return (
             <Card className={className} >
                 <CardHeader>
-                    {title && <CardTitle>{title} </CardTitle>
-                    }
-                    {description && <CardDescription>{description} </CardDescription>}
+                    {title && typeof title === 'string' && <CardTitle>{title} </CardTitle>}
+                    {description && typeof description === 'string' && <CardDescription>{description} </CardDescription>}
                 </CardHeader>
-                {content && <CardContent>{content} </CardContent>}
+                {bodyText && typeof bodyText === 'string' && <CardContent>{bodyText} </CardContent>}
             </Card>
         );
-    },
+    }),
     {
         name: "Card",
         inputs: [
             { name: "title", type: "text", defaultValue: "Card Title" },
             { name: "description", type: "text", defaultValue: "Card description goes here." },
-            { name: "content", type: "text", defaultValue: "This is the main content area of the card." },
+            { name: "bodyText", type: "text", defaultValue: "This is the main content area of the card." },
             { name: "className", type: "text" }
         ],
     }

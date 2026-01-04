@@ -1,3 +1,4 @@
+"use client";
 interface JobPostingSchemaProps {
   title: string;
   description: string;
