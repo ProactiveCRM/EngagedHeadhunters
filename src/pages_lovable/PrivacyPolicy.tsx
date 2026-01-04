@@ -1,22 +1,14 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Privacy Policy - Engaged Headhunters</title>
-        <meta name="description" content="Privacy Policy for Engaged Headhunters. Learn how we protect your personal information and candidate data in our executive search services." />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://engagedheadhunters.com/privacy-policy" />
-      </Helmet>
-
       <Navigation />
-      
+
       <main className="pt-20">
         <section className="py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,8 +26,8 @@ const PrivacyPolicy = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">1. Introduction</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Engaged Headhunters ("we," "our," or "us") is committed to protecting your privacy. 
-                    This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
+                    Engaged Headhunters ("we," "our," or "us") is committed to protecting your privacy.
+                    This Privacy Policy explains how we collect, use, disclose, and safeguard your information
                     when you use our executive search and recruiting services.
                   </p>
                 </section>
@@ -97,14 +89,14 @@ const PrivacyPolicy = () => {
                   <h2 className="text-2xl font-bold text-foreground mb-4">4. Information Sharing and Disclosure</h2>
                   <div className="space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
-                      We do not sell, trade, or otherwise transfer your personal information to third parties 
+                      We do not sell, trade, or otherwise transfer your personal information to third parties
                       without your consent, except as described in this Privacy Policy:
                     </p>
-                    
+
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">With Clients</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        We share candidate information with potential employers only with explicit consent 
+                        We share candidate information with potential employers only with explicit consent
                         and after determining mutual interest.
                       </p>
                     </div>
@@ -112,7 +104,7 @@ const PrivacyPolicy = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Service Providers</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        We may engage trusted third-party service providers to assist with background checks, 
+                        We may engage trusted third-party service providers to assist with background checks,
                         reference verification, and other recruiting-related services.
                       </p>
                     </div>
@@ -131,8 +123,8 @@ const PrivacyPolicy = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">5. Data Security</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    We implement appropriate technical and organizational security measures to protect your 
-                    personal information against unauthorized access, alteration, disclosure, or destruction. 
+                    We implement appropriate technical and organizational security measures to protect your
+                    personal information against unauthorized access, alteration, disclosure, or destruction.
                     These measures include encryption, secure servers, and access controls.
                   </p>
                 </section>
@@ -142,8 +134,8 @@ const PrivacyPolicy = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">6. Data Retention</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    We retain personal information for as long as necessary to provide our services and 
-                    fulfill the purposes outlined in this Privacy Policy. Candidate information may be 
+                    We retain personal information for as long as necessary to provide our services and
+                    fulfill the purposes outlined in this Privacy Policy. Candidate information may be
                     retained for future opportunities unless you request removal.
                   </p>
                 </section>
@@ -170,8 +162,8 @@ const PrivacyPolicy = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">8. Data Storage and Processing</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Your information is stored and processed in the United States. We implement 
-                    appropriate safeguards to protect your data in compliance with applicable federal 
+                    Your information is stored and processed in the United States. We implement
+                    appropriate safeguards to protect your data in compliance with applicable federal
                     and Virginia state data protection laws.
                   </p>
                 </section>
@@ -181,7 +173,7 @@ const PrivacyPolicy = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">9. Contact Information</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    If you have questions about this Privacy Policy or wish to exercise your rights, 
+                    If you have questions about this Privacy Policy or wish to exercise your rights,
                     please contact us at:
                   </p>
                   <div className="mt-4 p-4 bg-muted/50 rounded-lg">
@@ -197,8 +189,8 @@ const PrivacyPolicy = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">10. Changes to This Policy</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    We may update this Privacy Policy from time to time. We will notify you of any 
-                    material changes by posting the new Privacy Policy on our website and updating 
+                    We may update this Privacy Policy from time to time. We will notify you of any
+                    material changes by posting the new Privacy Policy on our website and updating
                     the "Last updated" date.
                   </p>
                 </section>

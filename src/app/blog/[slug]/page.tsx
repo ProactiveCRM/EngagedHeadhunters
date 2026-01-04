@@ -1,6 +1,8 @@
 import { Metadata, ResolvingMetadata } from 'next';
 import BlogPostClient from '@/components/pages/BlogPostClient';
 import { supabase } from '@/integrations/supabase/client';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -12,7 +14,11 @@ export async function generateMetadata(
 ): Promise<Metadata> {
     const { slug } = await params;
 
-    // Fetch the blog post for SEO metadata
+    // First try fetching from Builder for metadata
+    const urlPath = `/blog/${slug}`;
+    const builderPost = await getBuilderContent(urlPath, "blog-post");
+
+    // Fallback to Supabase for SEO metadata
     const { data: post } = await supabase
         .from('blog_posts')
         .select(`
@@ -28,10 +34,11 @@ export async function generateMetadata(
         .maybeSingle();
 
     if (!post) {
-        return {
+        const fallbackMetadata: Metadata = {
             title: 'Article Not Found | Engaged Headhunters',
             description: 'The requested blog article could not be found.',
         };
+        return mergeBuilderMetadata(builderPost, fallbackMetadata);
     }
 
     const title = `${post.title} | Engaged Headhunters Blog`;
@@ -39,7 +46,7 @@ export async function generateMetadata(
     const image = post.featured_image || 'https://www.engagedheadhunters.com/og-image.jpg';
     const url = `https://www.engagedheadhunters.com/blog/${post.slug || post.id}`;
 
-    return {
+    const supabaseMetadata: Metadata = {
         title,
         description,
         alternates: {
@@ -59,8 +66,22 @@ export async function generateMetadata(
             images: [image],
         },
     };
+
+    return mergeBuilderMetadata(builderPost, supabaseMetadata);
 }
 
-export default function BlogPostPage() {
+export default async function BlogPostPage({ params }: Props) {
+    const { slug } = await params;
+    const urlPath = `/blog/${slug}`;
+
+    // Check Builder for individual blog post content
+    const content = await getBuilderContent(urlPath, "blog-post");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="blog-post" />;
+    }
+
     return <BlogPostClient />;
 }
+
+export const revalidate = 1;

@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import ContractCareersClient from '@/components/pages/ContractCareersClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Contract Careers & Consulting Opportunities | Engaged Headhunters',
     description: 'Explore contract careers and consulting opportunities. Interim leadership, project-based work, and fractional roles.',
     keywords: 'contract careers, consulting jobs, interim leadership, project work, fractional roles',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ContractCareersPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/contract-careers");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function ContractCareersPage() {
+    const content = await getBuilderContent("/contract-careers");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <ContractCareersClient />;
 }
+
+export const revalidate = 1;

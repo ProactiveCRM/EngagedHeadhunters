@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import SubmitResumeClient from '@/components/pages/SubmitResumeClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Submit Your Resume | Confidential Career Opportunities | Engaged Headhunters',
     description: 'Submit your resume for confidential career opportunities. Connect with expert recruiters who specialize in executive and professional placement. Access unlisted leadership roles.',
     keywords: 'submit resume, job application, executive search, career opportunities, headhunters, professional placement',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function SubmitResumePage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/submit-resume");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function SubmitResumePage() {
+    const content = await getBuilderContent("/submit-resume");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <SubmitResumeClient />;
 }
+
+export const revalidate = 1;

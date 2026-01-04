@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useRouter,   } from 'next/navigation';
+import { useParams, useRouter, } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -37,7 +37,7 @@ interface Niche {
 
 const DirectoryEditorContent = () => {
   const { id } = useParams();
-  const navigate = useRouter();
+  const router = useRouter();
   const { toast } = useToast();
   const isNew = id === 'new';
 
@@ -79,7 +79,7 @@ const DirectoryEditorContent = () => {
     const { data, error } = await supabase
       .from('directory_listings')
       .select('*')
-      .eq('id', id)
+      .eq('id', id as string)
       .maybeSingle();
 
     if (error || !data) {
@@ -98,9 +98,9 @@ const DirectoryEditorContent = () => {
       niche: data.niche,
       listing_title: data.listing_title || '',
       listing_description: data.listing_description || '',
-      is_featured: data.is_featured,
-      is_visible: data.is_visible,
-      display_order: data.display_order,
+      is_featured: data.is_featured || false,
+      is_visible: data.is_visible ?? true,
+      display_order: data.display_order || 0,
     });
     setLoading(false);
   }
@@ -134,7 +134,7 @@ const DirectoryEditorContent = () => {
       const res = await supabase.from('directory_listings').insert(payload);
       error = res.error;
     } else {
-      const res = await supabase.from('directory_listings').update(payload).eq('id', id);
+      const res = await supabase.from('directory_listings').update(payload).eq('id', id as string);
       error = res.error;
     }
 

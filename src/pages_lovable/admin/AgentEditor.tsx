@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useRouter,   } from 'next/navigation';
+import { useParams, useRouter, } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Save } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -41,13 +41,13 @@ const AgentEditorContent = () => {
 
   async function fetchProfile() {
     if (!id) return;
-    
+
     setLoading(true);
-    
+
     const { data, error } = await supabase
       .from('profiles')
       .select('*')
-      .eq('id', id)
+      .eq('id', id as string)
       .single();
 
     if (error) {
@@ -62,9 +62,9 @@ const AgentEditorContent = () => {
 
   async function handleSave() {
     if (!profile) return;
-    
+
     setSaving(true);
-    
+
     const { error } = await supabase
       .from('profiles')
       .update({
@@ -121,7 +121,7 @@ const AgentEditorContent = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="pt-20 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">
@@ -247,7 +247,7 @@ const AgentEditorContent = () => {
               <div className="flex justify-end gap-4 pt-4">
                 <Button
                   variant="outline"
-                  onClick={() => router.push('/admin/agents')}
+                  onClick={() => navigate.push('/admin/agents')}
                 >
                   Cancel
                 </Button>

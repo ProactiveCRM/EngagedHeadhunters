@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 import { Plus, RefreshCw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -94,7 +94,9 @@ const DirectoryListContent = () => {
     } else {
       let filtered = (data || []).map(item => ({
         ...item,
-        profile: item.profile as DirectoryListing['profile']
+        profile: item.profile as DirectoryListing['profile'],
+        is_featured: !!item.is_featured,
+        is_visible: item.is_visible ?? true,
       }));
 
       // Apply search filter client-side

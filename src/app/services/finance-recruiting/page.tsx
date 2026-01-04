@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import FinanceRecruitingClient from '@/components/pages/FinanceRecruitingClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Finance Recruiting & Financial Services Hiring | Engaged Headhunters',
     description: 'Expert finance recruiting services for investment banking, wealth management, and financial leadership roles. We deliver financial professionals who drive growth and manage risk.',
     keywords: 'finance recruiting, financial services staffing, CFO search, investment banking recruitment',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function FinanceRecruitingPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/services/finance-recruiting");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function FinanceRecruitingPage() {
+    const content = await getBuilderContent("/services/finance-recruiting");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <FinanceRecruitingClient />;
 }
+
+export const revalidate = 1;

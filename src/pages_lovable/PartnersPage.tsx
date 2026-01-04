@@ -1,27 +1,15 @@
-import { Helmet } from 'react-helmet-async';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
 import PartnerServices from '@/components/PartnerServices';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles, Handshake } from 'lucide-react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 
 const PartnersPage = () => {
   return (
     <>
-      <Helmet>
-        <title>Partner Services for Recruiters | Engaged Headhunters</title>
-        <meta name="description" content="Exclusive access to vetted service providers for recruiting professionals. Back office solutions, legal services, financial services, and technology tools." />
-        <meta name="keywords" content="recruiting services, staffing agency services, recruiter tools, back office solutions, recruiting technology, EOR services" />
-        <link rel="canonical" href="https://www.engagedheadhunters.com/for-recruiters/partners" />
-        <meta property="og:title" content="Partner Services for Recruiters | Engaged Headhunters" />
-        <meta property="og:description" content="Exclusive access to vetted service providers for recruiting professionals." />
-        <meta property="og:url" content="https://www.engagedheadhunters.com/for-recruiters/partners" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
       <Navigation />
       <StickyCTA />
 
@@ -30,19 +18,19 @@ const PartnersPage = () => {
         <section className="relative bg-gradient-to-br from-dark-navy via-dark-navy to-primary/20 text-white py-24 lg:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--primary)/0.15),transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent)/0.1),transparent_40%)]" />
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-2 mb-6">
                 <Handshake className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-primary-foreground/90">Partner Network</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Professional Services{' '}
                 <span className="text-primary">& Partners</span>
               </h1>
-              
+
               <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto">
                 Vetted service providers offering exclusive discounts to help you run a more efficient and profitable recruiting business.
               </p>

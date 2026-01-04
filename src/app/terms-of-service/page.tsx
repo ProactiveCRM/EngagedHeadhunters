@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import TermsOfServiceClient from '@/components/pages/TermsOfServiceClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Terms of Service | Engaged Headhunters',
     description: 'Terms and conditions for using Engaged Headhunters services. Legal agreement for clients and candidates.',
     keywords: 'terms of service, legal terms, recruitment agreement, service conditions',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function TermsOfServicePage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/terms-of-service");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function TermsOfServicePage() {
+    const content = await getBuilderContent("/terms-of-service");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <TermsOfServiceClient />;
 }
+
+export const revalidate = 1;

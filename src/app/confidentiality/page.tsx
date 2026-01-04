@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import ConfidentialityClient from '@/components/pages/ConfidentialityClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Confidentiality Agreement | Data Protection | Engaged Headhunters',
     description: 'Learn about our comprehensive confidentiality standards and data protection measures. We maintain the highest standards of privacy in executive search.',
     keywords: 'confidentiality agreement, data protection, executive search privacy, recruitment security',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ConfidentialityPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/confidentiality");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function ConfidentialityPage() {
+    const content = await getBuilderContent("/confidentiality");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <ConfidentialityClient />;
 }
+
+export const revalidate = 1;

@@ -79,7 +79,7 @@ export function usePageContent(pageSlug: string) {
   };
 
   const updateMutation = useMutation({
-    mutationFn: async (updates: { id: string; content_value?: string; content_metadata?: Json; is_active?: boolean }) => {
+    mutationFn: async (updates: { id: string; content_value?: string | null; content_metadata?: Json; is_active?: boolean }) => {
       const { id, ...rest } = updates;
       const { data, error } = await supabase
         .from('page_content')
@@ -102,7 +102,7 @@ export function usePageContent(pageSlug: string) {
       section_id: string;
       content_key: string;
       content_type?: string;
-      content_value?: string;
+      content_value?: string | null;
       content_metadata?: Json;
       display_order?: number;
       is_active?: boolean;
@@ -156,7 +156,7 @@ export function useAdminPageContent(pageSlug: string) {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (updates: { id: string; content_value?: string; content_metadata?: Json; is_active?: boolean }) => {
+    mutationFn: async (updates: { id: string; content_value?: string | null; content_metadata?: Json; is_active?: boolean }) => {
       const { id, ...rest } = updates;
       const { data, error } = await supabase
         .from('page_content')
@@ -180,7 +180,7 @@ export function useAdminPageContent(pageSlug: string) {
       section_id: string;
       content_key: string;
       content_type?: string;
-      content_value?: string;
+      content_value?: string | null;
       content_metadata?: Json;
       display_order?: number;
       is_active?: boolean;

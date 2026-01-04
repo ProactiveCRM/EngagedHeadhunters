@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import CandidatesClient from '@/components/pages/CandidatesClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Executive Career Opportunities | Confidential Job Search | Engaged Headhunters',
     description: 'Access leadership opportunities that aren\'t publicly posted. Confidential career search for executives and senior professionals. Free for candidates. Healthcare, tech, finance roles.',
     alternates: {
@@ -22,6 +24,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function CandidatesPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/candidates");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function CandidatesPage() {
+    const content = await getBuilderContent("/candidates");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <CandidatesClient />;
 }
+
+export const revalidate = 1;

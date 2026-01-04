@@ -1,4 +1,4 @@
-import React from 'react';
+"use client";
 
 interface FAQItem {
   question: string;
@@ -9,8 +9,10 @@ interface FAQSchemaProps {
   faqs: FAQItem[];
 }
 
-const FAQSchema = ({ faqs }: FAQSchemaProps) => {
-  const faqSchema = {
+export const FAQSchema = ({ faqs }: FAQSchemaProps) => {
+  if (!faqs || faqs.length === 0) return null;
+
+  const schemaData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqs.map(faq => ({
@@ -26,7 +28,7 @@ const FAQSchema = ({ faqs }: FAQSchemaProps) => {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
     />
   );
 };

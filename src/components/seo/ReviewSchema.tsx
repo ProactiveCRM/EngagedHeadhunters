@@ -1,5 +1,3 @@
-import { Helmet } from 'react-helmet-async';
-
 interface Review {
   author: string;
   reviewBody: string;
@@ -20,12 +18,12 @@ interface ReviewSchemaProps {
   };
 }
 
-const ReviewSchema = ({ 
-  reviews, 
+const ReviewSchema = ({
+  reviews,
   itemReviewed = { name: "Engaged Headhunters", type: "Organization" },
   aggregateRating
 }: ReviewSchemaProps) => {
-  const reviewSchemas = reviews.map((review, index) => ({
+  const reviewSchemas = reviews.map((review) => ({
     "@context": "https://schema.org",
     "@type": "Review",
     "author": {
@@ -60,18 +58,21 @@ const ReviewSchema = ({
   } : null;
 
   return (
-    <Helmet>
+    <>
       {reviewSchemas.map((schema, index) => (
-        <script key={index} type="application/ld+json">
-          {JSON.stringify(schema)}
-        </script>
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
       ))}
       {aggregateSchema && (
-        <script type="application/ld+json">
-          {JSON.stringify(aggregateSchema)}
-        </script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateSchema) }}
+        />
       )}
-    </Helmet>
+    </>
   );
 };
 

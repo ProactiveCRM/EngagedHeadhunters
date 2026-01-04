@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import PrivacyPolicyClient from '@/components/pages/PrivacyPolicyClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Privacy Policy | Engaged Headhunters',
     description: 'Learn how Engaged Headhunters protects your personal and professional information. Our commitment to data security and candidate confidentiality.',
     keywords: 'privacy policy, data protection, candidate confidentiality, recruitment privacy',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function PrivacyPolicyPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/privacy-policy");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function PrivacyPolicyPage() {
+    const content = await getBuilderContent("/privacy-policy");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <PrivacyPolicyClient />;
 }
+
+export const revalidate = 1;

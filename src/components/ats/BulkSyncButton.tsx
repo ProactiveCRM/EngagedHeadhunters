@@ -3,9 +3,9 @@ import { useSyncToATS } from '@/hooks/useATS';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { 
-  RefreshCw, 
-  CheckCircle2, 
+import {
+  RefreshCw,
+  CheckCircle2,
   AlertCircle,
   X
 } from 'lucide-react';
@@ -30,7 +30,7 @@ export function BulkSyncButton({
 }: BulkSyncButtonProps) {
   const { toast } = useToast();
   const syncToATS = useSyncToATS();
-  
+
   const [isRunning, setIsRunning] = useState(false);
   const [progress, setProgress] = useState({ current: 0, total: 0 });
   const [cancelled, setCancelled] = useState(false);
@@ -70,7 +70,7 @@ export function BulkSyncButton({
       try {
         await syncToATS.mutateAsync({
           action: actionMap[entityType],
-          data: { id: item.id, ...item },
+          data: { ...item },
         });
         successCount++;
       } catch {
@@ -109,7 +109,7 @@ export function BulkSyncButton({
 
   if (isRunning) {
     const percent = (progress.current / progress.total) * 100;
-    
+
     return (
       <div className={cn("flex items-center gap-2", className)}>
         <div className="flex-1 min-w-[100px]">
@@ -118,9 +118,9 @@ export function BulkSyncButton({
             {progress.current} / {progress.total}
           </span>
         </div>
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={handleCancel}
           className="h-8 w-8"
         >

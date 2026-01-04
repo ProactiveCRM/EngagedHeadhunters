@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import TemporaryStaffingClient from '@/components/pages/TemporaryStaffingClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Temporary Staffing & Seasonal Workforce Solutions | Engaged Headhunters',
     description: 'Flexible temporary staffing solutions for peak demand and seasonal needs. Quick access to qualified professionals for short-term assignments.',
     keywords: 'temporary staffing, seasonal staffing, short-term hiring, temp workforce solutions',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function TemporaryStaffingPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/services/temporary-staffing");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function TemporaryStaffingPage() {
+    const content = await getBuilderContent("/services/temporary-staffing");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <TemporaryStaffingClient />;
 }
+
+export const revalidate = 1;

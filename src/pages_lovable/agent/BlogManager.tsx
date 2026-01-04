@@ -12,7 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { Navigate,   } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 
@@ -32,6 +32,7 @@ interface BlogPost {
 export default function BlogManager() {
   const { user, loading: authLoading } = useAuth();
   const { toast } = useToast();
+  const router = useRouter();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCreating, setIsCreating] = useState(false);
@@ -46,23 +47,36 @@ export default function BlogManager() {
   });
 
   useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace('/auth');
+    }
+  }, [user, authLoading, router]);
+
+  useEffect(() => {
     if (user) {
       fetchPosts();
     }
   }, [user]);
 
   const fetchPosts = async () => {
+    if (!user) return;
+
     try {
       const { data, error } = await supabase
         .from('blog_posts')
         .select('*')
-        .eq('author_id', user?.id)
+        .eq('author_id', user.id)
         .order('created_at', { ascending: false });
 
       if (error) {
         console.error('Error fetching posts:', error);
       } else {
-        setPosts(data || []);
+        const formattedPosts = (data || []).map(post => ({
+          ...post,
+          featured: !!post.featured,
+          published: !!post.published,
+        }));
+        setPosts(formattedPosts);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -72,12 +86,14 @@ export default function BlogManager() {
   };
 
   const handleCreatePost = async () => {
+    if (!user) return;
+
     try {
       const { error } = await supabase
         .from('blog_posts')
         .insert([{
           ...newPost,
-          author_id: user?.id,
+          author_id: user.id,
         }]);
 
       if (error) throw error;
@@ -169,13 +185,13 @@ export default function BlogManager() {
   }
 
   if (!user) {
-    return <Navigate href="/auth" replace />;
+    return null;
   }
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="container mx-auto px-4 pt-28 pb-8">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -249,13 +265,13 @@ export default function BlogManager() {
                     />
                   </div>
                   <div className="flex gap-4">
-                    <Button 
+                    <Button
                       onClick={handleCreatePost}
                       disabled={!newPost.title || !newPost.content}
                     >
                       Create Post
                     </Button>
-                    <Button 
+                    <Button
                       variant="outline"
                       onClick={() => setNewPost({ ...newPost, published: true })}
                     >
@@ -382,7 +398,7 @@ export default function BlogManager() {
                 <p className="text-muted-foreground">
                   You haven't created any blog posts yet. Start building your thought leadership!
                 </p>
-                <Button 
+                <Button
                   className="mt-4"
                   onClick={() => setIsCreating(true)}
                 >

@@ -4,30 +4,7 @@ import { useCallback, useRef } from 'react';
 const prefetchedRoutes = new Set<string>();
 
 // Map of routes to their chunk files
-const routeChunks: Record<string, () => Promise<unknown>> = {
-  '/': () => import('@/pages/Index'),
-  '/about': () => import('@/pages/About'),
-  '/employers': () => import('@/pages/Employers'),
-  '/candidates': () => import('@/pages/Candidates'),
-  '/services': () => import('@/pages/ServicesMain'),
-  '/executive-search': () => import('@/pages/services/ExecutiveSearch'),
-  '/healthcare-staffing': () => import('@/pages/services/HealthcareStaffing'),
-  '/technology-recruiting': () => import('@/pages/services/TechnologyRecruiting'),
-  '/finance-recruiting': () => import('@/pages/services/FinanceRecruiting'),
-  '/manufacturing-recruiting': () => import('@/pages/services/ManufacturingRecruiting'),
-  '/sales-recruiting': () => import('@/pages/services/SalesRecruiting'),
-  '/contract-staffing': () => import('@/pages/services/ContractStaffing'),
-  '/temporary-staffing': () => import('@/pages/services/TemporaryStaffing'),
-  '/careers': () => import('@/pages/Careers'),
-  '/agents': () => import('@/pages/AgentsIndex'),
-  '/alliance': () => import('@/pages/Alliance'),
-  '/contact': () => import('@/pages/Contact'),
-  '/book-talent': () => import('@/pages/BookTalent'),
-  '/book-career': () => import('@/pages/BookCareer'),
-  '/blog': () => import('@/pages/BlogIndex'),
-  '/niches': () => import('@/pages/NichesIndex'),
-  '/salary-guide': () => import('@/pages/SalaryGuide'),
-};
+const routeChunks: Record<string, () => Promise<unknown>> = {};
 
 /**
  * Hook for prefetching routes on hover to improve navigation speed

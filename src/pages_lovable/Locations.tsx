@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { usePathnames, groupLocationsByRegion } from '@/hooks/usePathname';
+import { usePathnames, groupLocationsByRegion } from '@/hooks/useLocation';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const ServiceAreas = () => {
@@ -36,7 +36,7 @@ const ServiceAreas = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pt-28 md:pt-32 bg-gradient-to-br from-muted to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
@@ -51,13 +51,13 @@ const ServiceAreas = () => {
               <span className="text-primary">Nationwide Coverage</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-12">
-              Premier recruiting agency serving 50+ major metropolitan areas across the United States. 
-              Local market expertise with national recruiting standards, delivering exceptional talent 
+              Premier recruiting agency serving 50+ major metropolitan areas across the United States.
+              Local market expertise with national recruiting standards, delivering exceptional talent
               solutions wherever your business operates.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+              <a
                 href="https://crm.engagedheadhunters.com/widget/bookings/request-talent"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -66,7 +66,7 @@ const ServiceAreas = () => {
                 Find Local Recruiter
                 <ArrowRight className="ml-2" size={20} />
               </a>
-              <Link 
+              <Link
                 href="/salary-guide"
                 className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
               >
@@ -85,7 +85,7 @@ const ServiceAreas = () => {
               Markets We Serve
             </h2>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-              From major metropolitan areas to emerging markets, our local recruiting specialists 
+              From major metropolitan areas to emerging markets, our local recruiting specialists
               understand the unique dynamics of each region and deliver tailored talent solutions.
             </p>
           </div>
@@ -108,10 +108,10 @@ const ServiceAreas = () => {
               {regions.map((region, regionIndex) => (
                 <div key={regionIndex} className="bg-gradient-to-br from-muted to-background rounded-2xl p-8 shadow-lg">
                   <h3 className="text-2xl font-bold text-foreground mb-8 text-center">{region.name}</h3>
-                  
+
                   <div className="grid lg:grid-cols-2 gap-6">
                     {region.cities.map((city, cityIndex) => (
-                      <Link 
+                      <Link
                         key={cityIndex}
                         href={city.id === 'houston' ? '/houston' : `/location/${city.id}`}
                         className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 border"
@@ -125,11 +125,11 @@ const ServiceAreas = () => {
                               Metro Population: {city.population || 'Growing'}
                             </p>
                           </div>
-                        <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center">
+                          <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center">
                             <span className="text-xl" role="img" aria-hidden="true">📍</span>
                           </div>
                         </div>
-                        
+
                         <div className="mb-4">
                           <h5 className="font-semibold text-foreground mb-2">Key Industries:</h5>
                           <div className="flex flex-wrap gap-2">
@@ -140,7 +140,7 @@ const ServiceAreas = () => {
                             ))}
                           </div>
                         </div>
-                        
+
                         <div className="flex justify-end items-center pt-4 border-t border-border">
                           <ArrowRight className="text-primary" size={16} />
                         </div>
@@ -162,7 +162,7 @@ const ServiceAreas = () => {
               Why Choose Local Recruiting Expertise
             </h2>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-              Local market knowledge combined with national recruiting standards delivers 
+              Local market knowledge combined with national recruiting standards delivers
               superior results for both employers and candidates.
             </p>
           </div>
@@ -189,7 +189,7 @@ const ServiceAreas = () => {
               Connect with Local Recruiting Experts
             </h2>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-              Ready to find top talent in your market? Our local recruiting specialists are 
+              Ready to find top talent in your market? Our local recruiting specialists are
               standing by to discuss your specific needs and market opportunities.
             </p>
           </div>
@@ -201,12 +201,12 @@ const ServiceAreas = () => {
               <p className="text-muted-foreground mb-4">Speak directly with a recruiting specialist</p>
               <a href="tel:+17577207173" className="text-primary font-semibold hover:text-primary/80 transition-colors">(757) 720-7173</a>
             </div>
-            
+
             <div className="bg-gradient-to-br from-muted to-background p-8 rounded-xl shadow-lg text-center">
               <span className="text-4xl block mb-4 mx-auto" role="img" aria-hidden="true">🌐</span>
               <h3 className="text-xl font-bold text-foreground mb-3">Online Request</h3>
               <p className="text-muted-foreground mb-4">Submit your hiring requirements</p>
-              <a 
+              <a
                 href="https://crm.engagedheadhunters.com/widget/bookings/request-talent"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -226,11 +226,11 @@ const ServiceAreas = () => {
             Find Your Local Recruiting Partner
           </h2>
           <p className="text-primary-foreground/80 text-xl mb-8 max-w-4xl mx-auto">
-            Whether you need executive search, professional staffing, or specialized recruiting 
+            Whether you need executive search, professional staffing, or specialized recruiting
             in your market, our local experts are ready to deliver exceptional results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
+            <a
               href="https://crm.engagedheadhunters.com/widget/bookings/request-talent"
               target="_blank"
               rel="noopener noreferrer"
@@ -238,7 +238,7 @@ const ServiceAreas = () => {
             >
               Schedule Consultation
             </a>
-            <Link 
+            <Link
               href="/salary-guide"
               className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors"
             >

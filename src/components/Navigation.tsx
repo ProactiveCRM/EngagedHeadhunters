@@ -1,3 +1,5 @@
+"use client";
+
 import { Menu, Phone, Building, Users, Briefcase } from 'lucide-react';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';

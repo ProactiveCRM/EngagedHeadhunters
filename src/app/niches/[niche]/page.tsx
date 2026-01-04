@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 import NichePageClient from '@/components/pages/NichePageClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
 interface Props {
     params: Promise<{ niche: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { niche } = await params;
-
+const getStaticNicheMetadata = (niche: string): Metadata => {
     const nicheData: Record<string, { title: string; description: string; specialties: string[] }> = {
         healthcare: {
             title: "Healthcare",
@@ -67,8 +67,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description,
         },
     };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { niche } = await params;
+    const urlPath = `/niches/${niche}`;
+    const content = await getBuilderContent(urlPath);
+    const staticMetadata = getStaticNicheMetadata(niche);
+
+    return mergeBuilderMetadata(content, staticMetadata);
 }
 
-export default function NichePage() {
+export default async function NichePage({ params }: Props) {
+    const { niche } = await params;
+    const urlPath = `/niches/${niche}`;
+    const content = await getBuilderContent(urlPath);
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <NichePageClient />;
 }
+
+export const revalidate = 1;

@@ -108,7 +108,7 @@ const BlogIndexClient = () => {
         if (!validation.success) {
             toast({
                 title: 'Invalid email',
-                description: validation.error.errors[0]?.message || 'Please enter a valid email',
+                description: validation.error.issues[0]?.message || 'Please enter a valid email',
                 variant: 'destructive',
             });
             return;
@@ -234,8 +234,8 @@ const BlogIndexClient = () => {
                                             key={category.slug}
                                             onClick={() => setSelectedCategory(category.slug)}
                                             className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors ${selectedCategory === category.slug
-                                                    ? 'bg-primary text-primary-foreground'
-                                                    : 'bg-background border hover:bg-muted text-foreground'
+                                                ? 'bg-primary text-primary-foreground'
+                                                : 'bg-background border hover:bg-muted text-foreground'
                                                 }`}
                                         >
                                             <IconComponent className="mr-2" size={16} />

@@ -13,7 +13,7 @@ import Footer from '@/components/Footer';
 import ProfileCompletionChecklist from '@/components/agent/ProfileCompletionChecklist';
 import AvatarUpload from '@/components/agent/AvatarUpload';
 import CoverPhotoUpload from '@/components/agent/CoverPhotoUpload';
-import { Navigate,   } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { MapPin, Briefcase, ExternalLink, Eye } from 'lucide-react';
 
@@ -47,6 +47,8 @@ interface Profile {
 export default function Dashboard() {
   const { user, loading: authLoading, signOut } = useAuth();
   const { toast } = useToast();
+  const router = useRouter();
+
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -59,25 +61,39 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace('/auth');
+    }
+  }, [user, authLoading, router]);
+
+  useEffect(() => {
     if (user) {
       fetchProfile();
     }
   }, [user]);
 
   const fetchProfile = async () => {
+    if (!user) return;
+
     try {
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', user?.id)
+        .eq('id', user.id)
         .single();
 
       if (error && error.code === 'PGRST116') {
         await createProfile();
       } else if (error) {
         console.error('Error fetching profile:', error);
-      } else {
-        setProfile(data);
+      } else if (data) {
+        setProfile({
+          ...data,
+          role: data.role || 'agent',
+          is_active: !!data.is_active,
+          username: data.username || '',
+          availability_status: data.availability_status || 'available',
+        } as Profile);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -87,10 +103,12 @@ export default function Dashboard() {
   };
 
   const createProfile = async () => {
+    if (!user) return;
+
     try {
       const newProfile = {
-        id: user?.id,
-        username: user?.email?.split('@')[0] || '',
+        id: user.id,
+        username: user.email?.split('@')[0] || '',
         full_name: '',
         role: 'agent',
         title: '',
@@ -111,8 +129,14 @@ export default function Dashboard() {
 
       if (error) {
         console.error('Error creating profile:', error);
-      } else {
-        setProfile(data);
+      } else if (data) {
+        setProfile({
+          ...data,
+          role: data.role || 'agent',
+          is_active: !!data.is_active,
+          username: data.username || '',
+          availability_status: data.availability_status || 'available',
+        } as Profile);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -120,8 +144,8 @@ export default function Dashboard() {
   };
 
   const handleSave = async () => {
-    if (!profile) return;
-    
+    if (!profile || !user) return;
+
     setSaving(true);
     try {
       const { error } = await supabase
@@ -147,7 +171,7 @@ export default function Dashboard() {
           years_experience: profile.years_experience,
           company: profile.company,
         })
-        .eq('id', user?.id);
+        .eq('id', user.id);
 
       if (error) throw error;
 
@@ -186,7 +210,7 @@ export default function Dashboard() {
   }
 
   if (!user) {
-    return <Navigate href="/auth" replace />;
+    return null;
   }
 
   if (!profile) {
@@ -196,7 +220,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="container mx-auto px-4 pt-28 pb-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <div>
@@ -264,11 +288,10 @@ export default function Dashboard() {
                       )}
                     </div>
                   </div>
-                  <div className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    profile.availability_status === 'available' 
-                      ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' 
-                      : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
-                  }`}>
+                  <div className={`px-3 py-1 rounded-full text-sm font-medium ${profile.availability_status === 'available'
+                    ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+                    : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
+                    }`}>
                     {profile.availability_status === 'available' ? 'Open to work' : 'Limited availability'}
                   </div>
                 </div>
@@ -534,9 +557,9 @@ export default function Dashboard() {
                 </div>
                 {profile.username && (
                   <Button asChild variant="outline" className="w-full mt-4">
-                    <a 
-                      href={`/${profile.username}`} 
-                      target="_blank" 
+                    <a
+                      href={`/${profile.username}`}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2"
                     >

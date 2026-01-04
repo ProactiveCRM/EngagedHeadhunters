@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 import { Users, FileText, MessageSquare, Settings, ChevronRight, UserCheck, UserX, BarChart3, PieChart, TrendingUp } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -48,7 +48,7 @@ const AdminDashboardContent = () => {
 
   async function fetchData() {
     setLoading(true);
-    
+
     // Fetch profiles
     const { data: profilesData, error: profilesError } = await supabase
       .from('profiles')
@@ -73,7 +73,7 @@ const AdminDashboardContent = () => {
       console.error('Error fetching submissions:', submissionsError);
     } else {
       setSubmissions(submissionsData || []);
-      
+
       // Process analytics data
       const bySourceMap = new Map<string, number>();
       const byInquiryMap = new Map<string, number>();
@@ -128,7 +128,7 @@ const AdminDashboardContent = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">
@@ -189,7 +189,7 @@ const AdminDashboardContent = () => {
               <BarChart3 className="text-primary" size={24} />
               Form Submission Analytics
             </h2>
-            
+
             <div className="grid lg:grid-cols-2 gap-6 mb-6">
               {/* Submissions by Source Page */}
               <div className="bg-card rounded-xl p-6 border shadow-sm">
@@ -222,7 +222,7 @@ const AdminDashboardContent = () => {
                         cx="50%"
                         cy="50%"
                         labelLine={false}
-                        label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                        label={({ name, percent }) => `${name} (${((percent || 0) * 100).toFixed(0)}%)`}
                         outerRadius={100}
                         fill="#8884d8"
                         dataKey="count"
@@ -268,7 +268,7 @@ const AdminDashboardContent = () => {
 
           {/* Quick Actions */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Link 
+            <Link
               href="/admin/agents"
               className="bg-card rounded-xl p-6 border shadow-sm hover:shadow-md transition-shadow group"
             >
@@ -281,7 +281,7 @@ const AdminDashboardContent = () => {
               </div>
             </Link>
 
-            <Link 
+            <Link
               href="/agent/blog"
               className="bg-card rounded-xl p-6 border shadow-sm hover:shadow-md transition-shadow group"
             >
@@ -335,11 +335,10 @@ const AdminDashboardContent = () => {
                         <p className="text-sm text-muted-foreground">{profile.role || 'user'}</p>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className={`px-2 py-1 rounded-full text-xs ${
-                          profile.is_active 
-                            ? 'bg-green-100 text-green-700' 
+                        <span className={`px-2 py-1 rounded-full text-xs ${profile.is_active
+                            ? 'bg-green-100 text-green-700'
                             : 'bg-yellow-100 text-yellow-700'
-                        }`}>
+                          }`}>
                           {profile.is_active ? 'Active' : 'Pending'}
                         </span>
                       </div>
@@ -371,11 +370,10 @@ const AdminDashboardContent = () => {
                     <div key={submission.id} className="p-4">
                       <div className="flex items-center justify-between mb-1">
                         <p className="font-medium text-foreground">{submission.name}</p>
-                        <span className={`px-2 py-1 rounded-full text-xs ${
-                          submission.status === 'new' 
-                            ? 'bg-accent/20 text-accent' 
+                        <span className={`px-2 py-1 rounded-full text-xs ${submission.status === 'new'
+                            ? 'bg-accent/20 text-accent'
                             : 'bg-muted text-muted-foreground'
-                        }`}>
+                          }`}>
                           {submission.status || 'new'}
                         </span>
                       </div>

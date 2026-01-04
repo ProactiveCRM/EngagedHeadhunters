@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import TechnologyCareersClient from '@/components/pages/TechnologyCareersClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Technology Careers & IT Jobs | Engaged Headhunters',
     description: 'Explore technology careers and IT jobs. Software engineering, development, and tech professional opportunities.',
     keywords: 'technology careers, IT jobs, software jobs, tech careers, developer opportunities',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function TechnologyCareersPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/technology-careers");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function TechnologyCareersPage() {
+    const content = await getBuilderContent("/technology-careers");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <TechnologyCareersClient />;
 }
+
+export const revalidate = 1;

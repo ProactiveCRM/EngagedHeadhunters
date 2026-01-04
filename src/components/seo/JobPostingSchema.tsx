@@ -1,5 +1,3 @@
-import { Helmet } from 'react-helmet-async';
-
 interface JobPostingSchemaProps {
   title: string;
   description: string;
@@ -50,12 +48,10 @@ export const JobPostingSchema = ({
     employmentType,
   };
 
-  // Add valid through date
   if (validThrough) {
     schemaData.validThrough = validThrough;
   }
 
-  // Add location or remote work
   if (remote) {
     schemaData.jobLocationType = 'TELECOMMUTE';
     schemaData.applicantLocationRequirements = {
@@ -76,7 +72,6 @@ export const JobPostingSchema = ({
     };
   }
 
-  // Add salary information
   if (salaryMin || salaryMax) {
     schemaData.baseSalary = {
       '@type': 'MonetaryAmount',
@@ -91,22 +86,19 @@ export const JobPostingSchema = ({
     };
   }
 
-  // Add industry
   if (industry) {
     schemaData.industry = industry;
   }
 
-  // Add experience requirements
   if (experienceRequirements) {
     schemaData.experienceRequirements = experienceRequirements;
   }
 
   return (
-    <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(schemaData)}
-      </script>
-    </Helmet>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
   );
 };
 

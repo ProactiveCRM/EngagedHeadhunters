@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { DollarSign, TrendingUp, BarChart3, FileText, CheckCircle, Users, ArrowRight, Loader2 } from 'lucide-react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
-import { Helmet } from 'react-helmet-async';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CTASection from '../components/CTASection';
@@ -109,14 +108,14 @@ const SalaryGuide = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    
+
     if (!formData.role.trim()) {
       toast.error('Please enter a job title/role');
       return;
     }
 
     setLoading(true);
-    
+
     try {
       const { data, error } = await supabase.functions.invoke('salary-lookup', {
         body: {
@@ -157,19 +156,14 @@ const SalaryGuide = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Executive Salary Guide & Compensation Data | Engaged Headhunters</title>
-        <meta name="description" content="Access market-accurate executive compensation data and salary benchmarks. Get instant salary estimates for your industry, role, and location." />
-        <meta name="keywords" content="executive salary guide, compensation data, salary benchmarks, executive pay, compensation report, salary calculator" />
-      </Helmet>
-      <ServiceSchema 
+      <ServiceSchema
         name="Executive Compensation Analysis"
         description="Market-accurate salary data and compensation benchmarks for executive and professional roles"
         url="https://www.engagedheadhunters.com/salary-guide"
         serviceType="Compensation Consulting"
       />
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pt-28 md:pt-32 bg-gradient-to-br from-muted to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
@@ -185,17 +179,17 @@ const SalaryGuide = () => {
                 <span className="text-primary"> Compensation Data</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                Make informed career and hiring decisions with market-accurate compensation data. 
+                Make informed career and hiring decisions with market-accurate compensation data.
                 Get instant salary estimates based on role, location, and experience level.
               </p>
-              
+
               {!showResults && (
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <a href="#salary-tool" className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center">
                     Get Salary Estimate
                     <ArrowRight className="ml-2" size={20} />
                   </a>
-                  <Link 
+                  <Link
                     href="/contact"
                     className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors text-center"
                   >
@@ -204,7 +198,7 @@ const SalaryGuide = () => {
                 </div>
               )}
             </div>
-            
+
             {/* Interactive Salary Tool */}
             <div id="salary-tool" className="bg-card rounded-2xl shadow-xl p-8 border">
               {!showResults ? (
@@ -300,7 +294,7 @@ const SalaryGuide = () => {
                       New Search
                     </Button>
                   </div>
-                  
+
                   <div className="space-y-6">
                     <div className="bg-muted/50 rounded-lg p-4">
                       <p className="text-sm text-muted-foreground mb-1">Role</p>
@@ -352,7 +346,7 @@ const SalaryGuide = () => {
                       <p className="text-xs text-muted-foreground">{result.disclaimer}</p>
                     </div>
 
-                    <a 
+                    <a
                       href="https://crm.engagedheadhunters.com/widget/bookings/confidential-career-call"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -423,7 +417,7 @@ const SalaryGuide = () => {
         </div>
       </section>
 
-      <CTASection 
+      <CTASection
         variant="candidate"
         title="Need Help Negotiating Your Compensation?"
         description="Our expert recruiters can help you understand your market value and negotiate the compensation package you deserve."

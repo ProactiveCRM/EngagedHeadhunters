@@ -18,7 +18,7 @@ function calculateSEOScore(seo: Partial<PageSEOData>): { score: number; issues: 
   const passed: string[] = [];
   let score = 0;
   const maxScore = 100;
-  
+
   // Meta title (20 points)
   const titleLen = seo.meta_title?.length || 0;
   if (titleLen === 0) {
@@ -33,7 +33,7 @@ function calculateSEOScore(seo: Partial<PageSEOData>): { score: number; issues: 
     passed.push('Meta title length optimal');
     score += 20;
   }
-  
+
   // Meta description (20 points)
   const descLen = seo.meta_description?.length || 0;
   if (descLen === 0) {
@@ -48,7 +48,7 @@ function calculateSEOScore(seo: Partial<PageSEOData>): { score: number; issues: 
     passed.push('Meta description length optimal');
     score += 20;
   }
-  
+
   // OG Image (15 points)
   if (seo.og_image) {
     passed.push('Open Graph image set');
@@ -56,7 +56,7 @@ function calculateSEOScore(seo: Partial<PageSEOData>): { score: number; issues: 
   } else {
     issues.push('Missing Open Graph image');
   }
-  
+
   // OG Title/Description (15 points)
   if (seo.og_title || seo.meta_title) {
     score += 7.5;
@@ -66,7 +66,7 @@ function calculateSEOScore(seo: Partial<PageSEOData>): { score: number; issues: 
     score += 7.5;
     if (seo.og_description) passed.push('OG description customized');
   }
-  
+
   // Keywords (10 points)
   if (seo.keywords && seo.keywords.length > 0) {
     passed.push(`${seo.keywords.length} keywords defined`);
@@ -74,7 +74,7 @@ function calculateSEOScore(seo: Partial<PageSEOData>): { score: number; issues: 
   } else {
     issues.push('No keywords defined');
   }
-  
+
   // Structured Data (15 points)
   if (seo.structured_data) {
     const schemaType = detectSchemaType(seo.structured_data);
@@ -88,25 +88,25 @@ function calculateSEOScore(seo: Partial<PageSEOData>): { score: number; issues: 
   } else {
     issues.push('No structured data');
   }
-  
+
   // Canonical URL (5 points)
   if (seo.canonical_url) {
     passed.push('Canonical URL set');
     score += 5;
   }
-  
+
   return { score: Math.min(Math.round(score), maxScore), issues, passed };
 }
 
 export function SEOPreview({ seo, pageUrl = 'https://www.engagedheadhunters.com' }: SEOPreviewProps) {
   const [schemaOpen, setSchemaOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  
+
   const fullUrl = `${pageUrl}${seo.page_slug === 'home' ? '' : `/${seo.page_slug}`}`;
   const { score, issues, passed } = calculateSEOScore(seo);
-  
+
   const schemaType = seo.structured_data ? detectSchemaType(seo.structured_data) : null;
-  
+
   const handleCopySchema = () => {
     if (seo.structured_data) {
       navigator.clipboard.writeText(JSON.stringify(seo.structured_data, null, 2));
@@ -114,19 +114,19 @@ export function SEOPreview({ seo, pageUrl = 'https://www.engagedheadhunters.com'
       setTimeout(() => setCopied(false), 2000);
     }
   };
-  
+
   const getScoreColor = (s: number) => {
     if (s >= 80) return 'text-green-600 dark:text-green-400';
     if (s >= 60) return 'text-yellow-600 dark:text-yellow-400';
     return 'text-destructive';
   };
-  
+
   const getProgressColor = (s: number) => {
     if (s >= 80) return 'bg-green-500';
     if (s >= 60) return 'bg-yellow-500';
     return 'bg-destructive';
   };
-  
+
   return (
     <div className="space-y-4">
       {/* SEO Score Card */}
@@ -139,7 +139,7 @@ export function SEOPreview({ seo, pageUrl = 'https://www.engagedheadhunters.com'
         </CardHeader>
         <CardContent className="space-y-3">
           <Progress value={score} className={`h-2 ${getProgressColor(score)}`} />
-          
+
           {issues.length > 0 && (
             <div className="space-y-1">
               {issues.slice(0, 3).map((issue, i) => (
@@ -150,7 +150,7 @@ export function SEOPreview({ seo, pageUrl = 'https://www.engagedheadhunters.com'
               ))}
             </div>
           )}
-          
+
           {passed.length > 0 && issues.length === 0 && (
             <div className="space-y-1">
               {passed.slice(0, 3).map((item, i) => (
@@ -251,7 +251,7 @@ export function SEOPreview({ seo, pageUrl = 'https://www.engagedheadhunters.com'
             <div className="border rounded-xl overflow-hidden">
               {(seo.twitter_image || seo.og_image) ? (
                 <img
-                  src={seo.twitter_image || seo.og_image}
+                  src={seo.twitter_image || seo.og_image || undefined}
                   alt="Twitter Preview"
                   className="w-full h-32 object-cover bg-muted"
                 />
@@ -303,7 +303,7 @@ export function SEOPreview({ seo, pageUrl = 'https://www.engagedheadhunters.com'
                   <Badge variant="secondary" className="text-xs">Service Rich Results</Badge>
                 )}
               </div>
-              
+
               <Collapsible open={schemaOpen} onOpenChange={setSchemaOpen}>
                 <CollapsibleTrigger asChild>
                   <Button variant="ghost" size="sm" className="w-full justify-between">
@@ -316,9 +316,9 @@ export function SEOPreview({ seo, pageUrl = 'https://www.engagedheadhunters.com'
                     <pre className="text-xs bg-muted p-3 rounded overflow-auto max-h-48 font-mono">
                       {JSON.stringify(seo.structured_data, null, 2)}
                     </pre>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       className="absolute top-1 right-1"
                       onClick={handleCopySchema}
                     >

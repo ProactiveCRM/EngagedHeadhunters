@@ -1,11 +1,9 @@
-import { Helmet } from 'react-helmet-async';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CTASection from '../components/CTASection';
 import StickyCTA from '../components/StickyCTA';
 import FAQSchema from '../components/seo/FAQSchema';
 import { Button } from '@/components/ui/button';
-import {   } from 'next/navigation';
 import Link from 'next/link';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { ArrowRight } from 'lucide-react';
@@ -122,13 +120,8 @@ const Employers = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Executive Recruiting Services for Employers | Engaged Headhunters</title>
-        <meta name="description" content="Fill leadership roles faster with executive search specialists. Industry-focused recruiters deliver qualified candidates in days with placement guarantees. Healthcare, tech, finance expertise." />
-        <link rel="canonical" href="https://engagedheadhunters.com/employers" />
-      </Helmet>
       <FAQSchema faqs={faqs} />
-      
+
       <div className="min-h-screen bg-background">
         <Navigation />
         <StickyCTA />
@@ -137,11 +130,11 @@ const Employers = () => {
         <section className="pt-24 pb-20 relative overflow-hidden">
           {/* Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 via-background to-muted/30" />
-          
+
           {/* Animated Decorations */}
           <div className="absolute top-20 right-[10%] w-[400px] h-[400px] bg-destructive/10 rounded-full blur-[100px] animate-blob opacity-40" />
           <div className="absolute bottom-20 left-[5%] w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] animate-blob opacity-30" style={{ animationDelay: '-5s' }} />
-          
+
           {/* Pattern */}
           <div className="absolute inset-0 opacity-[0.02]">
             <div className="absolute inset-0" style={{
@@ -149,29 +142,29 @@ const Employers = () => {
               backgroundSize: '50px 50px'
             }} />
           </div>
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-destructive/10 rounded-full border border-destructive/20 mb-6 animate-fade-in">
                 <span className="text-sm animate-pulse" role="img" aria-hidden="true">✨</span>
                 <span className="text-sm font-semibold text-destructive">For Hiring Decision-Makers</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 animate-fade-in leading-tight" style={{ animationDelay: '100ms' }}>
                 Empty Roles Cost $500/Day.{' '}
                 <span className="bg-gradient-to-r from-destructive via-destructive/80 to-destructive bg-clip-text text-transparent">
                   Let's Stop the Bleeding.
                 </span>
               </h1>
-              
+
               <p className="text-xl text-muted-foreground mb-8 animate-fade-in leading-relaxed" style={{ animationDelay: '200ms' }}>
                 Every week that critical position sits vacant, you're losing productivity, burning out your team, and watching competitors recruit the talent you need. We deliver qualified candidates in days.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '300ms' }}>
-                <Button 
-                  asChild 
-                  size="lg" 
+                <Button
+                  asChild
+                  size="lg"
                   className="text-lg px-8 py-6 shadow-brand hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group"
                   onClick={() => trackCTAClick('Request Talent', 'booking')}
                 >
@@ -180,10 +173,10 @@ const Employers = () => {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </Button>
-                <Button 
-                  asChild 
-                  variant="outline" 
-                  size="lg" 
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
                   className="text-lg px-8 py-6 hover:bg-primary/5 backdrop-blur-sm"
                   onClick={() => trackCTAClick('See How We Work', '/services')}
                 >
@@ -318,12 +311,12 @@ const Employers = () => {
           </div>
         </section>
 
-        <CTASection 
+        <CTASection
           variant="employer"
           title="Ready to Fill That Role?"
           description="Your next great hire is out there. Let's go find them before your competitors do."
         />
-        
+
         <Footer />
       </div>
     </>

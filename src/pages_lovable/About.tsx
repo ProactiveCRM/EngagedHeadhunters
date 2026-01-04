@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import PageLayout from '@/components/layout/PageLayout';
 import CTASection from '../components/CTASection';
 import PersonSchema from '@/components/seo/PersonSchema';
@@ -33,13 +32,6 @@ const About = () => {
 
   return (
     <PageLayout>
-      <Helmet>
-        <title>About Engaged Headhunters - Premier Executive Search & Staffing Agency Since 2022</title>
-        <meta name="description" content="Learn about Engaged Headhunters, founded in 2022 in Virginia Beach. Elite executive search and staffing agency with 500+ successful placements, trusted by companies nationwide." />
-        <meta name="keywords" content="about engaged headhunters, executive search firm, staffing agency virginia beach, headhunting company, recruiting services" />
-        <link rel="canonical" href="https://www.engagedheadhunters.com/about" />
-      </Helmet>
-
       <PersonSchema
         name="James Pemberton"
         jobTitle="Founder & CEO"
@@ -57,7 +49,7 @@ const About = () => {
                 About <span className="text-accent">Engaged Headhunters</span>
               </h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-                Elite executive search and staffing solutions, connecting exceptional talent 
+                Elite executive search and staffing solutions, connecting exceptional talent
                 with transformational opportunities since 2022.
               </p>
             </div>
@@ -73,8 +65,8 @@ const About = () => {
                   Our Story
                 </h2>
                 <p className="text-xl text-muted-foreground leading-relaxed">
-                  Founded in Virginia Beach in 2022, Engaged Headhunters began with a revolutionary 
-                  premise: that exceptional talent acquisition isn't just about credentials—it's about the 
+                  Founded in Virginia Beach in 2022, Engaged Headhunters began with a revolutionary
+                  premise: that exceptional talent acquisition isn't just about credentials—it's about the
                   perfect confluence of vision, culture, and transformational potential.
                 </p>
               </div>
@@ -83,13 +75,13 @@ const About = () => {
                 <div>
                   <h3 className="text-2xl font-bold text-foreground mb-4">The Engaged Difference</h3>
                   <p className="text-muted-foreground leading-relaxed mb-6">
-                    Founded by James Pemberton, Engaged Headhunters brings a unique approach to 
-                    executive search and staffing. Our "Build Don't Beg" methodology combines 
-                    military precision with innovative recruiting strategies to deliver results 
+                    Founded by James Pemberton, Engaged Headhunters brings a unique approach to
+                    executive search and staffing. Our "Build Don't Beg" methodology combines
+                    military precision with innovative recruiting strategies to deliver results
                     that traditional agencies can't match.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    Our name, "Engaged Headhunters," reflects our deep commitment to understanding the 
+                    Our name, "Engaged Headhunters," reflects our deep commitment to understanding the
                     nuanced needs of modern organizations and the aspirations of top-tier talent.
                   </p>
                 </div>
@@ -129,57 +121,59 @@ const About = () => {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="py-16 bg-muted/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Our Track Record
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Results that speak to our commitment to exceptional outcomes
-              </p>
-            </div>
+        {stats.length > 0 && (
+          <section className="py-16 bg-muted/30">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                  Our Track Record
+                </h2>
+                <p className="text-xl text-muted-foreground">
+                  Results that speak to our commitment to exceptional outcomes
+                </p>
+              </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="bg-white rounded-lg p-6 shadow-sm">
-                    <span className="text-3xl mb-4 block" role="img" aria-hidden="true">{stat.emoji}</span>
-                    <div className="text-3xl font-bold text-foreground mb-2">{stat.value}</div>
-                    <div className="text-muted-foreground font-medium">{stat.label}</div>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                {stats.map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="bg-white rounded-lg p-6 shadow-sm">
+                      <span className="text-3xl mb-4 block" role="img" aria-hidden="true">{stat.emoji}</span>
+                      <div className="text-3xl font-bold text-foreground mb-2">{stat.value}</div>
+                      <div className="text-muted-foreground font-medium">{stat.label}</div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        {/* Our Values */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Our Core Values
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                These principles guide every search, every interaction, and every decision we make
-              </p>
-            </div>
+        {values.length > 0 && (
+          <section className="py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                  Our Core Values
+                </h2>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                  These principles guide every search, every interaction, and every decision we make
+                </p>
+              </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {values.map((value, index) => (
-                <Card key={index}>
-                  <CardContent className="p-8 text-center">
-                    <span className="text-4xl mb-6 block" role="img" aria-hidden="true">{value.emoji}</span>
-                    <h3 className="text-xl font-bold text-foreground mb-4">{value.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+              <div className="grid md:grid-cols-3 gap-8">
+                {values.map((value, index) => (
+                  <Card key={index}>
+                    <CardContent className="p-8 text-center">
+                      <span className="text-4xl mb-6 block" role="img" aria-hidden="true">{value.emoji}</span>
+                      <h3 className="text-xl font-bold text-foreground mb-4">{value.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Leadership */}
         <section className="py-16 bg-muted/30">
@@ -202,9 +196,9 @@ const About = () => {
                   <h3 className="text-2xl font-bold text-foreground mb-2">James Pemberton</h3>
                   <p className="text-primary font-medium mb-4">Founder & CEO</p>
                   <p className="text-muted-foreground leading-relaxed">
-                    A U.S. Navy veteran with 15+ years of experience in recruiting and talent acquisition, 
-                    James founded Engaged Headhunters to bring military precision and innovative methodology 
-                    to executive search. His "Build Don't Beg" approach has revolutionized how companies 
+                    A U.S. Navy veteran with 15+ years of experience in recruiting and talent acquisition,
+                    James founded Engaged Headhunters to bring military precision and innovative methodology
+                    to executive search. His "Build Don't Beg" approach has revolutionized how companies
                     attract and secure top talent through strategic, authority-first recruiting.
                   </p>
                 </CardContent>
@@ -222,13 +216,13 @@ const About = () => {
             <Card>
               <CardContent className="p-8">
                 <p className="text-xl text-muted-foreground leading-relaxed italic">
-                  "To be the definitive bridge between visionary organizations and exceptional 
-                  talent, creating lasting partnerships that drive organizational excellence 
+                  "To be the definitive bridge between visionary organizations and exceptional
+                  talent, creating lasting partnerships that drive organizational excellence
                   and career success nationwide."
                 </p>
                 <div className="mt-6 pt-6 border-t border-border">
                   <p className="text-sm text-muted-foreground">
-                    Every search we conduct, every placement we make, and every relationship we build 
+                    Every search we conduct, every placement we make, and every relationship we build
                     is guided by this unwavering commitment to excellence.
                   </p>
                 </div>
@@ -237,8 +231,8 @@ const About = () => {
           </div>
         </section>
 
-      {/* CTA Section */}
-      <CTASection variant="hybrid" showJobsLink={true} />
+        {/* CTA Section */}
+        <CTASection variant="hybrid" showJobsLink={true} />
       </div>
     </PageLayout>
   );

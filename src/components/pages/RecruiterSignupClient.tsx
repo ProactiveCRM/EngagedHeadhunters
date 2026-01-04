@@ -159,7 +159,7 @@ const RecruiterSignupClient = () => {
                 email: accountData.email,
                 password: accountData.password,
                 options: {
-                    emailRedirectTo: `${window.location.origin}/`,
+                    emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/` : 'https://www.engagedheadhunters.com/',
                     data: {
                         full_name: accountData.fullName,
                         username: profileData.username,
@@ -226,8 +226,8 @@ const RecruiterSignupClient = () => {
                             {steps.map((s, index) => (
                                 <div key={s.number} className="flex items-center">
                                     <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-colors ${step >= s.number
-                                            ? 'bg-primary border-primary text-primary-foreground'
-                                            : 'border-muted-foreground/30 text-muted-foreground'
+                                        ? 'bg-primary border-primary text-primary-foreground'
+                                        : 'border-muted-foreground/30 text-muted-foreground'
                                         }`}>
                                         {step > s.number ? (
                                             <CheckCircle className="w-5 h-5" />

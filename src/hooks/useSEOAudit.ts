@@ -61,7 +61,7 @@ export const ALL_PAGES: PageDefinition[] = [
   { slug: 'candidates', label: 'Candidates', path: '/candidates', category: 'core' },
   { slug: 'about', label: 'About', path: '/about', category: 'core' },
   { slug: 'contact', label: 'Contact', path: '/contact', category: 'core' },
-  
+
   // Services pages
   { slug: 'services', label: 'Services Hub', path: '/services', category: 'services' },
   { slug: 'executive-search', label: 'Executive Search', path: '/executive-search', category: 'services' },
@@ -72,7 +72,7 @@ export const ALL_PAGES: PageDefinition[] = [
   { slug: 'finance-recruiting', label: 'Finance Recruiting', path: '/finance-recruiting', category: 'services' },
   { slug: 'sales-recruiting', label: 'Sales Recruiting', path: '/sales-recruiting', category: 'services' },
   { slug: 'manufacturing-recruiting', label: 'Manufacturing Recruiting', path: '/manufacturing-recruiting', category: 'services' },
-  
+
   // Careers pages
   { slug: 'careers', label: 'Careers Hub', path: '/careers', category: 'careers' },
   { slug: 'healthcare-careers', label: 'Healthcare Careers', path: '/careers/healthcare', category: 'careers' },
@@ -84,11 +84,11 @@ export const ALL_PAGES: PageDefinition[] = [
   { slug: 'contract-careers', label: 'Contract Careers', path: '/careers/contract', category: 'careers' },
   { slug: 'remote-careers', label: 'Remote Careers', path: '/careers/remote', category: 'careers' },
   { slug: 'entry-level-careers', label: 'Entry Level Careers', path: '/careers/entry-level', category: 'careers' },
-  
+
   // Locations
   { slug: 'locations', label: 'Locations Hub', path: '/locations', category: 'locations' },
   { slug: 'houston', label: 'Houston', path: '/houston', category: 'locations' },
-  
+
   // Other pages
   { slug: 'blog', label: 'Blog', path: '/blog', category: 'other' },
   { slug: 'agents', label: 'Agents Directory', path: '/agents', category: 'other' },
@@ -109,22 +109,22 @@ export const ALL_PAGES: PageDefinition[] = [
 function calculatePageScore(seoData: PageSEOData | null, pageCategory: string): { score: number; issues: SEOIssue[]; hasStructuredData: boolean; structuredDataType: string | null } {
   const issues: SEOIssue[] = [];
   let score = 0;
-  
+
   if (!seoData) {
-    return { 
-      score: 0, 
+    return {
+      score: 0,
       issues: [{ type: 'critical', category: 'Missing SEO', message: 'No SEO data configured for this page', fix: 'Add SEO settings' }],
       hasStructuredData: false,
       structuredDataType: null,
     };
   }
-  
+
   const title = seoData.meta_title || '';
   const description = seoData.meta_description || '';
   const ogImage = seoData.og_image || '';
   const keywords = seoData.keywords || [];
   const structuredData = seoData.structured_data;
-  
+
   // Title scoring (25 points max)
   if (title) {
     score += 12;
@@ -140,7 +140,7 @@ function calculatePageScore(seoData: PageSEOData | null, pageCategory: string): 
   } else {
     issues.push({ type: 'critical', category: 'Title', message: 'Missing meta title', fix: 'Add meta title' });
   }
-  
+
   // Description scoring (25 points max)
   if (description) {
     score += 12;
@@ -156,14 +156,14 @@ function calculatePageScore(seoData: PageSEOData | null, pageCategory: string): 
   } else {
     issues.push({ type: 'critical', category: 'Description', message: 'Missing meta description', fix: 'Add meta description' });
   }
-  
+
   // OG Image scoring (15 points max)
   if (ogImage) {
     score += 15;
   } else {
     issues.push({ type: 'warning', category: 'OG Image', message: 'Missing Open Graph image', fix: 'Add OG image' });
   }
-  
+
   // Keywords scoring (10 points max)
   if (keywords.length > 0) {
     score += Math.min(10, keywords.length * 2);
@@ -173,11 +173,11 @@ function calculatePageScore(seoData: PageSEOData | null, pageCategory: string): 
   } else {
     issues.push({ type: 'warning', category: 'Keywords', message: 'No keywords configured', fix: 'Add keywords' });
   }
-  
+
   // Structured Data scoring (15 points max)
   const schemaType = structuredData ? detectSchemaType(structuredData) : null;
   const hasStructuredData = !!structuredData && !!schemaType;
-  
+
   if (hasStructuredData) {
     score += 15;
   } else {
@@ -187,32 +187,32 @@ function calculatePageScore(seoData: PageSEOData | null, pageCategory: string): 
       issues.push({ type: 'info', category: 'Structured Data', message: 'No structured data (JSON-LD) configured', fix: 'Add schema' });
     }
   }
-  
+
   // Robots scoring (5 points max)
   if (seoData.robots && !seoData.robots.includes('noindex')) {
     score += 5;
   }
-  
+
   // Canonical URL scoring (5 points max)
   if (seoData.canonical_url) {
     score += 5;
   } else {
     issues.push({ type: 'info', category: 'Canonical', message: 'No canonical URL set', fix: 'Add canonical URL' });
   }
-  
+
   return { score: Math.min(100, score), issues, hasStructuredData, structuredDataType: schemaType };
 }
 
 export function useSEOAudit() {
   const { seoData, loading, refetch, updateSEO, isUpdating } = useAdminPageSEO();
-  
+
   const audit = useMemo((): SEOAuditResult => {
     const seoMap = new Map(seoData.map(s => [s.page_slug, s]));
-    
+
     const pages: PageAuditResult[] = ALL_PAGES.map(page => {
       const seo = seoMap.get(page.slug) || null;
       const { score, issues, hasStructuredData, structuredDataType } = calculatePageScore(seo, page.category);
-      
+
       return {
         page,
         seoData: seo,
@@ -228,22 +228,22 @@ export function useSEOAudit() {
         descriptionLength: seo?.meta_description?.length || 0,
       };
     });
-    
+
     const auditedPages = pages.filter(p => p.seoData !== null).length;
-    const overallScore = pages.length > 0 
+    const overallScore = pages.length > 0
       ? Math.round(pages.reduce((sum, p) => sum + p.score, 0) / pages.length)
       : 0;
-    
+
     const criticalIssues = pages.filter(p => p.issues.some(i => i.type === 'critical')).length;
     const warnings = pages.filter(p => p.issues.some(i => i.type === 'warning') && !p.issues.some(i => i.type === 'critical')).length;
     const optimized = pages.filter(p => p.score >= 80).length;
-    
+
     // Key pages that should have structured data
     const keyPageCategories = ['core', 'services', 'locations'];
-    const missingStructuredData = pages.filter(p => 
+    const missingStructuredData = pages.filter(p =>
       keyPageCategories.includes(p.page.category) && !p.hasStructuredData
     );
-    
+
     return {
       totalPages: pages.length,
       auditedPages,
@@ -265,20 +265,20 @@ export function useSEOAudit() {
       },
     };
   }, [seoData]);
-  
+
   const seedMissingPages = useCallback(async () => {
     const missing = ALL_PAGES.filter(page => !seoData.find(s => s.page_slug === page.slug));
-    
+
     for (const page of missing) {
       // First check PAGE_META_DESCRIPTIONS for optimized content
       const optimizedData = PAGE_META_DESCRIPTIONS[page.slug];
-      
+
       // Fallback to legacy config data if not in PAGE_META_DESCRIPTIONS
       const serviceData = SERVICE_SEO_DATA[page.slug as keyof typeof SERVICE_SEO_DATA];
       const careerData = CAREER_SEO_DATA[page.slug as keyof typeof CAREER_SEO_DATA];
       const locationData = LOCATION_SEO_DATA[page.slug as keyof typeof LOCATION_SEO_DATA];
       const legacyConfigData = serviceData || careerData || locationData;
-      
+
       // Generate default structured data based on page type
       let defaultSchema = null;
       if (page.slug === 'home') {
@@ -288,26 +288,26 @@ export function useSEOAudit() {
       } else if (page.category === 'services') {
         defaultSchema = generateDefaultServiceSchema(page.label);
       }
-      
+
       await updateSEO({
         page_slug: page.slug,
         meta_title: optimizedData?.title || legacyConfigData?.title || `${page.label} | Engaged Headhunters`,
         meta_description: optimizedData?.description || legacyConfigData?.description || null,
         keywords: optimizedData?.keywords || legacyConfigData?.keywords || [],
         robots: 'index, follow',
-        structured_data: defaultSchema,
+        structured_data: defaultSchema as any,
       });
     }
   }, [seoData, updateSEO]);
-  
+
   const bulkUpdateFromConfig = useCallback(async () => {
     for (const page of ALL_PAGES) {
       const serviceData = SERVICE_SEO_DATA[page.slug as keyof typeof SERVICE_SEO_DATA];
       const careerData = CAREER_SEO_DATA[page.slug as keyof typeof CAREER_SEO_DATA];
       const locationData = LOCATION_SEO_DATA[page.slug as keyof typeof LOCATION_SEO_DATA];
-      
+
       const configData = serviceData || careerData || locationData;
-      
+
       if (configData) {
         const existing = seoData.find(s => s.page_slug === page.slug);
         await updateSEO({
@@ -321,7 +321,7 @@ export function useSEOAudit() {
       }
     }
   }, [seoData, updateSEO]);
-  
+
   const exportReport = useCallback(() => {
     const csvRows = [
       ['Page', 'Score', 'Title', 'Title Length', 'Description', 'Desc Length', 'OG Image', 'Keywords', 'Issues'],
@@ -337,7 +337,7 @@ export function useSEOAudit() {
         p.issues.map(i => i.message).join('; '),
       ]),
     ];
-    
+
     const csvContent = csvRows.map(row => row.map(cell => `\"${cell}\"`).join(',')).join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
@@ -347,7 +347,7 @@ export function useSEOAudit() {
     a.click();
     URL.revokeObjectURL(url);
   }, [audit]);
-  
+
   return {
     audit,
     loading,

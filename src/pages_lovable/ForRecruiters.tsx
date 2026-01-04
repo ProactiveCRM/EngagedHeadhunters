@@ -1,17 +1,16 @@
-import { Helmet } from 'react-helmet-async';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import AgentAllianceComparison from '@/components/AgentAllianceComparison';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  Zap, 
-  Target, 
-  TrendingUp, 
-  Users, 
-  Brain, 
-  MessageSquare, 
-  BarChart3, 
+import {
+  Zap,
+  Target,
+  TrendingUp,
+  Users,
+  Brain,
+  MessageSquare,
+  BarChart3,
   Clock,
   CheckCircle2,
   ArrowRight,
@@ -19,7 +18,7 @@ import {
   Building2,
   Handshake
 } from 'lucide-react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 
 const ForRecruiters = () => {
@@ -94,17 +93,6 @@ const ForRecruiters = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Partner With Us: EH Agent or Alliance Member | Engaged Headhunters</title>
-        <meta name="description" content="Join as an EH Agent or Alliance Member. We book qualified appointments on your calendar. AI-powered sourcing, 2-4 extra placements per month, 40% better response rates." />
-        <meta name="keywords" content="recruiting partnership, recruiter franchise, staffing alliance, AI recruiting tools, recruiter methodology, increase placements, recruiting automation, headhunter tools" />
-        <link rel="canonical" href="https://www.engagedheadhunters.com/for-recruiters" />
-        <meta property="og:title" content="Partner With Us: EH Agent or Alliance Member | Engaged Headhunters" />
-        <meta property="og:description" content="Two paths to grow your recruiting business. Whether you build under our brand or keep your own, we book qualified appointments on your calendar." />
-        <meta property="og:url" content="https://www.engagedheadhunters.com/for-recruiters" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
       <Navigation />
 
       <main className="pt-20">
@@ -112,23 +100,23 @@ const ForRecruiters = () => {
         <section className="relative bg-gradient-to-br from-dark-navy via-dark-navy to-primary/20 text-white py-24 lg:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--primary)/0.15),transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent)/0.1),transparent_40%)]" />
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-2 mb-6">
                 <Sparkles className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-primary-foreground/90">For Recruiting Professionals</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Two Paths to{' '}
                 <span className="text-primary">Grow Your Business</span>
               </h1>
-              
+
               <p className="text-xl md:text-2xl text-white/80 mb-4 max-w-3xl mx-auto">
                 Join as an EH Agent or Alliance Member. Either way, we book qualified appointments directly on your calendar.
               </p>
-              
+
               <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
                 Build under our established brand or keep your own—same powerful support, same results.
               </p>
@@ -203,7 +191,7 @@ const ForRecruiters = () => {
                       <span>We book appointments for you</span>
                     </li>
                   </ul>
-                  <a 
+                  <a
                     href="https://crm.engagedheadhunters.com/widget/bookings/request-talent"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -245,7 +233,7 @@ const ForRecruiters = () => {
                       <span>We book appointments for you</span>
                     </li>
                   </ul>
-                  <a 
+                  <a
                     href="https://crm.engagedheadhunters.com/widget/bookings/request-talent"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -285,7 +273,7 @@ const ForRecruiters = () => {
                 The Build Don't Beg Methodology
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Transform from a transactional recruiter into a trusted talent advisor. 
+                Transform from a transactional recruiter into a trusted talent advisor.
                 Build relationships that generate placements on autopilot.
               </p>
             </div>
@@ -355,7 +343,7 @@ const ForRecruiters = () => {
                   </div>
                   <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 flex items-center gap-3">
                     <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-5 h-5 text-primary" />
+                      <span className="text-primary font-bold">✓</span>
                     </div>
                     <span className="text-foreground">{item.after}</span>
                   </div>
@@ -375,7 +363,7 @@ const ForRecruiters = () => {
               Schedule a discovery call to learn which path is right for you. We'll show you exactly how we book qualified appointments on your calendar.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+              <a
                 href="https://crm.engagedheadhunters.com/widget/bookings/request-talent"
                 target="_blank"
                 rel="noopener noreferrer"

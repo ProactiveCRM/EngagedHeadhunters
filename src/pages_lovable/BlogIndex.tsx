@@ -1,6 +1,6 @@
 import { Search, Calendar, User, ArrowRight, TrendingUp, Users, Briefcase, PenLine, Loader2, CheckCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -57,7 +57,7 @@ const BlogIndex = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  
+
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -101,12 +101,12 @@ const BlogIndex = () => {
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const validation = newsletterSchema.safeParse({ email: newsletterEmail });
     if (!validation.success) {
       toast({
         title: 'Invalid email',
-        description: validation.error.errors[0]?.message || 'Please enter a valid email',
+        description: validation.error.issues[0]?.message || 'Please enter a valid email',
         variant: 'destructive',
       });
       return;
@@ -149,7 +149,7 @@ const BlogIndex = () => {
   const filteredPosts = posts.filter(post => {
     const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         (post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false);
+      (post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false);
     return matchesCategory && matchesSearch;
   });
 
@@ -199,7 +199,7 @@ const BlogIndex = () => {
               Executive Search Insights & Intelligence
             </h1>
             <p className="text-xl text-primary-foreground/90 max-w-4xl mx-auto">
-              Industry insights, recruiting strategies, and thought leadership from our team of executive search experts. 
+              Industry insights, recruiting strategies, and thought leadership from our team of executive search experts.
               Stay ahead of trends that impact executive recruitment and organizational leadership.
             </p>
           </div>
@@ -220,7 +220,7 @@ const BlogIndex = () => {
                 className="w-full pl-10 pr-4 py-2 border rounded-lg bg-background"
               />
             </div>
-            
+
             <div className="flex flex-wrap gap-2">
               {categories.map(category => {
                 const IconComponent = category.icon;
@@ -228,11 +228,10 @@ const BlogIndex = () => {
                   <button
                     key={category.slug}
                     onClick={() => setSelectedCategory(category.slug)}
-                    className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors ${
-                      selectedCategory === category.slug
+                    className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors ${selectedCategory === category.slug
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-background border hover:bg-muted'
-                    }`}
+                      }`}
                   >
                     <IconComponent className="mr-2" size={16} />
                     {category.name}
@@ -285,7 +284,7 @@ const BlogIndex = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-foreground mb-4">Featured Article</h2>
             </div>
-            
+
             <div className="bg-card rounded-xl shadow-lg border overflow-hidden">
               <div className="grid lg:grid-cols-2 gap-8">
                 <div className="p-8">
@@ -295,10 +294,10 @@ const BlogIndex = () => {
                     </span>
                     <span className="text-muted-foreground capitalize">{featuredPost.category}</span>
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold text-foreground mb-4">{featuredPost.title}</h3>
                   <p className="text-muted-foreground mb-6">{getExcerpt(featuredPost)}</p>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-sm text-muted-foreground">
                       <User className="mr-2" size={16} />
@@ -307,7 +306,7 @@ const BlogIndex = () => {
                       <span className="mr-4">{formatDate(featuredPost.created_at)}</span>
                       <span>{estimateReadTime(featuredPost.content)}</span>
                     </div>
-                    <Link 
+                    <Link
                       href={`/blog/${featuredPost.slug || featuredPost.id}`}
                       className="inline-flex items-center text-primary hover:text-primary/80 font-semibold"
                     >
@@ -318,8 +317,8 @@ const BlogIndex = () => {
                 </div>
                 <div className="lg:p-8">
                   {featuredPost.featured_image ? (
-                    <img 
-                      src={featuredPost.featured_image} 
+                    <img
+                      src={featuredPost.featured_image}
                       alt={featuredPost.title}
                       className="w-full h-64 lg:h-full object-cover rounded-lg"
                     />
@@ -354,8 +353,8 @@ const BlogIndex = () => {
                   {regularPosts.map((post) => (
                     <article key={post.id} className="bg-card rounded-xl shadow-lg border overflow-hidden hover:shadow-xl transition-shadow">
                       {post.featured_image ? (
-                        <img 
-                          src={post.featured_image} 
+                        <img
+                          src={post.featured_image}
                           alt={post.title}
                           className="w-full h-48 object-cover"
                         />
@@ -370,10 +369,10 @@ const BlogIndex = () => {
                             {post.category}
                           </span>
                         </div>
-                        
+
                         <h3 className="text-xl font-bold text-foreground mb-3 line-clamp-2">{post.title}</h3>
                         <p className="text-muted-foreground mb-4 line-clamp-3">{getExcerpt(post)}</p>
-                        
+
                         <div className="flex items-center justify-between text-sm text-muted-foreground">
                           <div className="flex items-center">
                             <User className="mr-1" size={14} />
@@ -384,11 +383,11 @@ const BlogIndex = () => {
                             <span>{formatDate(post.created_at)}</span>
                           </div>
                         </div>
-                        
+
                         <div className="mt-4 pt-4 border-t">
                           <div className="flex items-center justify-between">
                             <span className="text-sm text-muted-foreground">{estimateReadTime(post.content)}</span>
-                            <Link 
+                            <Link
                               href={`/blog/${post.slug || post.id}`}
                               className="inline-flex items-center text-primary hover:text-primary/80 font-semibold text-sm"
                             >
@@ -419,10 +418,10 @@ const BlogIndex = () => {
             Stay Ahead of Recruiting Trends
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto">
-            Get weekly insights on executive search, talent acquisition strategies, and industry trends 
+            Get weekly insights on executive search, talent acquisition strategies, and industry trends
             delivered directly to your inbox.
           </p>
-          
+
           {isSubscribed ? (
             <div className="flex items-center justify-center text-primary-foreground">
               <CheckCircle className="mr-2" size={24} />
@@ -439,7 +438,7 @@ const BlogIndex = () => {
                 disabled={isSubscribing}
                 required
               />
-              <button 
+              <button
                 type="submit"
                 disabled={isSubscribing}
                 className="bg-accent text-accent-foreground hover:bg-accent/90 px-6 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"

@@ -16,12 +16,12 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from '@/hooks/use-toast';
-import { 
-  ArrowRight, 
-  ArrowLeft, 
-  CheckCircle2, 
-  User, 
-  Briefcase, 
+import {
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle2,
+  User,
+  Briefcase,
   MessageSquare,
   Loader2,
   Sparkles
@@ -256,13 +256,12 @@ const AllianceApplicationForm = ({ onSuccess }: AllianceApplicationFormProps) =>
             return (
               <li key={step.id} className="flex items-center">
                 <div
-                  className={`flex items-center gap-2 px-3 py-2 rounded-full transition-all ${
-                    isCurrent
+                  className={`flex items-center gap-2 px-3 py-2 rounded-full transition-all ${isCurrent
                       ? 'bg-primary text-primary-foreground'
                       : isCompleted
-                      ? 'bg-primary/20 text-primary'
-                      : 'bg-muted text-muted-foreground'
-                  }`}
+                        ? 'bg-primary/20 text-primary'
+                        : 'bg-muted text-muted-foreground'
+                    }`}
                   aria-current={isCurrent ? 'step' : undefined}
                 >
                   <div className="w-6 h-6 flex items-center justify-center">
@@ -276,9 +275,8 @@ const AllianceApplicationForm = ({ onSuccess }: AllianceApplicationFormProps) =>
                 </div>
                 {index < STEPS.length - 1 && (
                   <div
-                    className={`w-8 md:w-12 h-0.5 mx-1 md:mx-2 ${
-                      isCompleted ? 'bg-primary' : 'bg-border'
-                    }`}
+                    className={`w-8 md:w-12 h-0.5 mx-1 md:mx-2 ${isCompleted ? 'bg-primary' : 'bg-border'
+                      }`}
                     aria-hidden="true"
                   />
                 )}
@@ -306,7 +304,7 @@ const AllianceApplicationForm = ({ onSuccess }: AllianceApplicationFormProps) =>
 
         {/* Step 1: Contact Info */}
         <div
-          ref={(el) => (stepRefs.current[0] = el)}
+          ref={(el) => { stepRefs.current[0] = el; }}
           className={currentStep === 1 ? 'space-y-4' : 'hidden'}
           role="group"
           aria-labelledby="step-1-heading"
@@ -410,7 +408,7 @@ const AllianceApplicationForm = ({ onSuccess }: AllianceApplicationFormProps) =>
 
         {/* Step 2: Experience */}
         <div
-          ref={(el) => (stepRefs.current[1] = el)}
+          ref={(el) => { stepRefs.current[1] = el; }}
           className={currentStep === 2 ? 'space-y-4' : 'hidden'}
           role="group"
           aria-labelledby="step-2-heading"
@@ -533,7 +531,7 @@ const AllianceApplicationForm = ({ onSuccess }: AllianceApplicationFormProps) =>
 
         {/* Step 3: Tell Us More */}
         <div
-          ref={(el) => (stepRefs.current[2] = el)}
+          ref={(el) => { stepRefs.current[2] = el; }}
           className={currentStep === 3 ? 'space-y-4' : 'hidden'}
           role="group"
           aria-labelledby="step-3-heading"

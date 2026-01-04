@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { useAdminPageSEO } from '@/hooks/usePageSEO';
 import { SEOPreview } from '@/components/admin/SEOPreview';
@@ -63,7 +62,7 @@ export default function SEOManager() {
   const [keywordInput, setKeywordInput] = useState('');
 
   const currentSEO = seoData.find(s => s.page_slug === selectedPage);
-  
+
   const [formData, setFormData] = useState({
     meta_title: '',
     meta_description: '',
@@ -155,17 +154,13 @@ export default function SEOManager() {
 
   return (
     <DashboardLayout>
-      <Helmet>
-        <title>SEO Manager | Admin</title>
-      </Helmet>
-
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold">SEO Manager</h1>
             <p className="text-muted-foreground">Manage page titles, descriptions, and social metadata</p>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <Select value={selectedPage} onValueChange={setSelectedPage}>
               <SelectTrigger className="w-[200px]">
@@ -179,7 +174,7 @@ export default function SEOManager() {
                 ))}
               </SelectContent>
             </Select>
-            
+
             <Button onClick={handleSave} disabled={isUpdating}>
               {isUpdating ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
               Save
@@ -233,7 +228,7 @@ export default function SEOManager() {
                           {formData.meta_title.length > 60 && ' (too long)'}
                         </p>
                       </div>
-                      
+
                       <div className="space-y-2">
                         <Label>Meta Description</Label>
                         <Textarea
@@ -317,7 +312,7 @@ export default function SEOManager() {
                           placeholder="Defaults to meta title if empty"
                         />
                       </div>
-                      
+
                       <div className="space-y-2">
                         <Label>OG Description</Label>
                         <Textarea
@@ -354,7 +349,7 @@ export default function SEOManager() {
                           placeholder="Defaults to OG title if empty"
                         />
                       </div>
-                      
+
                       <div className="space-y-2">
                         <Label>Twitter Description</Label>
                         <Textarea

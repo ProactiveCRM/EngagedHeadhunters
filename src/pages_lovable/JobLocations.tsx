@@ -1,7 +1,6 @@
 import { MapPin, Building2, Users, ArrowRight, CheckCircle } from 'lucide-react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
-import { Helmet } from 'react-helmet-async';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CTASection from '../components/CTASection';
@@ -69,13 +68,8 @@ const JobLocations = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Job Locations | Find Executive Opportunities by Region | Engaged Headhunters</title>
-        <meta name="description" content="Explore executive and professional job opportunities by location. Find careers in Houston, Dallas, Austin, and major markets nationwide." />
-        <meta name="keywords" content="job locations, executive jobs Houston, jobs Dallas, careers Austin, nationwide recruiting" />
-      </Helmet>
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pt-28 md:pt-32 bg-gradient-to-br from-muted to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -90,12 +84,12 @@ const JobLocations = () => {
               <span className="text-primary"> by Location</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              We place professionals across the United States, with deep expertise in Texas markets 
+              We place professionals across the United States, with deep expertise in Texas markets
               and strong networks in major metropolitan areas nationwide.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+              <a
                 href="https://jobs.engagedheadhunters.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -104,7 +98,7 @@ const JobLocations = () => {
                 Browse All Positions
                 <ArrowRight className="ml-2" size={20} />
               </a>
-              <Link 
+              <Link
                 href="/contact"
                 className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors text-center"
               >
@@ -136,14 +130,14 @@ const JobLocations = () => {
               Texas Markets - Our Home Base
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Headquartered in Texas, we have deep roots and strong relationships 
+              Headquartered in Texas, we have deep roots and strong relationships
               across the state's major metropolitan areas.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
             {primaryMarkets.map((market, index) => (
-              <Link 
+              <Link
                 key={index}
                 href={market.link}
                 className="bg-card rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border group"
@@ -157,9 +151,9 @@ const JobLocations = () => {
                   </div>
                   <ArrowRight className="text-muted-foreground group-hover:text-primary transition-colors" size={20} />
                 </div>
-                
+
                 <p className="text-muted-foreground mb-6">{market.description}</p>
-                
+
                 <div>
                   <h4 className="text-sm font-semibold text-foreground mb-2">Key Industries:</h4>
                   <div className="flex flex-wrap gap-2">
@@ -184,7 +178,7 @@ const JobLocations = () => {
               Nationwide Reach
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our network extends across the United States, connecting talent 
+              Our network extends across the United States, connecting talent
               with opportunities in every major market.
             </p>
           </div>
@@ -198,7 +192,7 @@ const JobLocations = () => {
                   </div>
                   <h3 className="text-xl font-bold text-foreground">{region.region}</h3>
                 </div>
-                
+
                 <div className="space-y-2 mb-4">
                   {region.cities.map((city, idx) => (
                     <div key={idx} className="flex items-center text-muted-foreground">
@@ -207,7 +201,7 @@ const JobLocations = () => {
                     </div>
                   ))}
                 </div>
-                
+
                 <div className="border-t pt-4">
                   <p className="text-xs text-muted-foreground">
                     <span className="font-semibold">Industry Strengths:</span> {region.strengths}
@@ -228,10 +222,10 @@ const JobLocations = () => {
                 Remote & Hybrid Opportunities
               </h2>
               <p className="text-xl text-muted-foreground mb-8">
-                Location doesn't have to limit your career. We place professionals in fully 
+                Location doesn't have to limit your career. We place professionals in fully
                 remote and hybrid positions with companies nationwide.
               </p>
-              
+
               <div className="space-y-3 mb-8">
                 {remoteOpportunities.map((opportunity, idx) => (
                   <div key={idx} className="flex items-center">
@@ -241,7 +235,7 @@ const JobLocations = () => {
                 ))}
               </div>
 
-              <Link 
+              <Link
                 href="/remote-careers"
                 className="inline-flex items-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
               >
@@ -249,14 +243,14 @@ const JobLocations = () => {
                 <ArrowRight className="ml-2" size={20} />
               </Link>
             </div>
-            
+
             <div className="bg-card rounded-2xl p-8 border">
               <h3 className="text-2xl font-bold text-foreground mb-6">Don't See Your Area?</h3>
               <p className="text-muted-foreground mb-6">
-                We work with companies across the country and can often help regardless of your location. 
+                We work with companies across the country and can often help regardless of your location.
                 Contact us to discuss your career goals and see how we can help.
               </p>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start">
                   <Users className="text-primary mt-1 mr-3 flex-shrink-0" size={20} />
@@ -275,7 +269,7 @@ const JobLocations = () => {
               </div>
 
               <div className="mt-6">
-                <Link 
+                <Link
                   href="/contact"
                   className="inline-flex items-center text-primary font-semibold hover:underline"
                 >
@@ -288,7 +282,7 @@ const JobLocations = () => {
         </div>
       </section>
 
-      <CTASection 
+      <CTASection
         variant="candidate"
         title="Ready to Find Your Next Opportunity?"
         description="Whether you're looking locally or open to relocation, we can help you find the right fit."

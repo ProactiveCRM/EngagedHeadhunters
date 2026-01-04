@@ -7,7 +7,7 @@ interface UseFocusOnMountOptions {
 
 export const useFocusOnMount = <T extends HTMLElement>(
   options: UseFocusOnMountOptions = {}
-): RefObject<T> => {
+): RefObject<T | null> => {
   const { enabled = true, delay = 0 } = options;
   const ref = useRef<T>(null);
 

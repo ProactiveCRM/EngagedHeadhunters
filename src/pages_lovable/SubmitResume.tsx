@@ -1,7 +1,6 @@
 import { Upload, CheckCircle, Users, Shield, Clock, ArrowRight, FileText, Award, Briefcase } from 'lucide-react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
-import { Helmet } from 'react-helmet-async';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CTASection from '../components/CTASection';
@@ -64,13 +63,8 @@ const SubmitResume = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Submit Your Resume | Confidential Career Opportunities | Engaged Headhunters</title>
-        <meta name="description" content="Submit your resume for confidential career opportunities. Connect with expert recruiters who specialize in executive and professional placement." />
-        <meta name="keywords" content="submit resume, job application, career opportunities, executive jobs, professional placement" />
-      </Helmet>
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="pt-28 md:pt-32 bg-gradient-to-br from-muted to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
@@ -86,12 +80,12 @@ const SubmitResume = () => {
                 <span className="text-primary"> Exclusive Opportunities</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                Take the first step toward your next career move. Our recruiters specialize in 
+                Take the first step toward your next career move. Our recruiters specialize in
                 matching talented professionals with opportunities that align with their goals.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <a 
+                <a
                   href="https://crm.engagedheadhunters.com/widget/bookings/confidential-career-call"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -100,7 +94,7 @@ const SubmitResume = () => {
                   Schedule Career Consultation
                   <ArrowRight className="ml-2" size={20} />
                 </a>
-                <a 
+                <a
                   href="https://jobs.engagedheadhunters.com"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -115,7 +109,7 @@ const SubmitResume = () => {
                 Your information is confidential and never shared without your permission
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="bg-card rounded-2xl shadow-xl p-8 border">
                 <div className="text-center mb-6">
@@ -139,7 +133,7 @@ const SubmitResume = () => {
                   </div>
                 </div>
 
-                <a 
+                <a
                   href="https://crm.engagedheadhunters.com/widget/bookings/confidential-career-call"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -150,7 +144,7 @@ const SubmitResume = () => {
                 </a>
 
                 <p className="text-xs text-muted-foreground text-center mt-4">
-                  By scheduling, you agree to our <Link href="/privacy-policy" className="underline">Privacy Policy</Link> and 
+                  By scheduling, you agree to our <Link href="/privacy-policy" className="underline">Privacy Policy</Link> and
                   consent to be contacted about career opportunities.
                 </p>
               </div>
@@ -179,7 +173,7 @@ const SubmitResume = () => {
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3">{step.title}</h3>
                 <p className="text-muted-foreground">{step.description}</p>
-                
+
                 {index < processSteps.length - 1 && (
                   <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-border" />
                 )}
@@ -226,7 +220,7 @@ const SubmitResume = () => {
               <p className="text-xl text-muted-foreground mb-8">
                 We partner with professionals at all career stages who are looking for their next opportunity.
               </p>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start">
                   <CheckCircle className="text-primary mt-1 mr-3 flex-shrink-0" size={20} />
@@ -258,10 +252,10 @@ const SubmitResume = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-muted/50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-foreground mb-6">What to Expect</h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="bg-primary/10 p-2 rounded-lg mr-4">
@@ -305,7 +299,7 @@ const SubmitResume = () => {
         </div>
       </section>
 
-      <CTASection 
+      <CTASection
         variant="candidate"
         title="Ready to Explore New Opportunities?"
         description="Schedule a confidential career consultation with one of our recruiting specialists."

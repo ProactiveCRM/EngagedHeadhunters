@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import ManufacturingCareersClient from '@/components/pages/ManufacturingCareersClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Manufacturing Careers & Industrial Jobs | Engaged Headhunters',
     description: 'Find manufacturing careers and industrial jobs. Plant management, engineering, and operations opportunities.',
     keywords: 'manufacturing careers, industrial jobs, plant manager jobs, operations careers, engineering jobs',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ManufacturingCareersPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/manufacturing-careers");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function ManufacturingCareersPage() {
+    const content = await getBuilderContent("/manufacturing-careers");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <ManufacturingCareersClient />;
 }
+
+export const revalidate = 1;

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { BuilderSymbol } from '@/components/builder/BuilderSymbol';
 import StickyCTA from '@/components/StickyCTA';
 import PageBreadcrumb from '@/components/PageBreadcrumb';
 import { BreadcrumbItem } from '@/hooks/useBreadcrumbs';
@@ -31,7 +32,10 @@ const PageLayout = ({
 }: PageLayoutProps) => {
   return (
     <div className={cn('min-h-screen flex flex-col', className)}>
-      <Navigation />
+      <BuilderSymbol
+        model="nav"
+        fallback={<Navigation />}
+      />
       {showStickyCTA && <StickyCTA />}
       {/* Spacer for fixed navigation */}
       <div className="h-16 md:h-20 flex-shrink-0" aria-hidden="true" />
@@ -44,7 +48,10 @@ const PageLayout = ({
       <main id="main-content" className={cn('flex-1', mainClassName)}>
         {children}
       </main>
-      <Footer />
+      <BuilderSymbol
+        model="footer"
+        fallback={<Footer />}
+      />
     </div>
   );
 };

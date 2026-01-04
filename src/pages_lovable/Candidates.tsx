@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CTASection from '../components/CTASection';
@@ -110,13 +109,8 @@ const Candidates = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Executive Career Opportunities | Confidential Job Search | Engaged Headhunters</title>
-        <meta name="description" content="Access leadership opportunities that aren't publicly posted. Confidential career search for executives and senior professionals. Free for candidates. Healthcare, tech, finance roles." />
-        <link rel="canonical" href="https://engagedheadhunters.com/candidates" />
-      </Helmet>
       <FAQSchema faqs={faqs} />
-      
+
       <div className="min-h-screen bg-background">
         <Navigation />
         <StickyCTA />
@@ -125,11 +119,11 @@ const Candidates = () => {
         <section className="pt-24 pb-20 relative overflow-hidden">
           {/* Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-muted/30" />
-          
+
           {/* Animated Decorations */}
           <div className="absolute top-20 right-[10%] w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] animate-blob opacity-40" />
           <div className="absolute bottom-20 left-[5%] w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] animate-blob opacity-30" style={{ animationDelay: '-5s' }} />
-          
+
           {/* Pattern */}
           <div className="absolute inset-0 opacity-[0.02]">
             <div className="absolute inset-0" style={{
@@ -137,29 +131,29 @@ const Candidates = () => {
               backgroundSize: '50px 50px'
             }} />
           </div>
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 mb-6 animate-fade-in">
                 <span className="text-sm animate-pulse" role="img" aria-hidden="true">✨</span>
                 <span className="text-sm font-semibold text-primary">For Senior Professionals</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 animate-fade-in leading-tight" style={{ animationDelay: '100ms' }}>
                 The Best Jobs Aren't Posted.{' '}
                 <span className="bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
                   They're Offered.
                 </span>
               </h1>
-              
+
               <p className="text-xl text-muted-foreground mb-8 animate-fade-in leading-relaxed" style={{ animationDelay: '200ms' }}>
                 Top opportunities go to people who know the right people. If you're tired of competing with 500 applicants and getting ghosted by ATS systems, there's a better approach.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '300ms' }}>
-                <Button 
-                  asChild 
-                  size="lg" 
+                <Button
+                  asChild
+                  size="lg"
                   className="text-lg px-8 py-6 shadow-brand hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group"
                   onClick={() => trackCTAClick('Start Confidential Search', 'booking')}
                 >
@@ -168,10 +162,10 @@ const Candidates = () => {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </Button>
-                <Button 
-                  asChild 
-                  variant="outline" 
-                  size="lg" 
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
                   className="text-lg px-8 py-6 hover:bg-primary/5 backdrop-blur-sm"
                   onClick={() => trackCTAClick('Browse Open Positions', 'jobs')}
                 >
@@ -307,13 +301,13 @@ const Candidates = () => {
           </div>
         </section>
 
-        <CTASection 
+        <CTASection
           variant="candidate"
           title="The Best Roles Go to People Who Know the Right People"
           description="Let us open doors for you."
           showJobsLink={true}
         />
-        
+
         <Footer />
       </div>
     </>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,15 +7,8 @@ import { Separator } from '@/components/ui/separator';
 const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Terms of Service - Engaged Headhunters</title>
-        <meta name="description" content="Terms of Service for Engaged Headhunters executive search and recruiting services. Legal terms and conditions for clients and candidates." />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://engagedheadhunters.com/terms-of-service" />
-      </Helmet>
-
       <Navigation />
-      
+
       <main className="pt-20">
         <section className="py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,8 +26,8 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">1. Agreement to Terms</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    By accessing or using Engaged Headhunters' services, you agree to be bound by these 
-                    Terms of Service ("Terms"). If you disagree with any part of these terms, you may 
+                    By accessing or using Engaged Headhunters' services, you agree to be bound by these
+                    Terms of Service ("Terms"). If you disagree with any part of these terms, you may
                     not access our services.
                   </p>
                 </section>
@@ -65,7 +57,7 @@ const TermsOfService = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Information Accuracy</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Clients must provide accurate, complete, and current information about position 
+                        Clients must provide accurate, complete, and current information about position
                         requirements, company culture, and compensation packages.
                       </p>
                     </div>
@@ -73,7 +65,7 @@ const TermsOfService = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Exclusivity</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        For retained searches, clients agree to work exclusively with Engaged Headhunters 
+                        For retained searches, clients agree to work exclusively with Engaged Headhunters
                         for the agreed-upon period and not engage other search firms for the same position.
                       </p>
                     </div>
@@ -81,7 +73,7 @@ const TermsOfService = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Timely Response</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Clients commit to reviewing candidates and providing feedback within agreed timeframes 
+                        Clients commit to reviewing candidates and providing feedback within agreed timeframes
                         to maintain search momentum.
                       </p>
                     </div>
@@ -96,7 +88,7 @@ const TermsOfService = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Truthful Information</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Candidates must provide accurate employment history, educational background, 
+                        Candidates must provide accurate employment history, educational background,
                         and other relevant information.
                       </p>
                     </div>
@@ -104,7 +96,7 @@ const TermsOfService = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Confidentiality</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Candidates agree to maintain confidentiality regarding client information 
+                        Candidates agree to maintain confidentiality regarding client information
                         and opportunities presented.
                       </p>
                     </div>
@@ -112,7 +104,7 @@ const TermsOfService = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Professional Conduct</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Candidates commit to professional behavior throughout the search process 
+                        Candidates commit to professional behavior throughout the search process
                         and prompt communication regarding their status.
                       </p>
                     </div>
@@ -127,8 +119,8 @@ const TermsOfService = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Retained Search Fees</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Fees are typically one-third of the placed candidate's first-year total compensation 
-                        and are paid in three installments: upon assignment commencement, shortlist presentation, 
+                        Fees are typically one-third of the placed candidate's first-year total compensation
+                        and are paid in three installments: upon assignment commencement, shortlist presentation,
                         and successful placement.
                       </p>
                     </div>
@@ -136,7 +128,7 @@ const TermsOfService = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Expenses</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Reasonable expenses including travel, accommodation, and research costs are 
+                        Reasonable expenses including travel, accommodation, and research costs are
                         billed separately with client approval.
                       </p>
                     </div>
@@ -155,8 +147,8 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">6. Guarantee Period</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    We provide a 12-month guarantee on all placements. If a placed candidate leaves 
-                    or is terminated for cause within this period, we will conduct a replacement search 
+                    We provide a 12-month guarantee on all placements. If a placed candidate leaves
+                    or is terminated for cause within this period, we will conduct a replacement search
                     at no additional fee, subject to the same terms and conditions.
                   </p>
                 </section>
@@ -166,8 +158,8 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">7. Confidentiality</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    All parties agree to maintain strict confidentiality regarding proprietary information, 
-                    candidate details, and client information shared during the search process. This 
+                    All parties agree to maintain strict confidentiality regarding proprietary information,
+                    candidate details, and client information shared during the search process. This
                     obligation survives termination of our relationship.
                   </p>
                 </section>
@@ -177,8 +169,8 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">8. Limitation of Liability</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Engaged Headhunters' liability is limited to the fees paid for services. We are not 
-                    liable for indirect, incidental, or consequential damages. Our obligation is to 
+                    Engaged Headhunters' liability is limited to the fees paid for services. We are not
+                    liable for indirect, incidental, or consequential damages. Our obligation is to
                     conduct professional searches, not to guarantee specific outcomes.
                   </p>
                 </section>
@@ -188,8 +180,8 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">9. Intellectual Property</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    All methodologies, processes, and materials developed by Engaged Headhunters remain 
-                    our intellectual property. Client-specific deliverables become the property of the 
+                    All methodologies, processes, and materials developed by Engaged Headhunters remain
+                    our intellectual property. Client-specific deliverables become the property of the
                     client upon full payment.
                   </p>
                 </section>
@@ -199,7 +191,7 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">10. Termination</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Either party may terminate the engagement with 30 days' written notice. Upon termination, 
+                    Either party may terminate the engagement with 30 days' written notice. Upon termination,
                     all outstanding fees become due, and confidentiality obligations remain in effect.
                   </p>
                 </section>
@@ -209,7 +201,7 @@ const TermsOfService = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">11. Governing Law</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    These Terms are governed by the laws of the Commonwealth of Virginia. Any disputes will be resolved 
+                    These Terms are governed by the laws of the Commonwealth of Virginia. Any disputes will be resolved
                     through binding arbitration in Virginia Beach, Virginia.
                   </p>
                 </section>

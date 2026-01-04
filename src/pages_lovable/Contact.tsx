@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useRouter } from 'next/navigation';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -16,7 +15,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 const Contact = () => {
   const { toast } = useToast();
-  const navigate = useRouter();
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [tcpaConsent, setTcpaConsent] = useState(false);
   const [formData, setFormData] = useState({
@@ -30,7 +29,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!tcpaConsent) {
       toast({
         title: "Consent Required",
@@ -71,15 +70,8 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Contact Engaged Headhunters - Executive Search & Recruiting Services | Virginia Beach</title>
-        <meta name="description" content="Contact Engaged Headhunters for executive search, recruiting, and staffing solutions. Located in Virginia Beach, VA. Call (757) 720-7173 for a consultation." />
-        <meta name="keywords" content="contact headhunters, executive recruiting contact, staffing services virginia beach, recruiting agency contact" />
-        <link rel="canonical" href="https://www.engagedheadhunters.com/contact" />
-      </Helmet>
-
       <Navigation />
-      
+
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary to-primary/80 text-white py-16">
@@ -89,7 +81,7 @@ const Contact = () => {
                 Contact <span className="text-accent">Engaged Headhunters</span>
               </h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-                Connect with our executive search specialists to discuss your talent acquisition needs 
+                Connect with our executive search specialists to discuss your talent acquisition needs
                 or explore career opportunities with leading organizations.
               </p>
             </div>
@@ -105,7 +97,7 @@ const Contact = () => {
                 <div>
                   <h2 className="text-3xl font-bold text-foreground mb-6">Get in Touch</h2>
                   <p className="text-muted-foreground text-lg">
-                    Ready to transform your organization with exceptional leadership talent? 
+                    Ready to transform your organization with exceptional leadership talent?
                     Our team is standing by to discuss your executive search needs.
                   </p>
                 </div>
@@ -183,7 +175,7 @@ const Contact = () => {
                         <Input
                           id="name"
                           value={formData.name}
-                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           required
                           disabled={isSubmitting}
                         />
@@ -194,7 +186,7 @@ const Contact = () => {
                           id="email"
                           type="email"
                           value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           required
                           disabled={isSubmitting}
                         />
@@ -207,7 +199,7 @@ const Contact = () => {
                         <Input
                           id="company"
                           value={formData.company}
-                          onChange={(e) => setFormData({...formData, company: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                           disabled={isSubmitting}
                         />
                       </div>
@@ -217,7 +209,7 @@ const Contact = () => {
                           id="phone"
                           type="tel"
                           value={formData.phone}
-                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           disabled={isSubmitting}
                         />
                       </div>
@@ -225,9 +217,9 @@ const Contact = () => {
 
                     <div>
                       <Label htmlFor="inquiryType">Type of Inquiry *</Label>
-                      <Select 
-                        value={formData.inquiryType} 
-                        onValueChange={(value) => setFormData({...formData, inquiryType: value})}
+                      <Select
+                        value={formData.inquiryType}
+                        onValueChange={(value) => setFormData({ ...formData, inquiryType: value })}
                         disabled={isSubmitting}
                       >
                         <SelectTrigger>
@@ -250,7 +242,7 @@ const Contact = () => {
                       <Textarea
                         id="message"
                         value={formData.message}
-                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         placeholder="Tell us about your staffing needs, timeline, and any specific requirements..."
                         rows={5}
                         required
@@ -266,7 +258,7 @@ const Contact = () => {
                         disabled={isSubmitting}
                       />
                       <Label htmlFor="tcpa" className="text-sm text-muted-foreground leading-tight">
-                        I agree to receive communications from Engaged Headhunters. By submitting this form, 
+                        I agree to receive communications from Engaged Headhunters. By submitting this form,
                         I consent to be contacted regarding my inquiry and agree to the privacy policy.
                       </Label>
                     </div>
@@ -317,7 +309,7 @@ const Contact = () => {
                 <p className="text-muted-foreground">
                   249 Central Park Ave Suite 300-90, Virginia Beach, VA 23462
                 </p>
-                <a 
+                <a
                   href="https://maps.google.com/?q=249+Central+Park+Ave+Suite+300-90+Virginia+Beach+VA+23462"
                   target="_blank"
                   rel="noopener noreferrer"

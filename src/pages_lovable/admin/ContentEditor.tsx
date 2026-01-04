@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { useAdminPageContent } from '@/hooks/usePageContent';
 import { PageSectionEditor } from '@/components/admin/PageSectionEditor';
@@ -24,7 +23,7 @@ export default function ContentEditor() {
   const [selectedPage, setSelectedPage] = useState('home');
   const [newSection, setNewSection] = useState('');
   const { toast } = useToast();
-  
+
   const { content, loading, updateContent, createContent, deleteContent, isUpdating } = useAdminPageContent(selectedPage);
 
   // Group content by section
@@ -38,7 +37,7 @@ export default function ContentEditor() {
 
   const handleAddSection = async () => {
     if (!newSection.trim()) return;
-    
+
     const sectionId = newSection.toLowerCase().replace(/\s+/g, '_');
     try {
       await createContent({
@@ -62,17 +61,13 @@ export default function ContentEditor() {
 
   return (
     <DashboardLayout>
-      <Helmet>
-        <title>Content Editor | Admin</title>
-      </Helmet>
-
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold">Content Editor</h1>
             <p className="text-muted-foreground">Edit page content without touching code</p>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <Select value={selectedPage} onValueChange={setSelectedPage}>
               <SelectTrigger className="w-[200px]">
@@ -86,7 +81,7 @@ export default function ContentEditor() {
                 ))}
               </SelectContent>
             </Select>
-            
+
             <Button variant="outline" size="icon" asChild>
               <a href={currentPageUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4" />

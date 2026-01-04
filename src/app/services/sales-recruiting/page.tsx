@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import SalesRecruitingClient from '@/components/pages/SalesRecruitingClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Sales Recruiting & Business Development Hiring | Engaged Headhunters',
     description: 'Revenue-driving sales professionals and business development leaders. Our sales recruiting specialists deliver results-oriented professionals who accelerate growth.',
     keywords: 'sales recruiting, business development hiring, sales headhunters, account executive recruiting, sales director search',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function SalesRecruitingPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/services/sales-recruiting");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function SalesRecruitingPage() {
+    const content = await getBuilderContent("/services/sales-recruiting");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <SalesRecruitingClient />;
 }
+
+export const revalidate = 1;

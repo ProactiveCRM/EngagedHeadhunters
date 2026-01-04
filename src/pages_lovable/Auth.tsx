@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {  , useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,11 +23,11 @@ export default function Auth() {
   const [mode, setMode] = useState<'auth' | 'forgot' | 'reset'>('auth');
   const [resetEmailSent, setResetEmailSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  
+
   const { signIn, signUp, resetPassword, updatePassword, user } = useAuth();
   const { toast } = useToast();
-  const navigate = useRouter();
-  const [searchParams] = useSearchParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const clearError = (field: string) => {
     if (errors[field]) {
@@ -84,28 +84,28 @@ export default function Auth() {
         });
 
         // Clear the hash from URL
-        window.history.replaceState(null, '', window.pathname + window.location.search);
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
       }
     }
-  }, [user, navigate, toast, mode]);
+  }, [user, router, toast, mode]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    
+
     const result = signInSchema.safeParse({ email, password });
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach(err => {
+      result.error.issues.forEach(err => {
         if (err.path[0]) fieldErrors[err.path[0].toString()] = err.message;
       });
       setErrors(fieldErrors);
       return;
     }
-    
+
     setLoading(true);
     const { error } = await signIn(result.data.email, result.data.password);
-    
+
     if (error) {
       toast({
         title: "Sign in failed",
@@ -119,27 +119,27 @@ export default function Auth() {
       });
       router.push('/agent/dashboard');
     }
-    
+
     setLoading(false);
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    
+
     const result = signUpSchema.safeParse({ email, password });
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach(err => {
+      result.error.issues.forEach(err => {
         if (err.path[0]) fieldErrors[err.path[0].toString()] = err.message;
       });
       setErrors(fieldErrors);
       return;
     }
-    
+
     setLoading(true);
     const { error } = await signUp(result.data.email, result.data.password);
-    
+
     if (error) {
       toast({
         title: "Sign up failed",
@@ -152,27 +152,27 @@ export default function Auth() {
         description: "Please check your email to verify your account.",
       });
     }
-    
+
     setLoading(false);
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    
+
     const result = forgotPasswordSchema.safeParse({ email });
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach(err => {
+      result.error.issues.forEach(err => {
         if (err.path[0]) fieldErrors[err.path[0].toString()] = err.message;
       });
       setErrors(fieldErrors);
       return;
     }
-    
+
     setLoading(true);
     const { error } = await resetPassword(result.data.email);
-    
+
     if (error) {
       toast({
         title: "Reset failed",
@@ -186,27 +186,27 @@ export default function Auth() {
         description: "We've sent you a password reset link.",
       });
     }
-    
+
     setLoading(false);
   };
 
   const handleUpdatePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    
+
     const result = resetPasswordSchema.safeParse({ password, confirmPassword });
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach(err => {
+      result.error.issues.forEach(err => {
         if (err.path[0]) fieldErrors[err.path[0].toString()] = err.message;
       });
       setErrors(fieldErrors);
       return;
     }
-    
+
     setLoading(true);
     const { error } = await updatePassword(result.data.password);
-    
+
     if (error) {
       toast({
         title: "Update failed",
@@ -221,7 +221,7 @@ export default function Auth() {
       window.history.replaceState(null, '', '/auth');
       router.push('/agent/dashboard');
     }
-    
+
     setLoading(false);
   };
 
@@ -230,7 +230,7 @@ export default function Auth() {
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl text-center">Reset Password</CardTitle>
         <CardDescription className="text-center">
-          {resetEmailSent 
+          {resetEmailSent
             ? "Check your inbox for the reset link"
             : "Enter your email to receive a password reset link"
           }
@@ -243,7 +243,7 @@ export default function Auth() {
               <Mail className="h-6 w-6 text-primary" />
             </div>
             <p className="text-sm text-muted-foreground">
-              We've sent a password reset link to <strong>{email}</strong>. 
+              We've sent a password reset link to <strong>{email}</strong>.
               Click the link in the email to reset your password.
             </p>
             <Button
@@ -277,25 +277,23 @@ export default function Auth() {
               />
               {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
             </div>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full"
               disabled={loading}
             >
               {loading ? 'Sending...' : 'Send Reset Link'}
             </Button>
-            <Button
+            <button
               type="button"
-              variant="ghost"
-              className="w-full"
+              className="w-full text-sm text-primary hover:underline mt-2"
               onClick={() => {
                 setMode('auth');
                 setErrors({});
               }}
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Sign In
-            </Button>
+            </button>
           </form>
         )}
       </CardContent>
@@ -343,8 +341,8 @@ export default function Auth() {
             />
             {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword}</p>}
           </div>
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="w-full"
             disabled={loading}
           >
@@ -369,7 +367,7 @@ export default function Auth() {
             <TabsTrigger value="signin">Sign In</TabsTrigger>
             <TabsTrigger value="signup">Sign Up</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="signin">
             <form onSubmit={handleSignIn} className="space-y-4">
               <div className="space-y-2">
@@ -401,8 +399,8 @@ export default function Auth() {
                 />
                 {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
               </div>
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="w-full"
                 disabled={loading}
               >
@@ -420,7 +418,7 @@ export default function Auth() {
               </button>
             </form>
           </TabsContent>
-          
+
           <TabsContent value="signup">
             <form onSubmit={handleSignUp} className="space-y-4">
               <div className="space-y-2">
@@ -455,7 +453,7 @@ export default function Auth() {
                 {password && !errors.password && <PasswordStrengthIndicator password={password} />}
               </div>
               <Button
-                type="submit" 
+                type="submit"
                 className="w-full"
                 disabled={loading}
               >
@@ -471,17 +469,17 @@ export default function Auth() {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="container mx-auto px-4 pt-28 pb-16">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-primary mb-2">Agent Portal</h1>
             <p className="text-muted-foreground">
-              {mode === 'reset' 
+              {mode === 'reset'
                 ? 'Create a new password for your account'
                 : mode === 'forgot'
-                ? 'Reset your password'
-                : 'Access your dashboard to manage your profile and blog content'
+                  ? 'Reset your password'
+                  : 'Access your dashboard to manage your profile and blog content'
               }
             </p>
           </div>
@@ -491,8 +489,8 @@ export default function Auth() {
           {mode === 'auth' && renderAuthForm()}
 
           <div className="text-center mt-6">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               ← Back to homepage

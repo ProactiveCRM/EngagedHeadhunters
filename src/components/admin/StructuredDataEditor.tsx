@@ -45,7 +45,7 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
   const [serviceForm, setServiceForm] = useState<Record<string, unknown>>({});
   const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
   const [validation, setValidation] = useState<{ valid: boolean; errors: string[]; warnings: string[] }>({ valid: true, errors: [], warnings: [] });
-  
+
   // Inheritance state
   const [inheritOrganization, setInheritOrganization] = useState(false);
   const [homePageSchema, setHomePageSchema] = useState<OrganizationSchema | null>(null);
@@ -55,7 +55,7 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
   useEffect(() => {
     const fetchHomeSchema = async () => {
       if (pageSlug === 'home') return;
-      
+
       setLoadingHomeSchema(true);
       try {
         const { data } = await supabase
@@ -63,19 +63,19 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
           .select('structured_data')
           .eq('page_slug', 'home')
           .single();
-        
+
         if (data?.structured_data) {
           const schemaData = data.structured_data as unknown;
           // Handle both single schema and array
           let orgSchema: OrganizationSchema | null = null;
-          
+
           if (Array.isArray(schemaData)) {
             const orgItem = schemaData.find((s) => typeof s === 'object' && s !== null && (s as Record<string, unknown>)['@type'] === 'Organization');
             if (orgItem) orgSchema = orgItem as unknown as OrganizationSchema;
           } else if (detectSchemaType(schemaData) === 'Organization') {
             orgSchema = schemaData as unknown as OrganizationSchema;
           }
-          
+
           if (orgSchema) {
             setHomePageSchema(orgSchema);
           }
@@ -86,7 +86,7 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
         setLoadingHomeSchema(false);
       }
     };
-    
+
     fetchHomeSchema();
   }, [pageSlug]);
 
@@ -99,7 +99,7 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
         // Check if first is Organization (inherited)
         const orgIndex = initialData.findIndex((s: Record<string, unknown>) => s['@type'] === 'Organization');
         const otherIndex = initialData.findIndex((s: Record<string, unknown>) => s['@type'] !== 'Organization');
-        
+
         if (orgIndex !== -1 && otherIndex !== -1) {
           setInheritOrganization(true);
           mainData = initialData[otherIndex];
@@ -107,10 +107,10 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
           mainData = initialData[0];
         }
       }
-      
+
       const detected = detectSchemaType(mainData);
       setSchemaType(detected);
-      
+
       if (detected === 'Organization') {
         const data = mainData as Record<string, unknown>;
         setOrgForm({
@@ -165,11 +165,11 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
       } else if (detected === 'Service') {
         const data = mainData as Record<string, unknown>;
         const areas = data.areaServed as Array<{ name?: string }> | string[] | undefined;
-        const areaNames = areas 
+        const areaNames = areas
           ? (areas as Array<{ name?: string } | string>).map(a => typeof a === 'string' ? a : a.name || '')
           : [];
         const offerings = (data.hasOfferCatalog as Record<string, unknown>)?.itemListElement as Array<{ name: string }> | undefined;
-        
+
         setServiceForm({
           name: data.name || '',
           description: data.description || '',
@@ -216,12 +216,12 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
   // Build final schema with inheritance
   const buildFinalSchema = useCallback(() => {
     const pageSchema = buildSchema();
-    
+
     // If inheritance is enabled and we have home schema, combine them
     if (inheritOrganization && homePageSchema && pageSchema && schemaType !== 'Organization') {
       return [homePageSchema, pageSchema];
     }
-    
+
     return pageSchema;
   }, [buildSchema, inheritOrganization, homePageSchema, schemaType]);
 
@@ -622,7 +622,7 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
               <Label>Include Aggregate Rating</Label>
             </div>
 
-            {orgForm.includeRating && (
+            {Boolean(orgForm.includeRating) && (
               <div className="grid grid-cols-2 gap-3 pl-6">
                 <div className="space-y-2">
                   <Label>Rating</Label>
@@ -930,7 +930,7 @@ export function StructuredDataEditor({ initialData, pageSlug, onChange }: Struct
               <Label>Include Pricing Information</Label>
             </div>
 
-            {serviceForm.includePricing && (
+            {Boolean(serviceForm.includePricing) && (
               <div className="grid grid-cols-3 gap-3 pl-6">
                 <div className="space-y-2">
                   <Label>Price Range</Label>

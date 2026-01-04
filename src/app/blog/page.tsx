@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import BlogIndexClient from '@/components/pages/BlogIndexClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Executive Search Insights & Intelligence | Engaged Headhunters Blog',
     description: 'Stay ahead of recruiting trends with expert insights on executive search, talent acquisition strategies, and leadership development from Engaged Headhunters.',
     keywords: 'recruiting blog, executive search insights, talent acquisition trends, leadership advice, hiring strategies',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function BlogPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/blog");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function BlogPage() {
+    const content = await getBuilderContent("/blog");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <BlogIndexClient />;
 }
+
+export const revalidate = 1;

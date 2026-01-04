@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import ExecutiveCareersClient from '@/components/pages/ExecutiveCareersClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Executive Careers & C-Suite Opportunities | Engaged Headhunters',
     description: 'Explore executive careers and C-suite opportunities. CEO, CFO, and leadership positions with premier organizations.',
     keywords: 'executive careers, leadership jobs, C-suite opportunities, executive positions, senior leadership',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ExecutiveCareersPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/executive-careers");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function ExecutiveCareersPage() {
+    const content = await getBuilderContent("/executive-careers");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <ExecutiveCareersClient />;
 }
+
+export const revalidate = 1;

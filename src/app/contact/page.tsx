@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import ContactClient from '@/components/pages/ContactClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Contact Engaged Headhunters - Executive Search & Recruiting Services | Virginia Beach',
     description: 'Contact Engaged Headhunters for executive search, recruiting, and staffing solutions. Located in Virginia Beach, VA. Call (757) 720-7173 for a consultation.',
     keywords: 'contact headhunters, executive recruiting contact, staffing services virginia beach, recruiting agency contact',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ContactPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/contact");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function ContactPage() {
+    const content = await getBuilderContent("/contact");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <ContactClient />;
 }
+
+export const revalidate = 1;

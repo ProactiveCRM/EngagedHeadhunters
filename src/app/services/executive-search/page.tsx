@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import ExecutiveSearchClient from '@/components/pages/ExecutiveSearchClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Executive Search & C-Suite Recruiting | Engaged Headhunters',
     description: 'Board-level and C-suite executive recruitment for transformational leadership roles. Our executive search practice delivers visionary leaders who drive extraordinary results.',
     keywords: 'executive search, C-suite recruiting, CEO search, CFO recruiting, executive headhunters, board recruitment',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ExecutiveSearchPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/services/executive-search");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function ExecutiveSearchPage() {
+    const content = await getBuilderContent("/services/executive-search");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <ExecutiveSearchClient />;
 }
+
+export const revalidate = 1;

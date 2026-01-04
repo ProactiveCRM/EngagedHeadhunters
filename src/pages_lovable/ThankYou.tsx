@@ -1,6 +1,5 @@
-import { useParams,   } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Helmet } from 'react-helmet-async';
 import { ArrowRight } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -73,10 +72,6 @@ const ThankYou = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>{content.title} | Engaged Headhunters</title>
-        <meta name="robots" content="noindex, nofollow" />
-      </Helmet>
       <Navigation />
 
       <main className="pt-20">
@@ -115,9 +110,9 @@ const ThankYou = () => {
                 Book a time that works for you and let's connect
               </p>
             </div>
-            
+
             <div className="bg-card rounded-xl shadow-lg border overflow-hidden">
-              <GHLCalendarEmbed 
+              <GHLCalendarEmbed
                 bookingUrl={content.bookingUrl}
                 source={`thank-you-${pageType}`}
               />
@@ -167,7 +162,7 @@ const ThankYou = () => {
         {/* Back Home */}
         <section className="py-12 bg-background">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Link 
+            <Link
               href="/"
               className="inline-flex items-center text-primary hover:underline font-medium"
             >

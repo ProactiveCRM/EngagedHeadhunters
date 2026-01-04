@@ -102,7 +102,7 @@ function AuthContent() {
         const result = signInSchema.safeParse({ email, password });
         if (!result.success) {
             const fieldErrors: Record<string, string> = {};
-            result.error.errors.forEach(err => {
+            result.error.issues.forEach(err => {
                 if (err.path[0]) fieldErrors[err.path[0].toString()] = err.message;
             });
             setErrors(fieldErrors);
@@ -136,7 +136,7 @@ function AuthContent() {
         const result = signUpSchema.safeParse({ email, password });
         if (!result.success) {
             const fieldErrors: Record<string, string> = {};
-            result.error.errors.forEach(err => {
+            result.error.issues.forEach(err => {
                 if (err.path[0]) fieldErrors[err.path[0].toString()] = err.message;
             });
             setErrors(fieldErrors);
@@ -169,7 +169,7 @@ function AuthContent() {
         const result = forgotPasswordSchema.safeParse({ email });
         if (!result.success) {
             const fieldErrors: Record<string, string> = {};
-            result.error.errors.forEach(err => {
+            result.error.issues.forEach(err => {
                 if (err.path[0]) fieldErrors[err.path[0].toString()] = err.message;
             });
             setErrors(fieldErrors);
@@ -203,7 +203,7 @@ function AuthContent() {
         const result = resetPasswordSchema.safeParse({ password, confirmPassword });
         if (!result.success) {
             const fieldErrors: Record<string, string> = {};
-            result.error.errors.forEach(err => {
+            result.error.issues.forEach(err => {
                 if (err.path[0]) fieldErrors[err.path[0].toString()] = err.message;
             });
             setErrors(fieldErrors);

@@ -1,7 +1,6 @@
-import { useParams, Navigate } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Helmet } from 'react-helmet-async';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
@@ -10,13 +9,14 @@ import WhatToExpect from '@/components/booking/WhatToExpect';
 import BookingTrustBadges from '@/components/booking/BookingTrustBadges';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { MapPin, Briefcase, Star, Loader2 } from 'lucide-react';
-import {   } from 'next/navigation';
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 const DEFAULT_BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/2hwWwU2YZZPgzJ8TkENb';
 
 const AgentBooking = () => {
   const { username } = useParams<{ username: string }>();
+  const router = useRouter();
 
   const { data: agent, isLoading, error } = useQuery({
     queryKey: ['agent-booking', username],
@@ -35,6 +35,12 @@ const AgentBooking = () => {
     enabled: !!username,
   });
 
+  useEffect(() => {
+    if (!isLoading && (error || !agent)) {
+      router.replace('/book');
+    }
+  }, [isLoading, error, agent, router]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -44,7 +50,7 @@ const AgentBooking = () => {
   }
 
   if (error || !agent) {
-    return <Navigate href="/book" replace />;
+    return null;
   }
 
   const bookingUrl = agent.calendly_url || DEFAULT_BOOKING_URL;
@@ -56,16 +62,6 @@ const AgentBooking = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Helmet>
-        <title>Book with {agent.full_name} | Engaged Headhunters</title>
-        <meta
-          name="description"
-          content={`Schedule a consultation with ${agent.full_name}, ${agent.title || 'Recruiting Specialist'} at Engaged Headhunters.`}
-        />
-        <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href={`https://engagedheadhunters.com/agents/${username}/book`} />
-      </Helmet>
-
       <Navigation />
       <StickyCTA />
 
@@ -115,7 +111,7 @@ const AgentBooking = () => {
         <section className="py-8 md:py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <WhatToExpect variant="employer" defaultOpen={true} />
-            
+
             <GHLCalendarEmbed
               bookingUrl={bookingUrl}
               source={`agent-${username}`}

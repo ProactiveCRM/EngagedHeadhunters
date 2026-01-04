@@ -1,13 +1,13 @@
-import {  , usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Target, Building2 as CompanyIcon, Mail, MapPin } from 'lucide-react';
-import { 
-  LayoutDashboard, 
-  Users, 
-  FolderOpen, 
-  FileText, 
-  MessageSquare, 
-  Settings, 
+import {
+  LayoutDashboard,
+  Users,
+  FolderOpen,
+  FileText,
+  MessageSquare,
+  Settings,
   Building2,
   UserCheck,
   Briefcase,
@@ -103,14 +103,14 @@ const agentProfileItems = [
 ];
 
 export function DashboardSidebar() {
-  const location = usePathname();
+  const pathname = usePathname();
   const { user, signOut } = useAuth();
   const { isAdmin } = useAdminRole();
   const { state } = useSidebar();
   const collapsed = state === 'collapsed';
 
   const isActive = (url: string) => pathname === url;
-  const isGroupActive = (items: { url: string }[]) => 
+  const isGroupActive = (items: { url: string }[]) =>
     items.some(item => pathname.startsWith(item.url));
 
   const NavItem = ({ item }: { item: { title: string; url: string; icon: React.ElementType } }) => (

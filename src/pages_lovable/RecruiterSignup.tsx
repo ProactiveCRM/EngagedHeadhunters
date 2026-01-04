@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -79,7 +78,7 @@ const RecruiterSignup = () => {
   const [accountData, setAccountData] = useState<AccountFormData | null>(null);
   const [profileData, setProfileData] = useState<ProfileFormData | null>(null);
   const { toast } = useToast();
-  const navigate = useRouter();
+  const router = useRouter();
 
   const accountForm = useForm<AccountFormData>({
     resolver: zodResolver(accountSchema),
@@ -109,7 +108,7 @@ const RecruiterSignup = () => {
       setUsernameAvailable(null);
       return;
     }
-    
+
     setIsCheckingUsername(true);
     try {
       const { data, error } = await supabase
@@ -117,7 +116,7 @@ const RecruiterSignup = () => {
         .select('username')
         .eq('username', username)
         .maybeSingle();
-      
+
       if (error) throw error;
       setUsernameAvailable(!data);
     } catch (error) {
@@ -149,7 +148,7 @@ const RecruiterSignup = () => {
 
   const onBookingSubmit = async (data: BookingFormData) => {
     if (!accountData || !profileData) return;
-    
+
     setIsLoading(true);
     try {
       // Create auth user
@@ -213,12 +212,6 @@ const RecruiterSignup = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Become a Recruiter | Join Engaged Headhunters</title>
-        <meta name="description" content="Join Engaged Headhunters as a recruiter. Get qualified appointments booked on your calendar, access elite technology, and grow your recruiting business." />
-        <link rel="canonical" href="https://www.engagedheadhunters.com/recruiter-signup" />
-      </Helmet>
-
       <Navigation />
 
       <main className="pt-20 min-h-screen bg-muted/30">
@@ -228,26 +221,23 @@ const RecruiterSignup = () => {
             <div className="flex items-center space-x-4">
               {steps.map((s, index) => (
                 <div key={s.number} className="flex items-center">
-                  <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-colors ${
-                    step >= s.number 
-                      ? 'bg-primary border-primary text-primary-foreground' 
+                  <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-colors ${step >= s.number
+                      ? 'bg-primary border-primary text-primary-foreground'
                       : 'border-muted-foreground/30 text-muted-foreground'
-                  }`}>
+                    }`}>
                     {step > s.number ? (
                       <CheckCircle className="w-5 h-5" />
                     ) : (
                       <s.icon className="w-5 h-5" />
                     )}
                   </div>
-                  <span className={`ml-2 text-sm font-medium hidden sm:block ${
-                    step >= s.number ? 'text-foreground' : 'text-muted-foreground'
-                  }`}>
+                  <span className={`ml-2 text-sm font-medium hidden sm:block ${step >= s.number ? 'text-foreground' : 'text-muted-foreground'
+                    }`}>
                     {s.title}
                   </span>
                   {index < steps.length - 1 && (
-                    <div className={`w-8 sm:w-16 h-0.5 ml-4 ${
-                      step > s.number ? 'bg-primary' : 'bg-muted-foreground/30'
-                    }`} />
+                    <div className={`w-8 sm:w-16 h-0.5 ml-4 ${step > s.number ? 'bg-primary' : 'bg-muted-foreground/30'
+                      }`} />
                   )}
                 </div>
               ))}
@@ -276,7 +266,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={accountForm.control}
                       name="email"
@@ -290,7 +280,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={accountForm.control}
                       name="password"
@@ -305,7 +295,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={accountForm.control}
                       name="confirmPassword"
@@ -319,7 +309,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <Button type="submit" className="w-full" size="lg">
                       Continue
                       <ArrowRight className="ml-2 w-4 h-4" />
@@ -348,9 +338,9 @@ const RecruiterSignup = () => {
                           <div className="flex items-center">
                             <span className="text-muted-foreground text-sm mr-2">engagedheadhunters.com/</span>
                             <FormControl>
-                              <Input 
-                                placeholder="john-smith" 
-                                {...field} 
+                              <Input
+                                placeholder="john-smith"
+                                {...field}
                                 onChange={(e) => {
                                   const value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
                                   field.onChange(value);
@@ -376,7 +366,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={profileForm.control}
                       name="title"
@@ -390,7 +380,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={profileForm.control}
                       name="niche"
@@ -413,7 +403,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={profileForm.control}
                       name="location"
@@ -427,7 +417,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={profileForm.control}
                       name="bio"
@@ -435,11 +425,11 @@ const RecruiterSignup = () => {
                         <FormItem>
                           <FormLabel>Short Bio (Optional)</FormLabel>
                           <FormControl>
-                            <Textarea 
+                            <Textarea
                               placeholder="Tell clients about your recruiting experience and approach..."
                               className="resize-none"
                               rows={4}
-                              {...field} 
+                              {...field}
                             />
                           </FormControl>
                           <FormDescription>{(field.value?.length || 0)}/500 characters</FormDescription>
@@ -447,7 +437,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <div className="flex gap-4">
                       <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1">
                         <ArrowLeft className="mr-2 w-4 h-4" />
@@ -480,9 +470,9 @@ const RecruiterSignup = () => {
                         <FormItem>
                           <FormLabel>Booking Calendar URL</FormLabel>
                           <FormControl>
-                            <Input 
-                              placeholder="https://calendly.com/your-name" 
-                              {...field} 
+                            <Input
+                              placeholder="https://calendly.com/your-name"
+                              {...field}
                             />
                           </FormControl>
                           <FormDescription>
@@ -492,7 +482,7 @@ const RecruiterSignup = () => {
                         </FormItem>
                       )}
                     />
-                    
+
                     <div className="bg-muted/50 rounded-lg p-4">
                       <h4 className="font-semibold text-foreground mb-2">What happens next?</h4>
                       <ul className="text-sm text-muted-foreground space-y-2">
@@ -502,7 +492,7 @@ const RecruiterSignup = () => {
                         <li>• Clients can book appointments directly with you</li>
                       </ul>
                     </div>
-                    
+
                     <div className="flex gap-4">
                       <Button type="button" variant="outline" onClick={() => setStep(2)} className="flex-1">
                         <ArrowLeft className="mr-2 w-4 h-4" />

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { supabase } from '@/integrations/supabase/client';
-import { usePathnames, Location } from '@/hooks/usePathname';
+import { usePathnames, Location } from '@/hooks/useLocation';
 
 const ServiceAreasMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ const ServiceAreasMap = () => {
         setTokenLoading(false);
       }
     }
-    
+
     fetchToken();
   }, []);
 
@@ -42,7 +42,7 @@ const ServiceAreasMap = () => {
 
     try {
       mapboxgl.accessToken = mapboxToken;
-      
+
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/light-v11',
@@ -61,15 +61,15 @@ const ServiceAreasMap = () => {
 
       // Add markers for each location from database
       const validLocations = locations.filter(loc => loc.geo_lat && loc.geo_lng);
-      
+
       validLocations.forEach((location: Location) => {
-        const markerColor = 
+        const markerColor =
           location.market_type === 'headquarters' ? '#FF6B35' :
-          location.market_type === 'primary' ? '#006DB0' : '#002855';
-        
-        const markerSize = 
+            location.market_type === 'primary' ? '#006DB0' : '#002855';
+
+        const markerSize =
           location.market_type === 'headquarters' ? 'large' :
-          location.market_type === 'primary' ? 'medium' : 'small';
+            location.market_type === 'primary' ? 'medium' : 'small';
 
         // Create custom marker element
         const el = document.createElement('div');
@@ -141,7 +141,7 @@ const ServiceAreasMap = () => {
   return (
     <div className="relative w-full">
       <div ref={mapContainer} className="w-full h-96 rounded-xl shadow-lg" />
-      
+
       {/* Legend */}
       <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-md">
         <h4 className="font-semibold text-sm text-foreground mb-2">Service Areas</h4>

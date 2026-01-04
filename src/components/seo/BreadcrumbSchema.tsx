@@ -1,4 +1,6 @@
-import { Helmet } from 'react-helmet-async';
+"use client";
+
+const BASE_URL = 'https://www.engagedheadhunters.com';
 
 interface BreadcrumbItem {
   name: string;
@@ -9,24 +11,25 @@ interface BreadcrumbSchemaProps {
   items: BreadcrumbItem[];
 }
 
-const BreadcrumbSchema = ({ items }: BreadcrumbSchemaProps) => {
-  const breadcrumbSchema = {
+export const BreadcrumbSchema = ({ items }: BreadcrumbSchemaProps) => {
+  if (!items || items.length === 0) return null;
+
+  const schemaData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": item.url
+      "item": item.url.startsWith('http') ? item.url : `${BASE_URL}${item.url}`
     }))
   };
 
   return (
-    <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </script>
-    </Helmet>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
   );
 };
 

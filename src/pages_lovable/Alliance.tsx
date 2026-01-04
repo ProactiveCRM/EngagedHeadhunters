@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import { useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -8,11 +7,11 @@ import FAQSchema from '@/components/seo/FAQSchema';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  Handshake, 
-  Target, 
-  Shield, 
-  Users, 
+import {
+  Handshake,
+  Target,
+  Shield,
+  Users,
   Calendar,
   CheckCircle2,
   ArrowRight,
@@ -31,7 +30,7 @@ import {
   DollarSign,
   FileText
 } from 'lucide-react';
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 
 const Alliance = () => {
@@ -117,17 +116,6 @@ const Alliance = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Join the Engaged Headhunters Alliance | Keep Your Brand, Gain Our Support</title>
-        <meta name="description" content="Stay 100% independent while we book qualified appointments on YOUR calendar. Access exclusive job orders, AI-powered tools, and elite recruiter network. Your brand, our support." />
-        <meta name="keywords" content="recruiting alliance, independent recruiter support, recruiter partnership, staffing alliance, keep your brand recruiting, appointment booking for recruiters" />
-        <link rel="canonical" href="https://www.engagedheadhunters.com/alliance" />
-        <meta property="og:title" content="Join the Engaged Headhunters Alliance | Keep Your Brand, Gain Our Support" />
-        <meta property="og:description" content="Stay 100% independent while we book qualified appointments on YOUR calendar. Your brand, your business—our powerful support." />
-        <meta property="og:url" content="https://www.engagedheadhunters.com/alliance" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
       <FAQSchema faqs={faqs} />
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.engagedheadhunters.com' },
@@ -141,23 +129,23 @@ const Alliance = () => {
         <section className="relative bg-gradient-to-br from-[hsl(var(--dark-navy))] via-[hsl(var(--dark-navy))] to-accent/20 dark:from-background dark:via-background dark:to-primary/10 text-white dark:text-foreground py-24 lg:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--accent)/0.15),transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.1),transparent_40%)]" />
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-accent/20 dark:bg-primary/20 border border-accent/30 dark:border-primary/30 rounded-full px-4 py-2 mb-6">
                 <Handshake className="w-4 h-4 text-accent dark:text-primary" />
                 <span className="text-sm font-medium text-white/90 dark:text-foreground/90">For Independent Recruiters</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white dark:text-foreground">
                 Keep Your Brand.{' '}
                 <span className="text-accent dark:text-primary">Gain Our Support.</span>
               </h1>
-              
+
               <p className="text-xl md:text-2xl text-white/80 dark:text-muted-foreground mb-4 max-w-3xl mx-auto">
                 Join the Engaged Headhunters Alliance and stay 100% independent while we book qualified appointments directly on YOUR calendar.
               </p>
-              
+
               <p className="text-lg text-white/70 dark:text-muted-foreground/80 mb-10 max-w-2xl mx-auto">
                 Your name. Your clients. Your business. We just provide the same powerful support our EH Agents get.
               </p>
@@ -232,8 +220,8 @@ const Alliance = () => {
         </section>
 
         {/* Why Join Now Section */}
-        <section 
-          aria-labelledby="why-join-now-heading" 
+        <section
+          aria-labelledby="why-join-now-heading"
           className="py-20 bg-background"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -252,7 +240,7 @@ const Alliance = () => {
             </div>
 
             {/* Opportunity Cost Stats Bar */}
-            <div 
+            <div
               className="bg-gradient-to-r from-destructive/5 via-destructive/10 to-destructive/5 border border-destructive/20 rounded-2xl p-6 md:p-8 mb-12"
               role="region"
               aria-label="Opportunity cost statistics"
@@ -334,7 +322,7 @@ const Alliance = () => {
             </div>
 
             {/* Founding Member Benefits */}
-            <div 
+            <div
               className="bg-gradient-to-br from-accent/5 via-background to-primary/5 border border-accent/30 rounded-2xl p-8 md:p-10 mb-12"
               role="region"
               aria-labelledby="founding-member-heading"
@@ -387,7 +375,7 @@ const Alliance = () => {
             </div>
 
             {/* Urgency CTA Banner */}
-            <div 
+            <div
               className="relative bg-[hsl(var(--dark-navy))] dark:bg-card rounded-2xl p-8 md:p-10 text-center overflow-hidden"
               role="region"
               aria-labelledby="urgency-cta-heading"
@@ -488,7 +476,7 @@ const Alliance = () => {
         </section>
 
         {/* Application Form Section */}
-        <section 
+        <section
           id="apply"
           ref={applicationFormRef}
           className="py-20 bg-background scroll-mt-24"

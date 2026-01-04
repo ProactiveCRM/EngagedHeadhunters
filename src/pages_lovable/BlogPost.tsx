@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams,  , useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, User, Clock } from 'lucide-react';
 import Navigation from '../components/Navigation';
@@ -96,7 +96,7 @@ const BlogPost = () => {
           .eq('published', true)
           .eq('id', slug)
           .maybeSingle();
-        
+
         data = dataById;
         error = errorById;
       }
@@ -186,7 +186,7 @@ const BlogPost = () => {
             <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold capitalize">
               {post.category.replace('-', ' ')}
             </span>
-            
+
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-6">
               {post.title}
             </h1>
@@ -208,8 +208,8 @@ const BlogPost = () => {
 
             {/* Featured Image */}
             {post.featured_image ? (
-              <img 
-                src={post.featured_image} 
+              <img
+                src={post.featured_image}
                 alt={post.title}
                 loading="lazy"
                 className="w-full h-64 md:h-96 object-cover rounded-xl"
@@ -222,14 +222,14 @@ const BlogPost = () => {
           </header>
 
           {/* Article Content */}
-          <div 
+          <div
             className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-foreground prose-li:text-foreground prose-strong:text-foreground prose-a:text-primary"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           {/* Social Share */}
           <div className="mt-12 pt-8 border-t">
-            <SocialShareButtons 
+            <SocialShareButtons
               url={`https://www.engagedheadhunters.com/blog/${post.slug || post.id}`}
               title={post.title}
               description={post.excerpt || post.content.substring(0, 160)}
@@ -246,7 +246,7 @@ const BlogPost = () => {
                 <ArrowLeft className="mr-2" size={16} />
                 More Articles
               </Link>
-              
+
               <Link
                 href="/contact"
                 className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"

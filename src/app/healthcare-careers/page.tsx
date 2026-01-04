@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import HealthcareCareersClient from '@/components/pages/HealthcareCareersClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Healthcare Careers & Medical Jobs | Engaged Headhunters',
     description: 'Find healthcare careers and medical jobs. Nursing, physician, and healthcare professional opportunities with top employers.',
     keywords: 'healthcare careers, medical jobs, nursing jobs, physician careers, healthcare opportunities',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function HealthcareCareersPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/healthcare-careers");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function HealthcareCareersPage() {
+    const content = await getBuilderContent("/healthcare-careers");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <HealthcareCareersClient />;
 }
+
+export const revalidate = 1;

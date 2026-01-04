@@ -1,5 +1,3 @@
-import { Helmet } from 'react-helmet-async';
-
 interface PersonSchemaProps {
   name: string;
   jobTitle: string;
@@ -10,9 +8,9 @@ interface PersonSchemaProps {
   sameAs?: string[];
 }
 
-const PersonSchema = ({ 
-  name, 
-  jobTitle, 
+const PersonSchema = ({
+  name,
+  jobTitle,
   description,
   image,
   url,
@@ -36,11 +34,10 @@ const PersonSchema = ({
   };
 
   return (
-    <Helmet>
-      <script type="application/ld+json">
-        {JSON.stringify(personSchema)}
-      </script>
-    </Helmet>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+    />
   );
 };
 

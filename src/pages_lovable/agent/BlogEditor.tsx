@@ -8,17 +8,17 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { useRouter,  , useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Save, Eye } from 'lucide-react';
 import BlogImageUpload from '@/components/blog/BlogImageUpload';
 import RichTextEditor from '@/components/blog/RichTextEditor';
 
-const BlogEditor = () => {
+const BlogEditorContent = () => {
   const { user, loading } = useAuth();
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
-  const navigate = useRouter();
+  const router = useRouter();
   const { id } = useParams();
   const isEditing = !!id;
 
@@ -35,7 +35,7 @@ const BlogEditor = () => {
     if (!loading && !user) {
       router.push('/auth');
     }
-  }, [loading, user, navigate]);
+  }, [loading, user, router]);
 
   useEffect(() => {
     if (isEditing && user) {
@@ -44,12 +44,14 @@ const BlogEditor = () => {
   }, [isEditing, user]);
 
   const fetchPost = async () => {
+    if (!user) return;
+
     try {
       const { data, error } = await supabase
         .from('blog_posts')
         .select('*')
-        .eq('id', id)
-        .eq('author_id', user?.id)
+        .eq('id', id as string)
+        .eq('author_id', user.id)
         .single();
 
       if (error) throw error;
@@ -80,6 +82,8 @@ const BlogEditor = () => {
   };
 
   const handleSave = async (publish = false) => {
+    if (!user) return;
+
     if (!formData.title.trim() || !formData.content.trim()) {
       toast({
         title: "Error",
@@ -102,7 +106,7 @@ const BlogEditor = () => {
         category: formData.category,
         featured_image: formData.featured_image || null,
         published: publish,
-        author_id: user?.id,
+        author_id: user.id,
         updated_at: new Date().toISOString()
       };
 
@@ -110,7 +114,7 @@ const BlogEditor = () => {
         const { error } = await supabase
           .from('blog_posts')
           .update(postData)
-          .eq('id', id);
+          .eq('id', id as string);
 
         if (error) throw error;
       } else {
@@ -125,7 +129,7 @@ const BlogEditor = () => {
         title: "Success",
         description: `Post ${publish ? 'published' : 'saved'} successfully`,
       });
-      
+
       router.push('/agent/dashboard');
     } catch (error: any) {
       toast({
@@ -164,15 +168,15 @@ const BlogEditor = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => handleSave(false)}
               disabled={saving}
             >
               <Save className="w-4 h-4 mr-2" />
               Save Draft
             </Button>
-            <Button 
+            <Button
               onClick={() => handleSave(true)}
               disabled={saving}
             >
@@ -197,7 +201,7 @@ const BlogEditor = () => {
               <Input
                 id="title"
                 value={formData.title}
-                onChange={(e) => setFormData({...formData, title: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 placeholder="Enter a compelling title"
               />
             </div>
@@ -205,9 +209,9 @@ const BlogEditor = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="category">Category</Label>
-                <Select 
-                  value={formData.category} 
-                  onValueChange={(value) => setFormData({...formData, category: value})}
+                <Select
+                  value={formData.category}
+                  onValueChange={(value) => setFormData({ ...formData, category: value })}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
@@ -225,8 +229,8 @@ const BlogEditor = () => {
             </div>
 
             <BlogImageUpload
-              value={formData.featured_image}
-              onChange={(url) => setFormData({...formData, featured_image: url})}
+              value={formData.featured_image || ''}
+              onChange={(url) => setFormData({ ...formData, featured_image: url })}
               userId={user.id}
               label="Featured Image"
             />
@@ -236,7 +240,7 @@ const BlogEditor = () => {
               <Textarea
                 id="excerpt"
                 value={formData.excerpt}
-                onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
                 placeholder="Brief description of your post (will auto-generate if left empty)"
                 rows={3}
               />
@@ -246,7 +250,7 @@ const BlogEditor = () => {
               <Label>Content</Label>
               <RichTextEditor
                 content={formData.content}
-                onChange={(content) => setFormData({...formData, content})}
+                onChange={(content) => setFormData({ ...formData, content })}
                 userId={user.id}
                 placeholder="Write your blog post content here..."
               />
@@ -256,6 +260,10 @@ const BlogEditor = () => {
       </main>
     </div>
   );
+};
+
+const BlogEditor = () => {
+  return <BlogEditorContent />;
 };
 
 export default BlogEditor;

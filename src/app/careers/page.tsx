@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import CareersClient from '@/components/pages/CareersClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Find Your Dream Career | Job Search & Recruitment | Engaged Headhunters',
     description: 'Discover exclusive career opportunities across healthcare, technology, finance, and more. AI-powered job matching and expert career guidance.',
     keywords: 'job search, career opportunities, recruitment agency, healthcare jobs, tech careers, finance roles, executive search',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function CareersPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/careers");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function CareersPage() {
+    const content = await getBuilderContent("/careers");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <CareersClient />;
 }
+
+export const revalidate = 1;

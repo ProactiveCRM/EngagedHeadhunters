@@ -1,15 +1,23 @@
-import { useParams, Navigate,   } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { MapPin, Users, Building2, TrendingUp, Award, ArrowRight, Phone, Calendar, Briefcase, Target } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { usePathname } from '@/hooks/usePathname';
+import { usePathname } from '@/hooks/useLocation';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const LocationPage = () => {
   const { locationSlug } = useParams<{ locationSlug: string }>();
+  const router = useRouter();
   const { data: location, isLoading, error } = usePathname(locationSlug || '');
+
+  useEffect(() => {
+    if (!isLoading && (error || !location)) {
+      router.replace('/locations');
+    }
+  }, [isLoading, error, location, router]);
 
   if (isLoading) {
     return (
@@ -29,7 +37,7 @@ const LocationPage = () => {
   }
 
   if (error || !location) {
-    return <Navigate href="/locations" replace />;
+    return null;
   }
 
   const cityName = location.display_name.split(',')[0];

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { Helmet } from "react-helmet-async";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -208,21 +208,20 @@ function ShadowSwatch({ shadow }: { shadow: typeof shadows[0] }) {
 }
 
 // Compliance Badge Component
-function ComplianceBadge({ 
-  pass, 
-  label, 
-  requirement 
-}: { 
-  pass: boolean; 
-  label: string; 
+function ComplianceBadge({
+  pass,
+  label,
+  requirement
+}: {
+  pass: boolean;
+  label: string;
   requirement: string;
 }) {
   return (
-    <div className={`flex flex-col items-center p-3 rounded-lg border ${
-      pass 
-        ? 'bg-green-50 border-green-200' 
-        : 'bg-red-50 border-red-200'
-    }`}>
+    <div className={`flex flex-col items-center p-3 rounded-lg border ${pass
+      ? 'bg-green-50 border-green-200'
+      : 'bg-red-50 border-red-200'
+      }`}>
       <div className="flex items-center gap-1 mb-1">
         {pass ? (
           <CheckCircle2 className="w-4 h-4 text-green-600" />
@@ -361,23 +360,23 @@ function ContrastChecker() {
       </div>
 
       {/* Live Preview */}
-      <div 
+      <div
         className="rounded-lg p-6 border border-border"
         style={{ backgroundColor }}
       >
-        <h3 
+        <h3
           className="text-2xl font-bold mb-2"
           style={{ color: foregroundColor }}
         >
           Large Heading Text
         </h3>
-        <p 
+        <p
           className="text-base mb-3"
           style={{ color: foregroundColor }}
         >
           This is regular body text to test readability. WCAG requires at least 4.5:1 contrast ratio for normal text.
         </p>
-        <p 
+        <p
           className="text-sm"
           style={{ color: foregroundColor }}
         >
@@ -386,8 +385,8 @@ function ContrastChecker() {
         <div className="mt-4 flex gap-2">
           <button
             className="px-4 py-2 rounded text-sm font-medium border-2"
-            style={{ 
-              color: foregroundColor, 
+            style={{
+              color: foregroundColor,
               borderColor: foregroundColor,
               backgroundColor: 'transparent'
             }}
@@ -396,9 +395,9 @@ function ContrastChecker() {
           </button>
           <button
             className="px-4 py-2 rounded text-sm font-medium"
-            style={{ 
-              backgroundColor: foregroundColor, 
-              color: backgroundColor 
+            style={{
+              backgroundColor: foregroundColor,
+              color: backgroundColor
             }}
           >
             Filled Button
@@ -411,13 +410,12 @@ function ContrastChecker() {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-muted rounded-full">
             <span className="text-sm text-muted-foreground">Contrast Ratio:</span>
-            <span className={`text-2xl font-bold ${
-              compliance.ratio >= 7 
-                ? 'text-green-600' 
-                : compliance.ratio >= 4.5 
-                  ? 'text-amber-600' 
-                  : 'text-red-500'
-            }`}>
+            <span className={`text-2xl font-bold ${compliance.ratio >= 7
+              ? 'text-green-600'
+              : compliance.ratio >= 4.5
+                ? 'text-amber-600'
+                : 'text-red-500'
+              }`}>
               {formatContrastRatio(compliance.ratio)}
             </span>
           </div>
@@ -535,7 +533,7 @@ export default function DesignSystem() {
   const filteredShadows = filterTokens(shadows, searchQuery);
 
   // Calculate total results
-  const totalResults = 
+  const totalResults =
     (visibleCategories.brand ? filteredBrandTokens.length : 0) +
     (visibleCategories.core ? filteredCoreTokens.length : 0) +
     (visibleCategories.metallic ? filteredMetallicTokens.length : 0) +
@@ -561,10 +559,7 @@ export default function DesignSystem() {
 
   return (
     <>
-      <Helmet>
-        <title>Design System | EngagedHeadhunters</title>
-        <meta name="robots" content="noindex, nofollow" />
-      </Helmet>
+
 
       <div className="min-h-screen bg-background">
         {/* Header */}
@@ -617,11 +612,10 @@ export default function DesignSystem() {
                 <button
                   key={key}
                   onClick={() => toggleCategory(key)}
-                  className={`px-3 py-1 text-xs rounded-full border transition-colors ${
-                    visibleCategories[key]
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-muted text-muted-foreground border-border hover:border-primary/50"
-                  }`}
+                  className={`px-3 py-1 text-xs rounded-full border transition-colors ${visibleCategories[key]
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-muted text-muted-foreground border-border hover:border-primary/50"
+                    }`}
                 >
                   {categoryLabels[key]}
                 </button>

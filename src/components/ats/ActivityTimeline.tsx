@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { formatDistanceToNow, format } from 'date-fns';
-import { 
-  Send, 
-  RefreshCw, 
-  CheckCircle2, 
-  Plus, 
+import {
+  Send,
+  RefreshCw,
+  CheckCircle2,
+  Plus,
   AlertCircle,
   ArrowRight,
   Clock
@@ -30,11 +30,11 @@ interface ActivityEvent {
   iconClass: string;
 }
 
-export function ActivityTimeline({ 
-  candidateId, 
-  createdAt, 
-  updatedAt, 
-  lastSyncedAt 
+export function ActivityTimeline({
+  candidateId,
+  createdAt,
+  updatedAt,
+  lastSyncedAt
 }: ActivityTimelineProps) {
   const { data: submissions, isLoading } = useQuery({
     queryKey: ['candidate-submissions', candidateId],
@@ -52,7 +52,7 @@ export function ActivityTimeline({
         `)
         .eq('candidate_id', candidateId)
         .order('submitted_at', { ascending: false });
-      
+
       if (error) throw error;
       return data || [];
     },
@@ -64,14 +64,18 @@ export function ActivityTimeline({
     queryKey: ['submission-jobs', submissions?.map(s => s.job_order_id)],
     queryFn: async () => {
       if (!submissions?.length) return {};
-      const jobIds = [...new Set(submissions.map(s => s.job_order_id).filter(Boolean))];
+      const jobIds = submissions
+        .map(s => s.job_order_id)
+        .filter((id): id is string => id !== null);
       if (!jobIds.length) return {};
-      
+
+      const uniqueJobIds = [...new Set(jobIds)];
+
       const { data, error } = await supabase
         .from('job_orders')
         .select('id, job_title, client_company')
-        .in('id', jobIds);
-      
+        .in('id', uniqueJobIds);
+
       if (error) throw error;
       return (data || []).reduce((acc, job) => {
         acc[job.id] = job;
@@ -87,7 +91,7 @@ export function ActivityTimeline({
 
     // Submission events
     submissions?.forEach((sub) => {
-      const job = jobOrders?.[sub.job_order_id];
+      const job = sub.job_order_id ? jobOrders?.[sub.job_order_id] : null;
       events.push({
         id: `sub-${sub.id}`,
         type: 'submission',
@@ -114,11 +118,11 @@ export function ActivityTimeline({
           description: sub.client_feedback || sub.rejection_reason || undefined,
           timestamp: sub.updated_at || '',
           icon: <ArrowRight className="h-4 w-4" />,
-          iconClass: sub.stage === 'rejected' 
-            ? 'bg-destructive text-destructive-foreground' 
+          iconClass: sub.stage === 'rejected'
+            ? 'bg-destructive text-destructive-foreground'
             : sub.stage === 'hired'
-            ? 'bg-green-500 text-white'
-            : 'bg-secondary text-secondary-foreground',
+              ? 'bg-green-500 text-white'
+              : 'bg-secondary text-secondary-foreground',
         });
       }
     });
@@ -160,7 +164,7 @@ export function ActivityTimeline({
     }
 
     // Sort by timestamp descending
-    return events.sort((a, b) => 
+    return events.sort((a, b) =>
       new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
     );
   };
@@ -214,7 +218,7 @@ export function ActivityTimeline({
               {event.description && (
                 <p className="text-sm text-muted-foreground">{event.description}</p>
               )}
-              <p 
+              <p
                 className="text-xs text-muted-foreground mt-1"
                 title={event.timestamp ? format(new Date(event.timestamp), 'PPpp') : undefined}
               >

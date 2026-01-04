@@ -13,20 +13,20 @@ import { toast } from 'sonner';
 
 export default function SEOAuditDashboard() {
   const navigate = useRouter();
-  const { 
-    audit, 
-    loading, 
-    refetch, 
-    seedMissingPages, 
-    bulkUpdateFromConfig, 
+  const {
+    audit,
+    loading,
+    refetch,
+    seedMissingPages,
+    bulkUpdateFromConfig,
     exportReport,
-    isUpdating 
+    isUpdating
   } = useSEOAudit();
-  
+
   const handleEditPage = (slug: string) => {
-    router.push(`/admin/seo?page=${slug}`);
+    navigate.push(`/admin/seo?page=${slug}`);
   };
-  
+
   const handleSeedMissing = async () => {
     try {
       await seedMissingPages();
@@ -36,7 +36,7 @@ export default function SEOAuditDashboard() {
       toast.error('Failed to seed pages');
     }
   };
-  
+
   const handleBulkUpdate = async () => {
     try {
       await bulkUpdateFromConfig();
@@ -46,59 +46,59 @@ export default function SEOAuditDashboard() {
       toast.error('Failed to update SEO data');
     }
   };
-  
+
   const issueCategories = [
-    { 
-      title: 'Missing Meta Titles', 
-      type: 'critical' as const, 
+    {
+      title: 'Missing Meta Titles',
+      type: 'critical' as const,
       pages: audit.issues.missingTitles,
       fixLabel: 'Generate Titles',
     },
-    { 
-      title: 'Missing Meta Descriptions', 
-      type: 'critical' as const, 
+    {
+      title: 'Missing Meta Descriptions',
+      type: 'critical' as const,
       pages: audit.issues.missingDescriptions,
       fixLabel: 'Generate Descriptions',
     },
-    { 
-      title: 'Missing OG Images', 
-      type: 'warning' as const, 
+    {
+      title: 'Missing OG Images',
+      type: 'warning' as const,
       pages: audit.issues.missingOGImages,
       fixLabel: 'Set Default',
     },
-    { 
-      title: 'No Keywords', 
-      type: 'warning' as const, 
+    {
+      title: 'No Keywords',
+      type: 'warning' as const,
       pages: audit.issues.missingKeywords,
     },
-    { 
-      title: 'Missing Structured Data', 
-      type: 'info' as const, 
+    {
+      title: 'Missing Structured Data',
+      type: 'info' as const,
       pages: audit.issues.missingStructuredData,
       fixLabel: 'Add Schema',
     },
-    { 
-      title: 'Title Too Long (>60 chars)', 
-      type: 'warning' as const, 
+    {
+      title: 'Title Too Long (>60 chars)',
+      type: 'warning' as const,
       pages: audit.issues.titleTooLong,
     },
-    { 
-      title: 'Title Too Short (<30 chars)', 
-      type: 'info' as const, 
+    {
+      title: 'Title Too Short (<30 chars)',
+      type: 'info' as const,
       pages: audit.issues.titleTooShort,
     },
-    { 
-      title: 'Description Too Long (>160 chars)', 
-      type: 'warning' as const, 
+    {
+      title: 'Description Too Long (>160 chars)',
+      type: 'warning' as const,
       pages: audit.issues.descriptionTooLong,
     },
-    { 
-      title: 'Description Too Short (<120 chars)', 
-      type: 'info' as const, 
+    {
+      title: 'Description Too Short (<120 chars)',
+      type: 'info' as const,
       pages: audit.issues.descriptionTooShort,
     },
   ];
-  
+
   if (loading) {
     return (
       <DashboardLayout>
@@ -114,7 +114,7 @@ export default function SEOAuditDashboard() {
       </DashboardLayout>
     );
   }
-  
+
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -136,7 +136,7 @@ export default function SEOAuditDashboard() {
             configuredCount={audit.auditedPages}
           />
         </div>
-        
+
         {/* Overview Stats */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <Card className="md:col-span-1">
@@ -144,7 +144,7 @@ export default function SEOAuditDashboard() {
               <SEOScoreGauge score={audit.overallScore} size="lg" label="Overall Score" />
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="pb-2">
               <CardDescription>Total Pages</CardDescription>
@@ -159,7 +159,7 @@ export default function SEOAuditDashboard() {
               </p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="pb-2">
               <CardDescription>Critical Issues</CardDescription>
@@ -174,7 +174,7 @@ export default function SEOAuditDashboard() {
               </p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="pb-2">
               <CardDescription>Warnings</CardDescription>
@@ -189,7 +189,7 @@ export default function SEOAuditDashboard() {
               </p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader className="pb-2">
               <CardDescription>Optimized</CardDescription>
@@ -205,7 +205,7 @@ export default function SEOAuditDashboard() {
             </CardContent>
           </Card>
         </div>
-        
+
         {/* Main Content Tabs */}
         <Tabs defaultValue="pages" className="space-y-4">
           <TabsList>
@@ -222,7 +222,7 @@ export default function SEOAuditDashboard() {
               Insights
             </TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="pages">
             <Card>
               <CardHeader>
@@ -236,7 +236,7 @@ export default function SEOAuditDashboard() {
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="issues">
             <Card>
               <CardHeader>
@@ -246,14 +246,14 @@ export default function SEOAuditDashboard() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <SEOIssuesList 
-                  categories={issueCategories} 
+                <SEOIssuesList
+                  categories={issueCategories}
                   onEditPage={handleEditPage}
                 />
               </CardContent>
             </Card>
           </TabsContent>
-          
+
           <TabsContent value="insights">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card>
@@ -332,7 +332,7 @@ export default function SEOAuditDashboard() {
                   )}
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle>SEO Score Breakdown</CardTitle>
@@ -348,7 +348,7 @@ export default function SEOAuditDashboard() {
                         <span className="text-sm text-muted-foreground">{audit.optimized} pages</span>
                       </div>
                       <div className="h-3 bg-muted rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-green-500 transition-all duration-500"
                           style={{ width: `${(audit.optimized / audit.totalPages) * 100}%` }}
                         />
@@ -360,7 +360,7 @@ export default function SEOAuditDashboard() {
                         <span className="text-sm text-muted-foreground">{audit.warnings} pages</span>
                       </div>
                       <div className="h-3 bg-muted rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-yellow-500 transition-all duration-500"
                           style={{ width: `${(audit.warnings / audit.totalPages) * 100}%` }}
                         />
@@ -372,7 +372,7 @@ export default function SEOAuditDashboard() {
                         <span className="text-sm text-muted-foreground">{audit.criticalIssues} pages</span>
                       </div>
                       <div className="h-3 bg-muted rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-destructive transition-all duration-500"
                           style={{ width: `${(audit.criticalIssues / audit.totalPages) * 100}%` }}
                         />

@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { Helmet } from 'react-helmet-async';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
@@ -28,17 +27,6 @@ const BookingPageLayout = ({
 }: BookingPageLayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Helmet>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDescription} />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://engagedheadhunters.com${canonicalPath}`} />
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://engagedheadhunters.com${canonicalPath}`} />
-      </Helmet>
-
       <Navigation />
       <StickyCTA />
 

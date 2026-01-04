@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import HomeClient from '@/components/pages/HomeClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
   title: 'Executive Search Firm & Leadership Recruiting | Engaged Headhunters',
   description: 'Executive search specialists connecting growth-focused organizations with senior leadership talent. Industry-focused recruiters with placement guarantees and confidential search capabilities.',
   alternates: {
@@ -36,6 +38,19 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getBuilderContent("/");
+  return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function Page() {
+  const content = await getBuilderContent("/");
+
+  if (content) {
+    return <RenderBuilderContent content={content} model="page" />;
+  }
+
   return <HomeClient />;
 }
+
+export const revalidate = 1;

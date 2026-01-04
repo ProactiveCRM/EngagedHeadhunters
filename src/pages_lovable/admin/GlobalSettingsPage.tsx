@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { DashboardLayout } from '@/components/dashboard/DashboardLayout';
 import { useAdminGlobalSettings } from '@/hooks/useGlobalSettings';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -46,10 +45,6 @@ export default function GlobalSettings() {
 
   return (
     <DashboardLayout>
-      <Helmet>
-        <title>Global Settings | Admin</title>
-      </Helmet>
-
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold">Global Settings</h1>

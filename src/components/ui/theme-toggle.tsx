@@ -1,3 +1,5 @@
+"use client";
+
 import { Moon, Sun, Monitor, Check } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -23,7 +25,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     // Add transitioning class for smooth animation
     document.documentElement.classList.add('theme-transitioning');
     setTheme(newTheme);
-    
+
     // Remove transitioning class after animation completes
     setTimeout(() => {
       document.documentElement.classList.remove('theme-transitioning');
@@ -42,9 +44,9 @@ export function ThemeToggle({ className }: { className?: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           className={cn(
             "relative overflow-hidden",
             "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
@@ -63,7 +65,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[120px]">
-        <DropdownMenuItem 
+        <DropdownMenuItem
           onClick={() => handleThemeChange("light")}
           className="flex items-center justify-between cursor-pointer"
         >
@@ -73,7 +75,7 @@ export function ThemeToggle({ className }: { className?: string }) {
           </div>
           {theme === "light" && <Check className="h-4 w-4 text-primary" />}
         </DropdownMenuItem>
-        <DropdownMenuItem 
+        <DropdownMenuItem
           onClick={() => handleThemeChange("dark")}
           className="flex items-center justify-between cursor-pointer"
         >
@@ -83,7 +85,7 @@ export function ThemeToggle({ className }: { className?: string }) {
           </div>
           {theme === "dark" && <Check className="h-4 w-4 text-primary" />}
         </DropdownMenuItem>
-        <DropdownMenuItem 
+        <DropdownMenuItem
           onClick={() => handleThemeChange("system")}
           className="flex items-center justify-between cursor-pointer"
         >

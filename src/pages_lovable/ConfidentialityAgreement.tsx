@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,15 +8,8 @@ import { Shield, Lock, Eye, FileText } from 'lucide-react';
 const ConfidentialityAgreement = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Confidentiality Agreement - Engaged Headhunters</title>
-        <meta name="description" content="Confidentiality standards and data protection measures for Engaged Headhunters executive search services. Protecting sensitive information in executive searches." />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://engagedheadhunters.com/confidentiality" />
-      </Helmet>
-
       <Navigation />
-      
+
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary to-primary/80 text-white py-16">
@@ -28,7 +20,7 @@ const ConfidentialityAgreement = () => {
                 Confidentiality <span className="text-accent">Agreement</span>
               </h1>
               <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-                Your trust is our foundation. We maintain the highest standards of confidentiality 
+                Your trust is our foundation. We maintain the highest standards of confidentiality
                 in all executive search engagements.
               </p>
             </div>
@@ -44,7 +36,7 @@ const ConfidentialityAgreement = () => {
                   <Lock className="w-12 h-12 text-primary mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-foreground mb-2">Secure Searches</h3>
                   <p className="text-muted-foreground">
-                    All search activities are conducted with the utmost discretion to protect both 
+                    All search activities are conducted with the utmost discretion to protect both
                     client and candidate privacy.
                   </p>
                 </CardContent>
@@ -55,7 +47,7 @@ const ConfidentialityAgreement = () => {
                   <Eye className="w-12 h-12 text-primary mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-foreground mb-2">Need-to-Know Basis</h3>
                   <p className="text-muted-foreground">
-                    Information is shared only with authorized individuals directly involved 
+                    Information is shared only with authorized individuals directly involved
                     in the search process.
                   </p>
                 </CardContent>
@@ -66,7 +58,7 @@ const ConfidentialityAgreement = () => {
                   <FileText className="w-12 h-12 text-primary mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-foreground mb-2">Written Agreements</h3>
                   <p className="text-muted-foreground">
-                    All parties sign comprehensive confidentiality agreements before 
+                    All parties sign comprehensive confidentiality agreements before
                     any sensitive information is disclosed.
                   </p>
                 </CardContent>
@@ -78,9 +70,9 @@ const ConfidentialityAgreement = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Our Confidentiality Commitment</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    At Engaged Headhunters, we understand that executive searches often involve highly 
-                    sensitive information. Our confidentiality agreement outlines our unwavering commitment 
-                    to protecting proprietary business information, strategic plans, and personal data 
+                    At Engaged Headhunters, we understand that executive searches often involve highly
+                    sensitive information. Our confidentiality agreement outlines our unwavering commitment
+                    to protecting proprietary business information, strategic plans, and personal data
                     throughout the search process.
                   </p>
                 </section>
@@ -165,8 +157,8 @@ const ConfidentialityAgreement = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Client Consent</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        No client information is shared with candidates without explicit written consent. 
-                        We work closely with clients to determine what information can be disclosed 
+                        No client information is shared with candidates without explicit written consent.
+                        We work closely with clients to determine what information can be disclosed
                         and at what stage of the process.
                       </p>
                     </div>
@@ -174,7 +166,7 @@ const ConfidentialityAgreement = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Candidate Consent</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Candidate profiles and resumes are only shared with clients after obtaining 
+                        Candidate profiles and resumes are only shared with clients after obtaining
                         explicit permission from the candidate and confirming mutual interest.
                       </p>
                     </div>
@@ -182,7 +174,7 @@ const ConfidentialityAgreement = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Reference Checks</h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        Reference checks are conducted only with the candidate's knowledge and consent, 
+                        Reference checks are conducted only with the candidate's knowledge and consent,
                         and reference providers are informed of the confidential nature of the process.
                       </p>
                     </div>
@@ -194,8 +186,8 @@ const ConfidentialityAgreement = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Duration of Obligations</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Our confidentiality obligations extend beyond the completion of any search assignment. 
-                    We maintain strict confidentiality indefinitely, ensuring that sensitive information 
+                    Our confidentiality obligations extend beyond the completion of any search assignment.
+                    We maintain strict confidentiality indefinitely, ensuring that sensitive information
                     remains protected long after our engagement has concluded.
                   </p>
                 </section>
@@ -206,7 +198,7 @@ const ConfidentialityAgreement = () => {
                   <h2 className="text-2xl font-bold text-foreground mb-4">Compliance and Certifications</h2>
                   <div className="space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
-                      Engaged Headhunters maintains compliance with international data protection 
+                      Engaged Headhunters maintains compliance with international data protection
                       regulations and industry standards:
                     </p>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
@@ -223,9 +215,9 @@ const ConfidentialityAgreement = () => {
                 <section>
                   <h2 className="text-2xl font-bold text-foreground mb-4">Breach Response</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    In the unlikely event of a security incident, we have established protocols 
-                    for immediate response, containment, and notification. All affected parties 
-                    would be notified promptly, and we would work diligently to minimize any 
+                    In the unlikely event of a security incident, we have established protocols
+                    for immediate response, containment, and notification. All affected parties
+                    would be notified promptly, and we would work diligently to minimize any
                     impact while implementing additional safeguards.
                   </p>
                 </section>

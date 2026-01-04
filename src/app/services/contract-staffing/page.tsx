@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import ContractStaffingClient from '@/components/pages/ContractStaffingClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Contract Staffing & Project-Based Hiring | Engaged Headhunters',
     description: 'Flexible contract staffing solutions for project-based and interim positions. Access specialized contractors for your workforce needs.',
     keywords: 'contract staffing, project-based hiring, interim staffing, contractor recruitment',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ContractStaffingPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/services/contract-staffing");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function ContractStaffingPage() {
+    const content = await getBuilderContent("/services/contract-staffing");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <ContractStaffingClient />;
 }
+
+export const revalidate = 1;

@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import FinanceCareersClient from '@/components/pages/FinanceCareersClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Finance & Accounting Careers | Engaged Headhunters',
     description: 'Discover finance careers and accounting jobs. Banking, financial services, and accounting professional opportunities.',
     keywords: 'finance careers, accounting jobs, banking careers, financial services jobs, CPA opportunities',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function FinanceCareersPage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/finance-careers");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function FinanceCareersPage() {
+    const content = await getBuilderContent("/finance-careers");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <FinanceCareersClient />;
 }
+
+export const revalidate = 1;

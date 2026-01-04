@@ -1,4 +1,4 @@
-import { usePathname,   } from "next/navigation";
+import { usePathname, } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ const matchTypeBadge: Record<RouteSuggestion['matchType'], { label: string; vari
 };
 
 const NotFound = () => {
-  const location = usePathname();
+  const pathname = usePathname();
   const { trackEvent } = useAnalytics();
 
   // Generate smart suggestions based on the current pathname
@@ -91,7 +91,7 @@ const NotFound = () => {
               {hasSmartSuggestions ? "Did you mean one of these?" : "Popular pages"}
             </h3>
           </div>
-          
+
           <div className="grid gap-2">
             {suggestions.map((suggestion) => (
               <Link

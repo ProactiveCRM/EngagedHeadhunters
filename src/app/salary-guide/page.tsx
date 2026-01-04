@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 import SalaryGuideClient from '@/components/pages/SalaryGuideClient';
+import { getBuilderContent, mergeBuilderMetadata } from "@/lib/builder-fetch";
+import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 
-export const metadata: Metadata = {
+const STATIC_METADATA: Metadata = {
     title: 'Executive Salary Guide & Compensation Data | Engaged Headhunters',
     description: 'Access market-accurate executive compensation data and salary benchmarks. Get instant salary estimates for your industry, role, and location.',
     keywords: 'executive salary guide, compensation data, salary benchmarks, executive pay, compensation report, salary calculator',
@@ -23,6 +25,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function SalaryGuidePage() {
+export async function generateMetadata(): Promise<Metadata> {
+    const content = await getBuilderContent("/salary-guide");
+    return mergeBuilderMetadata(content, STATIC_METADATA);
+}
+
+export default async function SalaryGuidePage() {
+    const content = await getBuilderContent("/salary-guide");
+
+    if (content) {
+        return <RenderBuilderContent content={content} model="page" />;
+    }
+
     return <SalaryGuideClient />;
 }
+
+export const revalidate = 1;
