@@ -1,4 +1,4 @@
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 import { type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -23,41 +23,31 @@ export const MegaMenuItem = ({
       href={href}
       onClick={onClick}
       className={cn(
-        'group flex items-start gap-3 rounded-lg p-3',
-        'transition-all duration-200',
-        'hover:bg-muted',
-        'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+        'group flex items-start gap-4 rounded-xl p-3',
+        'transition-all duration-300',
+        'hover:bg-muted/50',
+        'focus:outline-none focus:ring-2 focus:ring-primary/20',
         'relative overflow-hidden'
       )}
     >
-      {/* Hover indicator */}
-      <span
-        className={cn(
-          'absolute left-0 top-0 h-full w-0.5 bg-primary',
-          'scale-y-0 transition-transform duration-200 origin-top',
-          'group-hover:scale-y-100'
-        )}
-        aria-hidden="true"
-      />
-      
       {/* Icon */}
       <span
         className={cn(
-          'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg',
+          'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl',
           'bg-primary/5 text-primary',
           'group-hover:bg-primary group-hover:text-primary-foreground',
-          'transition-colors duration-200'
+          'transition-all duration-300 shadow-sm'
         )}
       >
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
-      
+
       {/* Text */}
-      <div className="flex-1 min-w-0">
-        <p className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+      <div className="flex-1 min-w-0 py-0.5">
+        <p className="font-bold text-sm text-[#002B57] group-hover:text-primary transition-colors tracking-tight">
           {name}
         </p>
-        <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+        <p className="text-[11px] font-medium text-muted-foreground/70 mt-1 line-clamp-2 leading-relaxed">
           {description}
         </p>
       </div>

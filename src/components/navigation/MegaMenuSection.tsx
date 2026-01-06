@@ -1,4 +1,4 @@
-import {   } from 'next/navigation';
+import { } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronRight, type LucideIcon } from 'lucide-react';
 import { MegaMenuItem } from './MegaMenuItem';
@@ -32,13 +32,13 @@ export const MegaMenuSection = ({
   return (
     <div className="flex flex-col">
       {/* Section Header */}
-      <div className="flex items-center gap-2 px-3 pb-3 border-b border-border mb-3">
-        <Icon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
-        <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+      <div className="flex items-center gap-2 px-3 pb-3 border-b border-border/50 mb-4">
+        <Icon className="h-3.5 w-3.5 text-muted-foreground/70" aria-hidden="true" />
+        <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/80">
           {title}
         </h3>
       </div>
-      
+
       {/* Items */}
       <div className="space-y-1">
         {items.map((item) => (
@@ -49,7 +49,7 @@ export const MegaMenuSection = ({
           />
         ))}
       </div>
-      
+
       {/* View All Link */}
       {viewAll && (
         <Link

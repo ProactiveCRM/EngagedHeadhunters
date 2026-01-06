@@ -46,7 +46,7 @@ export const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(
           aria-hidden="true"
           onClick={onClose}
         />
-        
+
         {/* Menu Panel */}
         <div
           ref={(el) => {
@@ -65,18 +65,17 @@ export const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(
           onKeyDown={onKeyDown}
           onTouchStart={handleTouchStart}
           className={cn(
-            'fixed left-1/2 -translate-x-1/2 top-20',
+            'fixed left-1/2 -translate-x-1/2 top-[84px]',
             'w-[95vw] max-w-4xl z-[55]',
-            'bg-background border border-border rounded-xl shadow-elegant',
-            'animate-mega-menu-open motion-reduce:animate-none',
-            // Tablet adjustments
+            'bg-background/98 backdrop-blur-xl border border-border/40 rounded-[2rem] shadow-[var(--shadow-mega)]',
+            'animate-[mega-menu-open_0.3s_cubic-bezier(0.16,1,0.3,1)] motion-reduce:animate-none',
             'lg:max-w-4xl xl:max-w-5xl'
           )}
         >
           {/* Responsive grid: 2 columns on smaller screens, 3 on larger */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_280px] gap-0">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-0 overflow-hidden">
             {/* Navigation Columns */}
-            <div className="col-span-1 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 p-4 sm:p-6 lg:p-8 lg:border-r border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-12 p-10">
               {data.columns.map((column) => (
                 <MegaMenuSection
                   key={column.title}
@@ -85,9 +84,9 @@ export const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(
                 />
               ))}
             </div>
-            
-            {/* Featured Panel - Hidden on very small screens, shown below on tablet */}
-            <div className="hidden sm:block p-4 border-t lg:border-t-0 border-border bg-muted/30 lg:bg-transparent rounded-b-xl lg:rounded-none">
+
+            {/* Featured Panel - High contrast CTA card */}
+            <div className="hidden lg:block p-1">
               <MegaMenuFeatured
                 content={data.featured}
                 onItemClick={onClose}
