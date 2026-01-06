@@ -1,10 +1,7 @@
-import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "@/components/builder/RenderBuilderContent";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-
-// Initialize builder with the public key
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+import { getBuilderContent } from "@/lib/builder-fetch";
 
 interface PageProps {
     params: Promise<{
@@ -15,13 +12,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const resolvedParams = await params;
     const urlPath = "/" + (resolvedParams.page?.join("/") || "");
-    const content = await builder
-        .get("page", {
-            userAttributes: {
-                urlPath,
-            },
-        })
-        .toPromise();
+    const content = await getBuilderContent(urlPath, "page");
 
     if (!content) {
         return {};
@@ -42,20 +33,10 @@ export default async function Page({ params }: PageProps) {
     const resolvedParams = await params;
     const urlPath = "/" + (resolvedParams.page?.join("/") || "");
 
-    // Fetch the builder content for the current page
-    const content = await builder
-        .get("page", {
-            userAttributes: {
-                urlPath,
-            },
-            // Set prerender to false to prevent errors if the key is missing during build
-            // or if you want to handle missing content dynamically
-            prerender: false,
-        })
-        .toPromise();
+    // Fetch the builder content for the current page using the protected utility
+    const content = await getBuilderContent(urlPath, "page");
 
     // If no content is found, and this is a catch-all route, we should 404
-    // unless we have another fallback mechanism.
     if (!content) {
         notFound();
     }
