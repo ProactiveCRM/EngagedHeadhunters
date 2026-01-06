@@ -8,12 +8,12 @@ const STATIC_METADATA: Metadata = {
     description: 'Specialized healthcare staffing and medical recruiting services. From nursing leadership to hospital administration, we deliver qualified healthcare professionals.',
     keywords: 'healthcare staffing, medical recruiting, nursing recruitment, hospital administration jobs, healthcare IT staffing',
     alternates: {
-        canonical: 'https://www.engagedheadhunters.com/services/healthcare-staffing',
+        canonical: 'https://www.engagedheadhunters.com/healthcare-staffing',
     },
     openGraph: {
         title: 'Healthcare Staffing & Medical Recruiting | Engaged Headhunters',
         description: 'Specialized medical recruiting for nursing leadership and hospital administration.',
-        url: 'https://www.engagedheadhunters.com/services/healthcare-staffing',
+        url: 'https://www.engagedheadhunters.com/healthcare-staffing',
         siteName: 'Engaged Headhunters',
         locale: 'en_US',
         type: 'website',
@@ -26,12 +26,12 @@ const STATIC_METADATA: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-    const content = await getBuilderContent("/services/healthcare-staffing");
+    const content = await getBuilderContent("/healthcare-staffing");
     return mergeBuilderMetadata(content, STATIC_METADATA);
 }
 
 export default async function HealthcareStaffingPage() {
-    const content = await getBuilderContent("/services/healthcare-staffing");
+    const content = await getBuilderContent("/healthcare-staffing");
 
     if (content) {
         return <RenderBuilderContent content={content} model="page" />;

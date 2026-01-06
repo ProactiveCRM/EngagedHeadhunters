@@ -8,12 +8,12 @@ const STATIC_METADATA: Metadata = {
     description: 'Expert finance recruiting services for investment banking, wealth management, and financial leadership roles. We deliver financial professionals who drive growth and manage risk.',
     keywords: 'finance recruiting, financial services staffing, CFO search, investment banking recruitment',
     alternates: {
-        canonical: 'https://www.engagedheadhunters.com/services/finance-recruiting',
+        canonical: 'https://www.engagedheadhunters.com/finance-recruiting',
     },
     openGraph: {
         title: 'Finance Recruiting & Financial Services Hiring | Engaged Headhunters',
         description: 'Financial leadership recruitment for investment banking and wealth management.',
-        url: 'https://www.engagedheadhunters.com/services/finance-recruiting',
+        url: 'https://www.engagedheadhunters.com/finance-recruiting',
         siteName: 'Engaged Headhunters',
         locale: 'en_US',
         type: 'website',
@@ -26,12 +26,12 @@ const STATIC_METADATA: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-    const content = await getBuilderContent("/services/finance-recruiting");
+    const content = await getBuilderContent("/finance-recruiting");
     return mergeBuilderMetadata(content, STATIC_METADATA);
 }
 
 export default async function FinanceRecruitingPage() {
-    const content = await getBuilderContent("/services/finance-recruiting");
+    const content = await getBuilderContent("/finance-recruiting");
 
     if (content) {
         return <RenderBuilderContent content={content} model="page" />;

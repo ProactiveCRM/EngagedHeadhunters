@@ -8,12 +8,12 @@ const STATIC_METADATA: Metadata = {
     description: 'Flexible contract staffing solutions for project-based and interim positions. Access specialized contractors for your workforce needs.',
     keywords: 'contract staffing, project-based hiring, interim staffing, contractor recruitment',
     alternates: {
-        canonical: 'https://www.engagedheadhunters.com/services/contract-staffing',
+        canonical: 'https://www.engagedheadhunters.com/contract-staffing',
     },
     openGraph: {
         title: 'Contract Staffing & Project-Based Hiring | Engaged Headhunters',
         description: 'Flexible contract staffing solutions for specialized projects.',
-        url: 'https://www.engagedheadhunters.com/services/contract-staffing',
+        url: 'https://www.engagedheadhunters.com/contract-staffing',
         siteName: 'Engaged Headhunters',
         locale: 'en_US',
         type: 'website',
@@ -26,12 +26,12 @@ const STATIC_METADATA: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-    const content = await getBuilderContent("/services/contract-staffing");
+    const content = await getBuilderContent("/contract-staffing");
     return mergeBuilderMetadata(content, STATIC_METADATA);
 }
 
 export default async function ContractStaffingPage() {
-    const content = await getBuilderContent("/services/contract-staffing");
+    const content = await getBuilderContent("/contract-staffing");
 
     if (content) {
         return <RenderBuilderContent content={content} model="page" />;

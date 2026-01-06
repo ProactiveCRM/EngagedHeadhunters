@@ -8,12 +8,12 @@ const STATIC_METADATA: Metadata = {
     description: 'Revenue-driving sales professionals and business development leaders. Our sales recruiting specialists deliver results-oriented professionals who accelerate growth.',
     keywords: 'sales recruiting, business development hiring, sales headhunters, account executive recruiting, sales director search',
     alternates: {
-        canonical: 'https://www.engagedheadhunters.com/services/sales-recruiting',
+        canonical: 'https://www.engagedheadhunters.com/sales-recruiting',
     },
     openGraph: {
         title: 'Sales Recruiting & Business Development Hiring | Engaged Headhunters',
         description: 'Revenue-driving sales professionals and business development leaders.',
-        url: 'https://www.engagedheadhunters.com/services/sales-recruiting',
+        url: 'https://www.engagedheadhunters.com/sales-recruiting',
         siteName: 'Engaged Headhunters',
         locale: 'en_US',
         type: 'website',
@@ -26,12 +26,12 @@ const STATIC_METADATA: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-    const content = await getBuilderContent("/services/sales-recruiting");
+    const content = await getBuilderContent("/sales-recruiting");
     return mergeBuilderMetadata(content, STATIC_METADATA);
 }
 
 export default async function SalesRecruitingPage() {
-    const content = await getBuilderContent("/services/sales-recruiting");
+    const content = await getBuilderContent("/sales-recruiting");
 
     if (content) {
         return <RenderBuilderContent content={content} model="page" />;

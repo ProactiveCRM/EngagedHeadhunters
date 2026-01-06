@@ -8,12 +8,12 @@ const STATIC_METADATA: Metadata = {
     description: 'Expert technology recruiting services for software engineers, CTOs, data scientists, and IT leaders. We deliver innovative tech professionals for your digital transformation.',
     keywords: 'technology recruiting, IT staffing, software engineer recruitment, CTO search, tech talent acquisition',
     alternates: {
-        canonical: 'https://www.engagedheadhunters.com/services/technology-recruiting',
+        canonical: 'https://www.engagedheadhunters.com/technology-recruiting',
     },
     openGraph: {
         title: 'Technology Recruiting & IT Talent Acquisition | Engaged Headhunters',
         description: 'Expert technology recruiting for software engineers and IT leaders.',
-        url: 'https://www.engagedheadhunters.com/services/technology-recruiting',
+        url: 'https://www.engagedheadhunters.com/technology-recruiting',
         siteName: 'Engaged Headhunters',
         locale: 'en_US',
         type: 'website',
@@ -26,12 +26,12 @@ const STATIC_METADATA: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-    const content = await getBuilderContent("/services/technology-recruiting");
+    const content = await getBuilderContent("/technology-recruiting");
     return mergeBuilderMetadata(content, STATIC_METADATA);
 }
 
 export default async function TechnologyRecruitingPage() {
-    const content = await getBuilderContent("/services/technology-recruiting");
+    const content = await getBuilderContent("/technology-recruiting");
 
     if (content) {
         return <RenderBuilderContent content={content} model="page" />;

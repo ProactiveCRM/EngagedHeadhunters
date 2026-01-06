@@ -8,12 +8,12 @@ const STATIC_METADATA: Metadata = {
     description: 'Flexible temporary staffing solutions for peak demand and seasonal needs. Quick access to qualified professionals for short-term assignments.',
     keywords: 'temporary staffing, seasonal staffing, short-term hiring, temp workforce solutions',
     alternates: {
-        canonical: 'https://www.engagedheadhunters.com/services/temporary-staffing',
+        canonical: 'https://www.engagedheadhunters.com/temporary-staffing',
     },
     openGraph: {
         title: 'Temporary Staffing & Seasonal Workforce Solutions | Engaged Headhunters',
         description: 'Flexible temporary staffing solutions for short-term needs.',
-        url: 'https://www.engagedheadhunters.com/services/temporary-staffing',
+        url: 'https://www.engagedheadhunters.com/temporary-staffing',
         siteName: 'Engaged Headhunters',
         locale: 'en_US',
         type: 'website',
@@ -26,12 +26,12 @@ const STATIC_METADATA: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-    const content = await getBuilderContent("/services/temporary-staffing");
+    const content = await getBuilderContent("/temporary-staffing");
     return mergeBuilderMetadata(content, STATIC_METADATA);
 }
 
 export default async function TemporaryStaffingPage() {
-    const content = await getBuilderContent("/services/temporary-staffing");
+    const content = await getBuilderContent("/temporary-staffing");
 
     if (content) {
         return <RenderBuilderContent content={content} model="page" />;
