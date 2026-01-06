@@ -2,14 +2,20 @@ import { builder } from "@builder.io/sdk";
 import { Metadata } from "next";
 
 // Initialize builder with the public key
-if (!builder.apiKey) {
-    builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+const apiKey = process.env.NEXT_PUBLIC_BUILDER_API_KEY;
+if (apiKey) {
+    builder.init(apiKey);
 }
 
 /**
  * Fetches content from Builder.io for a specific path and model.
  */
 export async function getBuilderContent(urlPath: string, model: string = "page") {
+    if (!builder.apiKey) {
+        console.warn(`Builder API key is missing. Skipping fetch for ${urlPath}`);
+        return null;
+    }
+
     try {
         const content = await builder
             .get(model, {
@@ -31,6 +37,10 @@ export async function getBuilderContent(urlPath: string, model: string = "page")
  * This allows managing these elements as "symbols" in the Builder dashboard.
  */
 export async function getBuilderSymbol(model: string) {
+    if (!builder.apiKey) {
+        return null;
+    }
+
     try {
         const content = await builder
             .get(model, {
