@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from 'react';
 import { useCountUp } from '@/hooks/useCountUp';
 import { useInView } from '@/hooks/useInView';

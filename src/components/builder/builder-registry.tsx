@@ -35,21 +35,38 @@ const withSafety = (Component: any) => {
     return (props: any) => {
         const { builderBlock, builderContext, attributes, children, ...rest } = props;
 
-        // Sanitize all string-like props in rest
+        // Sanitize all props in rest to prevent "Objects as children" errors
         const safeProps: any = { ...rest };
         for (const key in safeProps) {
-            if (typeof safeProps[key] === 'object' && safeProps[key] !== null) {
-                if (safeProps[key].component || safeProps[key].id) {
-                    // This is likely a Builder block or internal object being passed as a prop
-                    safeProps[key] = '';
+            const val = safeProps[key];
+            if (val && typeof val === 'object' && !React.isValidElement(val)) {
+                if (Array.isArray(val)) {
+                    // It's a list, keep it but ensure its items are safe
+                    safeProps[key] = val.map(item => {
+                        if (item && typeof item === 'object' && !React.isValidElement(item)) {
+                            // If it's a Builder object, return a safe version or stringify
+                            return item.item || item.text || '';
+                        }
+                        return item;
+                    });
+                } else {
+                    // It's a single object, if it looks like a Builder block/ref, strip it
+                    if (val.id || val.component || val['@type']) {
+                        safeProps[key] = '';
+                    }
                 }
             }
         }
 
-        // Only allow valid children
+        // Only allow valid children to pass through
         const safeChildren = React.Children.map(children, (child) => {
             if (typeof child === 'string' || typeof child === 'number' || React.isValidElement(child)) {
                 return child;
+            }
+            if (child && typeof child === 'object') {
+                // Try to extract text if it's a Builder text node object
+                const text = (child as any).text || (child as any).children || '';
+                return typeof text === 'string' ? text : null;
             }
             return null;
         });

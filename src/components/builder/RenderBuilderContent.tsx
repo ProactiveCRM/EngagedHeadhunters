@@ -18,13 +18,16 @@ export function RenderBuilderContent({ content, model }: BuilderPageProps) {
     }, []);
 
     // If content is found or we are in editing mode, render the BuilderComponent
+    // We STRICTLY defer rendering to the client to prevent prerendering errors
     if (content || builder.editingMode) {
         return (
             <ErrorBoundary>
-                {isMounted || builder.editingMode ? (
+                {(isMounted || builder.editingMode) ? (
                     <BuilderComponent content={content} model={model} />
                 ) : (
-                    null
+                    <div className="min-h-[200px] flex items-center justify-center">
+                        <div className="animate-pulse text-muted-foreground">Loading content...</div>
+                    </div>
                 )}
             </ErrorBoundary>
         );

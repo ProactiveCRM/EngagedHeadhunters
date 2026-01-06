@@ -53,12 +53,18 @@ export function ValuePropGrid({
                 </div>
 
                 <div className="grid lg:grid-cols-3 gap-8">
-                    {displayProps.map((prop, index) => {
-                        const titleText = typeof prop.title === 'string' ? prop.title : '';
-                        const descText = typeof prop.description === 'string' ? prop.description : '';
-                        const solutionText = typeof prop.solution === 'string' ? prop.solution : '';
-                        const proofText = typeof prop.proof === 'string' ? prop.proof : '';
-                        const emojiText = typeof prop.emoji === 'string' ? prop.emoji : '';
+                    {Array.isArray(displayProps) && displayProps.map((prop, index) => {
+                        const sanitize = (val: any) => {
+                            if (typeof val === 'string') return val;
+                            if (val && typeof val === 'object') return val.text || val.item || '';
+                            return '';
+                        };
+
+                        const titleText = sanitize(prop.title);
+                        const descText = sanitize(prop.description);
+                        const solutionText = sanitize(prop.solution);
+                        const proofText = sanitize(prop.proof);
+                        const emojiText = sanitize(prop.emoji);
 
                         return (
                             <div key={index} className="bg-card rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border">
