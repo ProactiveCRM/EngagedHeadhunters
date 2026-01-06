@@ -30,13 +30,5 @@
                 }
             ]
         }
-    ],
-    "images": {
-        "domains": [
-            "www.engagedheadhunters.com",
-            "images.unsplash.com",
-            "cdn.builder.io"
-        ],
-        "minimumCacheTTL": 60
-    }
+    ]
 }
