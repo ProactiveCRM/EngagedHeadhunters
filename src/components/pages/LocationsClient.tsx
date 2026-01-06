@@ -110,7 +110,7 @@ const LocationsClient = () => {
                                         {region.cities.map((city, cityIndex) => (
                                             <Link
                                                 key={cityIndex}
-                                                href={city.id === 'houston' ? '/houston' : `/locations/${city.id}`}
+                                                href={`/${city.id}`}
                                                 className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 border"
                                             >
                                                 <div className="flex items-start justify-between mb-4">
