@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClientProviders } from "@/components/ClientProviders";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -75,7 +76,12 @@ export const metadata: Metadata = {
   },
   other: {
     "llms-txt": "https://www.engagedheadhunters.com/llms.txt"
-  }
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -87,6 +93,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <OrganizationSchema />
+        <BreadcrumbSchema />
       </head>
       <body
         className={`${inter.variable} font-inter antialiased`}
