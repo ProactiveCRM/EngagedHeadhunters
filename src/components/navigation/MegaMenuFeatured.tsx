@@ -28,8 +28,8 @@ export const MegaMenuFeatured = ({ content, onItemClick }: MegaMenuFeaturedProps
     <div
       className={cn(
         'relative flex flex-col justify-between rounded-[1.5rem] p-8 h-full min-h-[300px]',
-        'bg-gradient-to-br from-[#002B57] to-[#0187DA]',
-        'text-primary-foreground overflow-hidden shadow-brand'
+        'bg-gradient-to-br from-primary via-primary to-primary/90',
+        'text-white overflow-hidden shadow-brand'
       )}
     >
       {/* Background decoration - Premium Inner Glow */}
@@ -74,8 +74,8 @@ export const MegaMenuFeatured = ({ content, onItemClick }: MegaMenuFeaturedProps
           className={cn(
             'flex items-center justify-center gap-2 w-full',
             'px-6 py-4 rounded-xl font-bold text-sm transition-all duration-300',
-            'bg-white text-[#002B57] shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]',
-            'focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#002B57]'
+            'bg-white text-primary shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]',
+            'focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary'
           )}
         >
           {content.cta.text}
@@ -89,9 +89,9 @@ export const MegaMenuFeatured = ({ content, onItemClick }: MegaMenuFeaturedProps
             className={cn(
               'flex items-center justify-center w-full',
               'px-4 py-2 text-sm font-semibold',
-              'text-primary-foreground/80 hover:text-white transition-colors',
+              'text-white/80 hover:text-white transition-colors',
               'hover:underline underline-offset-8 decoration-2',
-              'focus:outline-none focus:ring-2 focus:ring-white/20 rounded-lg'
+              'focus:outline-none focus:ring-2 focus:ring-white/30 rounded-lg'
             )}
           >
             {content.secondaryCta.text}
