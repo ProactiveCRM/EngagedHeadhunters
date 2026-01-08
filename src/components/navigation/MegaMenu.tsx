@@ -42,7 +42,7 @@ export const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(
       <>
         {/* Backdrop */}
         <div
-          className="fixed inset-0 top-20 bg-foreground/5 backdrop-blur-sm z-40 animate-fade-in motion-reduce:animate-none"
+          className="fixed inset-0 top-20 bg-foreground/10 dark:bg-foreground/5 backdrop-blur-sm z-40 animate-fade-in motion-reduce:animate-none"
           aria-hidden="true"
           onClick={onClose}
         />
@@ -67,7 +67,7 @@ export const MegaMenu = forwardRef<HTMLDivElement, MegaMenuProps>(
           className={cn(
             'fixed left-1/2 -translate-x-1/2 top-[84px]',
             'w-[95vw] max-w-4xl z-[55]',
-            'bg-background/98 backdrop-blur-xl border border-border/40 rounded-[2rem] shadow-[var(--shadow-mega)]',
+            'bg-background/98 backdrop-blur-xl border border-border rounded-[2rem] shadow-[var(--shadow-mega)]',
             'animate-[mega-menu-open_0.3s_cubic-bezier(0.16,1,0.3,1)] motion-reduce:animate-none',
             'lg:max-w-4xl xl:max-w-5xl'
           )}
