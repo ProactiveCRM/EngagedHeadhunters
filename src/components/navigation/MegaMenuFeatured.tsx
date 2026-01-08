@@ -28,8 +28,8 @@ export const MegaMenuFeatured = ({ content, onItemClick }: MegaMenuFeaturedProps
     <div
       className={cn(
         'relative flex flex-col justify-between rounded-[1.5rem] p-8 h-full min-h-[300px]',
-        'bg-gradient-to-br from-[#002B57] to-[#0187DA]',
-        'text-primary-foreground overflow-hidden shadow-brand'
+        'bg-gradient-to-br from-primary via-primary to-primary/90',
+        'text-white overflow-hidden shadow-brand'
       )}
     >
       {/* Background decoration - Premium Inner Glow */}
