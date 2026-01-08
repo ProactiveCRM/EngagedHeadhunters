@@ -89,9 +89,9 @@ export const MegaMenuFeatured = ({ content, onItemClick }: MegaMenuFeaturedProps
             className={cn(
               'flex items-center justify-center w-full',
               'px-4 py-2 text-sm font-semibold',
-              'text-primary-foreground/80 hover:text-white transition-colors',
+              'text-white/80 hover:text-white transition-colors',
               'hover:underline underline-offset-8 decoration-2',
-              'focus:outline-none focus:ring-2 focus:ring-white/20 rounded-lg'
+              'focus:outline-none focus:ring-2 focus:ring-white/30 rounded-lg'
             )}
           >
             {content.secondaryCta.text}
