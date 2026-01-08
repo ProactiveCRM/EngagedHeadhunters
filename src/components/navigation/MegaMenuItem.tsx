@@ -44,7 +44,7 @@ export const MegaMenuItem = ({
 
       {/* Text */}
       <div className="flex-1 min-w-0 py-0.5">
-        <p className="font-bold text-sm text-[#002B57] group-hover:text-primary transition-colors tracking-tight">
+        <p className="font-bold text-sm text-foreground group-hover:text-primary transition-colors tracking-tight">
           {name}
         </p>
         <p className="text-[11px] font-medium text-muted-foreground/70 mt-1 line-clamp-2 leading-relaxed">
