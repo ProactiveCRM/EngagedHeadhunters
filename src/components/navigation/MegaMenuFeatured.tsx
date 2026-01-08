@@ -74,8 +74,8 @@ export const MegaMenuFeatured = ({ content, onItemClick }: MegaMenuFeaturedProps
           className={cn(
             'flex items-center justify-center gap-2 w-full',
             'px-6 py-4 rounded-xl font-bold text-sm transition-all duration-300',
-            'bg-white text-[#002B57] shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]',
-            'focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#002B57]'
+            'bg-white text-primary shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]',
+            'focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary'
           )}
         >
           {content.cta.text}
